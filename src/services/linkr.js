@@ -1,11 +1,17 @@
-import axios from "axios";
-import { api } from "./apiUrl";
+import axios from 'axios';
+import { api } from './apiUrl';
 
 function postSignUp(body) {
-    const promise = axios.post(`${api}/users`, body);
-    return promise;
+  const promise = axios.post(`${api}/users`, body);
+  return promise;
 }
 
-export {
-    postSignUp,
-};
+function getPosts() {
+  return axios.get(`${api}/posts`, {
+    headers: {
+      Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTY0Nzk3NzYwOSwiZXhwIjoxNjQ4MTUwNDA5fQ.300UH6vu-9BoFyGc3mFTH8YfeIevYNCa2mY213IxIcc`,
+    },
+  });
+}
+
+export { postSignUp, getPosts };
