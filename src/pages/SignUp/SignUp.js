@@ -35,7 +35,7 @@ export default function SignUp() {
             setMessage('Cadastro realizado com sucesso!');
             setModalSuccess(true);
             setTimeout(() => {
-                navigate('/login')
+                navigate('/')
             }, 2000)
         }).catch((err) => {
             console.error();
@@ -58,17 +58,13 @@ export default function SignUp() {
             if (err.response.status === 500) {
                 setMessage("Servidor fora de área, tente novamente mais tarde");
                 setModalError(true);
-
-                setTimeout(() => {
-                    navigate('/')
-                }, 2000)
             }
         })
     }
     return (
         <PageContainer>
             <IntroductionText />
-            <Form onSubmit={ signup}>
+            <Form onSubmit={ signup }>
                 <Input
                     type='email'
                     placeholder='e-mail'
@@ -103,7 +99,7 @@ export default function SignUp() {
                 />
                 <ButtonSubmit disabled={disable}>Sign Up</ButtonSubmit>
             </Form>
-            <Link to='/login'>
+            <Link to='/'>
                 <Redirect>Switch back to log in</Redirect>
             </Link>
 
