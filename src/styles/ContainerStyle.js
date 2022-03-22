@@ -1,7 +1,7 @@
 import styled from "styled-components"
 
 const PageContainer = styled.div`
-	width: 90vw;
+	width: 100vw;
     height: 100vh;
 
 	display: flex;
@@ -12,12 +12,6 @@ const PageContainer = styled.div`
 	margin: 0 auto;
 
     position: relative;
-
-    /* a {
-        color: #ffffff;
-        font-size: 15px;
-        font-weight: bold;
-    } */
 `;
 
 export {
