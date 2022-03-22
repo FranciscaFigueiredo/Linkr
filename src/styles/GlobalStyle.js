@@ -12,6 +12,7 @@ const GlobalStyle = createGlobalStyle`
 	body {
 		background-color: #333333;
 		font-family: 'Lato', sans-serif;
+        color: #ffffff;
 	}
 `;
  
