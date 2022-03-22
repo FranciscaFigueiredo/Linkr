@@ -14,9 +14,13 @@ export default function Posts() {
         posts.map((post) => {
           return (
             <Post key={post.id}>
-              <PostSidebar></PostSidebar>
+              <PostSidebar>
+                <img src={post.picture_url} />
+              </PostSidebar>
               <PostContent>
-                <span>a</span>
+                <span id='name'>{post.username}</span>
+                {post.comment && <span id='comment'>{post.comment}</span>}
+                <span id='link'>{post.link}</span>
               </PostContent>
             </Post>
           );
@@ -44,15 +48,32 @@ const Post = styled.div`
 `;
 
 const PostSidebar = styled.div`
-  flex-grow: 0.14;
+  width: 14%;
   height: 100%;
-  background-color: blue;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  img {
+    width: 80%;
+    aspect-ratio: 1;
+    border-radius: 100%;
+  }
 `;
 
 const PostContent = styled.div`
-  flex-grow: 0.86;
+  width: 86%;
   height: 100%;
-  background-color: lightblue;
   display: flex;
   flex-direction: column;
+  gap: 8px;
+
+  #name {
+    font: 400 17px 'Lato';
+  }
+
+  #comment {
+    font: 400 15px 'Lato';
+    color: #b7b7b7;
+  }
 `;
