@@ -6,6 +6,12 @@ function postSignUp(body) {
     return promise;
 }
 
+function postLogin(body) {
+    const promise = axios.post(`${api}/users/login`, body);
+    return promise;
+}
+
 export {
     postSignUp,
+    postLogin,
 };

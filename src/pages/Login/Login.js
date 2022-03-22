@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 import IntroductionText from "../../components/IntroductionText";
+import { postLogin } from "../../services/linkr";
 import ModalError from "../../shared/ModalError";
 import ModalSuccess from "../../shared/ModalSuccess";
 
@@ -22,6 +23,42 @@ export default function Login() {
     function login(event) {
         event.preventDefault();
         setDisable(true);
+
+        postLogin({
+            email,
+            password,
+        }).then((res) => {
+            setMessage('');
+            setModalSuccess(true);
+            setTimeout(() => {
+                navigate('/timeline')
+            }, 2000)
+        }).catch((err) => {
+            console.error();
+
+            setPassword('');
+            setDisable(false);
+
+            if(err.response.status === 422) {
+                setMessage('Digite dados válidos');
+                setModalError(true);
+            }
+
+            if(err.response.status === 401) {
+                setEmail('');
+                setMessage(err.response.data);
+                setModalError(true);
+            }
+
+            if (err.response.status === 500) {
+                setMessage("Servidor fora de área, tente novamente mais tarde");
+                setModalError(true);
+
+                setTimeout(() => {
+                    navigate('/')
+                }, 2000)
+            }
+        })
     }
 
     return (
