@@ -6,6 +6,13 @@ function postSignUp(body) {
     return promise;
 }
 
+function postPublish(body, token) {
+    const promise = axios.post(`${api}/posts`, body,
+    { headers: { Authorization: `Bearer ${token}` } })
+    return promise;
+}
+
 export {
     postSignUp,
+    postPublish,
 };
