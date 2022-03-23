@@ -1,4 +1,4 @@
-import { Introduction, Title, Description } from "../styles/TitleIntroduction";
+import { Introduction, Title, Description } from "./TitleIntroduction";
 
 export default function IntroductionText() {
     return (

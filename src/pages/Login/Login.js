@@ -1,15 +1,15 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-import IntroductionText from "../../components/IntroductionText";
+import IntroductionText from "../../components/IntroductionText/IntroductionText";
 import { postLogin } from "../../services/linkr";
-import ModalError from "../../shared/ModalError";
-import ModalSuccess from "../../shared/ModalSuccess";
+import ModalError from "../../shared/Modals/ModalError";
+import ModalSuccess from "../../shared/Modals/ModalSuccess";
 
 import { PageContainer } from "../../styles/ContainerStyle";
 import { ButtonSubmit, Form, Input, Redirect } from "../../styles/FormStyle";
 
-export default function Login() {
+export default function Login({ user, setUser, setToken }) {
     const navigate = useNavigate()
 
     const [disable, setDisable] = useState(false);
@@ -19,6 +19,21 @@ export default function Login() {
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+
+    if (user) {
+        navigate('/timeline')
+    }
+
+    function redirectLogin(res) {
+        setToken(res.data);
+
+        const user = JSON.stringify(res.data);
+        sessionStorage.setItem("user", user);
+
+        setTimeout(() => {
+            navigate('/timeline')
+        }, 2000);
+    }
 
     function login(event) {
         event.preventDefault();
@@ -30,9 +45,7 @@ export default function Login() {
         }).then((res) => {
             setMessage('');
             setModalSuccess(true);
-            setTimeout(() => {
-                navigate('/timeline')
-            }, 2000)
+            redirectLogin(res);
         }).catch((err) => {
             console.error();
 
