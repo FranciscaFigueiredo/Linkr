@@ -11,7 +11,18 @@ function postLogin(body) {
     return promise;
 }
 
+function logout({ token }) {
+    const config = {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    }
+    const promise = axios.delete(`${api}/users/logout`, config);
+    return promise;
+}
+
 export {
     postSignUp,
     postLogin,
+    logout,
 };

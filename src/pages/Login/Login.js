@@ -30,6 +30,7 @@ export default function Login({ user, setUser, setToken }) {
         const user = JSON.stringify({
             username: res.data.username,
             pictureUrl: res.data.pictureUrl,
+            token: res.data.token,
         });
         sessionStorage.setItem("user", user);
 

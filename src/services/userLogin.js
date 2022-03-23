@@ -9,7 +9,9 @@ function UserLoginValidation() {
         navigate("/");
     }
     
-    return user;
+    return {
+        user,
+    };
 }
 
 export {

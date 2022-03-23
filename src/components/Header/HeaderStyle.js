@@ -16,6 +16,10 @@ const Navbar = styled.header`
     padding: 0 30px 0 30px;
 
     position: relative;
+
+    a {
+        all: unset;
+    }
 `;
 
 const Title = styled.h1`
@@ -50,6 +54,20 @@ const Avatar = styled.img`
     border-radius: 50%;
 `;
 
+const MenuContainer = styled.div`
+	width: 100vw;
+    height: 100vh;
+
+    position: absolute;
+    left: 0;
+    top: 72px;
+    z-index: 10;
+
+    a {
+        all: unset;
+    }
+`;
+
 const ButtonMenu = styled.button`
     width: 150px;
     height: 45px;
@@ -64,7 +82,7 @@ const ButtonMenu = styled.button`
 
     position: absolute;
     right: 0;
-    top: 72px;
+    top: 0;
 
     &:hover {
         background-color: #1877f2;
@@ -77,5 +95,6 @@ export {
 	Menu,
     ArrowMenu,
     Avatar,
+    MenuContainer,
     ButtonMenu,
 }
