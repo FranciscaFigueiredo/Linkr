@@ -1,27 +1,24 @@
-import { IoShieldCheckmarkSharp } from 'react-icons/io5'
+import { IoAlertCircleSharp } from 'react-icons/io5'
 import { IconContext } from "react-icons/lib";
-import { Message, Modal } from "../styles/ModalStyle";
+import { ButtonModal, Message, Modal } from "./ModalStyle";
 
-export default function ModalSuccess({ message }) {
+export default function ModalError({ message, setModal }) {
     return (
         <Modal>
             <Message>
             <IconContext.Provider
                 value={{
                     size: "60px",
-                    color: "#008000",
+                    color: "#C44536",
                     className: "global-class-name"
                 }}>
                 <div>
-                    <IoShieldCheckmarkSharp />
+                    <IoAlertCircleSharp />
                 </div>
             </IconContext.Provider>
                 
-                {
-                    message !== '' ?
-                    <h1>{ message }</h1>
-                    : ''
-                }
+                <h1>{ message }</h1>
+                <ButtonModal onClick={() => setModal(false)}>OK</ButtonModal>
             </Message>
         </Modal>
     );

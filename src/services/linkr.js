@@ -14,9 +14,26 @@ function getPosts() {
   });
 }
 
+function postPublish(body, token) {
+  const promise = axios.post(`${api}/posts`, body, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+  return promise;
+}
+
 function postLogin(body) {
   const promise = axios.post(`${api}/users/login`, body);
   return promise;
 }
 
-export { postSignUp, getPosts, postLogin };
+function logout({ token }) {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+  const promise = axios.delete(`${api}/users/logout`, config);
+  return promise;
+}
+
+export { postSignUp, postPublish, postLogin, logout, getPosts };

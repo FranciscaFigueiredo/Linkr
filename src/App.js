@@ -13,16 +13,26 @@ function App() {
   const [user, setUser] = useState(null);
   const [token, setToken] = useState(null);
 
+  useEffect(() => {
+    if (user === null) {
+      setUser(JSON.parse(sessionStorage.getItem('user')));
+    }
+  }, [user, token]);
+
   return (
     <BrowserRouter>
       <GlobalStyle />
       <UserContext.Provider value={{ user, setUser, token, setToken }}>
         <Routes>
           <Route path='/sign-up' element={<SignUp />} />
-          <Route path='/' element={<Login />} />
+          <Route
+            path='/'
+            element={
+              <Login user={user} setUser={setUser} setToken={setToken} />
+            }
+          />
           <Route path='/timeline' element={<Timeline />} />
         </Routes>
-        <ToastContainer />
       </UserContext.Provider>
     </BrowserRouter>
   );
