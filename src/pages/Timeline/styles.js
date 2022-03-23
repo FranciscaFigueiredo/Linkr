@@ -18,6 +18,14 @@ const TimelineParent = styled.div`
     font: 700 43px 'Oswald';
     margin-bottom: 43px;
   }
+  @media (max-width: 611px) {
+    width: 100%;
+
+    #title {
+      padding-left: 17px;
+      margin-bottom: 0;
+    }
+  }
 `;
 
 const PublishPlaceholder = styled.div`

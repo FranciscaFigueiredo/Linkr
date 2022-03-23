@@ -6,9 +6,14 @@ const PostsContainer = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 16px;
+  margin-top: 29px;
 
   #noPosts {
     font: 700 17px 'Lato';
+  }
+
+  @media (max-width: 611px) {
+    margin-top: 0;
   }
 `;
 
@@ -21,6 +26,11 @@ const Post = styled.div`
   display: flex;
   flex-direction: row;
   align-items: stretch;
+
+  @media (max-width: 611px) {
+    margin-top: 16px;
+    border-radius: 0;
+  }
 `;
 
 const PostSidebar = styled.div`

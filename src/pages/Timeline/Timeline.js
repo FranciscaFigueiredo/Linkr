@@ -1,20 +1,19 @@
+import Header from '../../components/Header/Header.js';
 import Posts from '../../components/Posts/';
-import {
-  PublishPlaceholder,
-  TimelineContainer,
-  TimelineParent,
-} from './styles.js';
+import Publish from '../../components/Publish/index.js';
+import { TimelineContainer, TimelineParent } from './styles.js';
 
 export default function Timeline() {
   return (
-    <TimelineContainer>
-      <TimelineParent>
-        <h1 id='title'>timeline</h1>
-        <PublishPlaceholder>
-          <span>PLACEHOLDER</span>
-        </PublishPlaceholder>
-        <Posts />
-      </TimelineParent>
-    </TimelineContainer>
+    <>
+      <Header />
+      <TimelineContainer>
+        <TimelineParent>
+          <span id='title'>timeline</span>
+          <Publish />
+          <Posts />
+        </TimelineParent>
+      </TimelineContainer>
+    </>
   );
 }
