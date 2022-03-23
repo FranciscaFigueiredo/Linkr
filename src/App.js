@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import UserContext from './contexts/UserContext';
 import SignUp from './pages/SignUp/SignUp';
@@ -17,9 +19,10 @@ function App() {
       <UserContext.Provider value={{ user, setUser, token, setToken }}>
         <Routes>
           <Route path='/sign-up' element={<SignUp />} />
-          <Route path='/login' element={<Login />} />
+          <Route path='/' element={<Login />} />
           <Route path='/timeline' element={<Timeline />} />
         </Routes>
+        <ToastContainer />
       </UserContext.Provider>
     </BrowserRouter>
   );

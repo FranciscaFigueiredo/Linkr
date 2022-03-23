@@ -1,4 +1,4 @@
-import Posts from '../../components/Posts.js';
+import Posts from '../../components/Posts/';
 import {
   PublishPlaceholder,
   TimelineContainer,

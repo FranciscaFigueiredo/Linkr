@@ -22,11 +22,14 @@ const TimelineParent = styled.div`
 
 const PublishPlaceholder = styled.div`
   width: 611px;
-  height: 209px;
+  min-height: 209px;
   background-color: lightpink;
   color: red;
   border-radius: 16px;
   margin-bottom: 29px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 export { TimelineContainer, TimelineParent, PublishPlaceholder };

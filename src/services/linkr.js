@@ -14,4 +14,9 @@ function getPosts() {
   });
 }
 
-export { postSignUp, getPosts };
+function postLogin(body) {
+  const promise = axios.post(`${api}/users/login`, body);
+  return promise;
+}
+
+export { postSignUp, getPosts, postLogin };
