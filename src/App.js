@@ -14,9 +14,7 @@ function App() {
         if (user === null) {
             setUser(JSON.parse(sessionStorage.getItem("user")));
         }
-    }, [user]);
-
-    console.log(user);
+    }, [user, token]);
 
     return (
         <BrowserRouter>

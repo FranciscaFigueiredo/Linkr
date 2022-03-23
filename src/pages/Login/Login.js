@@ -25,9 +25,12 @@ export default function Login({ user, setUser, setToken }) {
     }
 
     function redirectLogin(res) {
-        setToken(res.data);
+        setToken(res.data.token);
 
-        const user = JSON.stringify(res.data);
+        const user = JSON.stringify({
+            username: res.data.username,
+            pictureUrl: res.data.pictureUrl,
+        });
         sessionStorage.setItem("user", user);
 
         setTimeout(() => {
