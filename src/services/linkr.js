@@ -9,10 +9,15 @@ function postSignUp(body) {
 function postPublish(body, token) {
     const promise = axios.post(`${api}/posts`, body,
     { headers: { Authorization: `Bearer ${token}` } })
+}
+
+function postLogin(body) {
+    const promise = axios.post(`${api}/users/login`, body);
     return promise;
 }
 
 export {
     postSignUp,
     postPublish,
+    postLogin,
 };
