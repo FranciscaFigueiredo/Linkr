@@ -8,7 +8,7 @@ export default function Publish() {
   const [comment, setComment] = useState('');
   const [isLoading, setIsLoading] = useState(0);
   const { token } = useContext(UserContext);
-  console.log('token' + token);
+
   function handleSubmit(e) {
     e.preventDefault();
     setIsLoading(1);

@@ -12,13 +12,11 @@ export default function Posts() {
     getPosts()
       .then((res) => setPosts(res.data))
       .catch(() => {
-        console.log('error');
         toastError(
           'An error occured while trying to fetch the posts, please refresh the page'
         );
       });
   }, []);
-  console.log(posts);
   return posts ? (
     <PostsContainer>
       {posts.length > 0 ? (
