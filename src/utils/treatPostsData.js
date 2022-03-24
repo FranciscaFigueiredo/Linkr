@@ -1,29 +1,34 @@
-export function treatPostsData(posts) {
-  const likes = posts.map((post) => ({
-    id: post.like_id,
-    post_id: post.like_post_id,
-    user_id: post.like_user_id,
-  }));
+export function treatPostsData(rawPosts) {
+  const posts = [];
 
-  const uniquePosts = [];
-  posts.forEach((post) => {
-    if (uniquePosts.map((uniquePost) => uniquePost.id).indexOf(post.id) === -1)
-      uniquePosts.push(post);
+  rawPosts.forEach((rawPost, index) => {
+    const { like_id: id, like_user_id: user_id } = rawPost;
+    const postsIds = posts.map((post) => post.id);
+    const indexOfFoundRawPost = postsIds.indexOf(rawPost.id);
+
+    delete rawPost.like_id;
+    delete rawPost.like_post_id;
+    delete rawPost.like_user_id;
+    if (indexOfFoundRawPost === -1) {
+      posts.push({
+        ...rawPost,
+        likes: [
+          {
+            id,
+            user_id,
+          },
+        ],
+      });
+    } else {
+      const post = posts[indexOfFoundRawPost];
+
+      post.likes.push({
+        id,
+        user_id,
+      });
+    }
   });
+  console.log(posts);
 
-  uniquePosts.forEach((uniquePost) => {
-    uniquePost.likes = [];
-    likes.forEach((like) => {
-      if (like.post_id === uniquePost.id) uniquePost.likes.push(like);
-      delete like.post_id;
-    });
-  });
-
-  uniquePosts.forEach((uniquePost) => {
-    delete uniquePost.like_id;
-    delete uniquePost.like_post_id;
-    delete uniquePost.like_user_id;
-  });
-
-  return uniquePosts;
+  return posts;
 }
