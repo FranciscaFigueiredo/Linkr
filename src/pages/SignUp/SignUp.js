@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-import IntroductionText from "../../components/IntroductionText";
+import IntroductionText from "../../components/IntroductionText/IntroductionText";
 import { postSignUp } from "../../services/linkr";
-import ModalError from "../../shared/ModalError";
-import ModalSuccess from "../../shared/ModalSuccess";
+import ModalError from "../../shared/Modals/ModalError";
+import ModalSuccess from "../../shared/Modals/ModalSuccess";
 
 import { PageContainer } from "../../styles/ContainerStyle";
 import { ButtonSubmit, Form, Input, Redirect } from "../../styles/FormStyle";

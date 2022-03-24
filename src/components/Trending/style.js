@@ -2,6 +2,9 @@ import styled from "styled-components";
 
 const TrendingContainer = styled.div`
     width: 301px;
+    min-height: 70px;
+
+    margin: 105px 0px 0px 0px;
 
     background-color: #171717;
 

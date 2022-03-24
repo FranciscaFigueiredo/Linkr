@@ -1,104 +1,119 @@
-import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 
-import IntroductionText from "../../components/IntroductionText";
-import { postLogin } from "../../services/linkr";
-import ModalError from "../../shared/ModalError";
-import ModalSuccess from "../../shared/ModalSuccess";
+import IntroductionText from '../../components/IntroductionText/IntroductionText';
+import { postLogin } from '../../services/linkr';
+import ModalError from '../../shared/Modals/ModalError';
+import ModalSuccess from '../../shared/Modals/ModalSuccess';
 
-import { PageContainer } from "../../styles/ContainerStyle";
-import { ButtonSubmit, Form, Input, Redirect } from "../../styles/FormStyle";
+import { PageContainer } from '../../styles/ContainerStyle';
+import { ButtonSubmit, Form, Input, Redirect } from '../../styles/FormStyle';
 
-export default function Login() {
-    const navigate = useNavigate()
+export default function Login({ user, setUser, setToken }) {
+  const navigate = useNavigate();
 
-    const [disable, setDisable] = useState(false);
-    const [modalSuccess, setModalSuccess] = useState(false);
-    const [modalError, setModalError] = useState(false);
-    const [message, setMessage] = useState("");
+  const [disable, setDisable] = useState(false);
+  const [modalSuccess, setModalSuccess] = useState(false);
+  const [modalError, setModalError] = useState(false);
+  const [message, setMessage] = useState('');
 
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
-    function login(event) {
-        event.preventDefault();
-        setDisable(true);
+  if (user) {
+    navigate('/timeline');
+  }
 
-        postLogin({
-            email,
-            password,
-        }).then((res) => {
-            setMessage('');
-            setModalSuccess(true);
-            setTimeout(() => {
-                navigate('/timeline')
-            }, 2000)
-        }).catch((err) => {
-            console.error();
+  function redirectLogin(res) {
+    setToken(res.data.token);
 
-            setPassword('');
-            setDisable(false);
+    const user = JSON.stringify({
+      username: res.data.username,
+      pictureUrl: res.data.pictureUrl,
+      token: res.data.token,
+    });
+    sessionStorage.setItem('user', user);
 
-            if(err.response.status === 422) {
-                setMessage('Digite dados válidos');
-                setModalError(true);
-            }
+    setTimeout(() => {
+      navigate('/timeline');
+    }, 2000);
+  }
 
-            if(err.response.status === 401) {
-                setEmail('');
-                setMessage(err.response.data);
-                setModalError(true);
-            }
+  function login(event) {
+    event.preventDefault();
+    setDisable(true);
 
-            if (err.response.status === 500) {
-                setMessage("Servidor fora de área, tente novamente mais tarde");
-                setModalError(true);
+    postLogin({
+      email,
+      password,
+    })
+      .then((res) => {
+        setMessage('');
+        setModalSuccess(true);
+        redirectLogin(res);
+      })
+      .catch((err) => {
+        console.error();
 
-                setTimeout(() => {
-                    navigate('/')
-                }, 2000)
-            }
-        })
-    }
+        setPassword('');
+        setDisable(false);
 
-    return (
-        <PageContainer>
-            <IntroductionText />
-            <Form onSubmit={ login }>
-                <Input
-                    type='email'
-                    placeholder='e-mail'
-                    disabled={disable}
-                    required
-                    value={email}
-                    onChange={(event) => (setEmail(event.target.value))}
-                />
-                <Input
-                    type='password'
-                    placeholder='password'
-                    disabled={disable}
-                    required
-                    value={password}
-                    onChange={(event) => (setPassword(event.target.value))}
-                />
-                <ButtonSubmit disabled={disable}>Log In</ButtonSubmit>
-            </Form>
-            <Link to='/sign-up'>
-                <Redirect>First time? Create an account!</Redirect>
-            </Link>
+        if (err.response.status === 422) {
+          setMessage('Digite dados válidos');
+          setModalError(true);
+        }
 
-            {
-                modalError ?
-                <ModalError message={message} setModal={setModalError} />
-                : ''
-            }
+        if (err.response.status === 401) {
+          setEmail('');
+          setMessage(err.response.data);
+          setModalError(true);
+        }
 
-            {
-                modalSuccess ?
-                <ModalSuccess message={message} />
-                : ''
-            }
-        </PageContainer>
-    );
+        if (err.response.status === 500) {
+          setMessage('Servidor fora de área, tente novamente mais tarde');
+          setModalError(true);
 
+          setTimeout(() => {
+            navigate('/');
+          }, 2000);
+        }
+      });
+  }
+
+  return (
+    <PageContainer>
+      <IntroductionText />
+      <Form onSubmit={login}>
+        <Input
+          type='email'
+          placeholder='e-mail'
+          disabled={disable}
+          required
+          value={email}
+          onChange={(event) => setEmail(event.target.value)}
+        />
+        <Input
+          type='password'
+          placeholder='password'
+          disabled={disable}
+          required
+          value={password}
+          onChange={(event) => setPassword(event.target.value)}
+        />
+        <ButtonSubmit disabled={disable}>Log In</ButtonSubmit>
+      </Form>
+      <Link to='/sign-up'>
+        <Redirect>First time? Create an account!</Redirect>
+      </Link>
+
+      {modalError ? (
+        <ModalError message={message} setModal={setModalError} />
+      ) : (
+        ''
+      )}
+
+      {modalSuccess ? <ModalSuccess message={message} /> : ''}
+    </PageContainer>
+  );
 }
+
