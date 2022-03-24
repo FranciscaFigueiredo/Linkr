@@ -10,7 +10,7 @@ import { PageContainer } from "../../styles/ContainerStyle";
 import { ButtonSubmit, Form, Input, Redirect } from "../../styles/FormStyle";
 
 export default function SignUp() {
-    const navigate = useNavigate()
+    const navigate = useNavigate();
 
     const [disable, setDisable] = useState(false);
     const [modalSuccess, setModalSuccess] = useState(false);

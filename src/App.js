@@ -22,6 +22,7 @@ function App() {
             <UserContext.Provider value={{user, setUser, token, setToken}} >
                 <Routes>
                     <Route path="/sign-up" element={<SignUp />} />
+                    <Route path="/timeline" element={<SignUp />} />
                     <Route path="/" element={<Login user={user} setUser={setUser} setToken={setToken} />} />
                 </Routes>
             </UserContext.Provider>

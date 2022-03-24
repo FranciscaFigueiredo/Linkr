@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 function UserLoginValidation() {
@@ -5,9 +6,11 @@ function UserLoginValidation() {
 
     const navigate = useNavigate();
 
-    if (user === null) {
-        navigate("/");
-    }
+    useEffect(() => {
+        if (user === null) {
+            navigate('/');
+        }
+    }, []);    
     
     return {
         user,
