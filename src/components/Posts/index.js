@@ -17,6 +17,7 @@ export default function Posts() {
         );
       });
   }, []);
+
   return posts ? (
     <PostsContainer>
       {posts.length > 0 ? (
