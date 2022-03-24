@@ -6,10 +6,10 @@ function postSignUp(body) {
   return promise;
 }
 
-function getPosts() {
+function getPosts(token) {
   return axios.get(`${api}/posts`, {
     headers: {
-      Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTY0Nzk3NzYwOSwiZXhwIjoxNjQ4MTUwNDA5fQ.300UH6vu-9BoFyGc3mFTH8YfeIevYNCa2mY213IxIcc`,
+      Authorization: `Bearer ${token}`,
     },
   });
 }

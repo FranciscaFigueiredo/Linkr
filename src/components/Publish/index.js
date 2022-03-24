@@ -3,31 +3,34 @@ import UserContext from '../../contexts/UserContext';
 import { postPublish } from '../../services/linkr';
 import Container from './style';
 
-export default function Publish() {
+export default function Publish({refresh, setRefresh}) {
   const [link, setLink] = useState('');
   const [comment, setComment] = useState('');
   const [isLoading, setIsLoading] = useState(0);
-  const { token } = useContext(UserContext);
+  const { token, user } = useContext(UserContext);
 
   function handleSubmit(e) {
     e.preventDefault();
     setIsLoading(1);
-    postPublish({ link, comment }, token)
+    postPublish({ link, comment }, token || JSON.parse(sessionStorage.getItem('user')).token)
       .then(() => {
         setLink('');
         setComment('');
+        setRefresh(!refresh);
       })
-      .catch(() => {
+      .catch((err) => {
         alert('Houve um erro ao publicar seu link');
+        console.log(err.response.data)
       })
       .finally(() => {
         setIsLoading(0);
       });
   }
+  
   return (
     <Container>
       <div className='image'>
-        <img src='https://unsplash.it/144/87' alt='Profile' />
+        <img src={user.pictureUrl || JSON.parse(sessionStorage.getItem('user')).pictureUrl} alt='Profile' /> 
       </div>
 
       <form onSubmit={handleSubmit}>
@@ -47,6 +50,7 @@ export default function Publish() {
           onChange={(e) => setComment(e.target.value)}
           disabled={isLoading === 1 ? true : false}
           className='comment'
+          maxLength='100'
         />
         <button disabled={isLoading === 1 ? true : false}>
           {isLoading === 0 ? 'Publish' : 'Publishing'}
