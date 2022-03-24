@@ -7,11 +7,11 @@ function postSignUp(body) {
 }
 
 function getPosts() {
-  return axios.get(`${api}/posts`, {
-    headers: {
-      Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTY0Nzk3NzYwOSwiZXhwIjoxNjQ4MTUwNDA5fQ.300UH6vu-9BoFyGc3mFTH8YfeIevYNCa2mY213IxIcc`,
-    },
-  });
+  return axios.get(`${api}/posts`);
+}
+
+function getLikes() {
+  return axios.get(`${api}/likes`);
 }
 
 function postPublish(body, token) {
@@ -36,4 +36,4 @@ function logout({ token }) {
   return promise;
 }
 
-export { postSignUp, postPublish, postLogin, logout, getPosts };
+export { postSignUp, postPublish, postLogin, logout, getPosts, getLikes };

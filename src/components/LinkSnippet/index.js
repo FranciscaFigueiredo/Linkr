@@ -1,14 +1,16 @@
 import { Content, LinkSnippetContainer } from './styles.js';
 
-export function LinkSnippet({ children: [title, description, image, url] }) {
+export function LinkSnippet({
+  post: { linkTitle, linkDescription, linkImage, url },
+}) {
   return (
     <LinkSnippetContainer>
       <Content>
-        <span id='snippetTitle'>{title}</span>
-        <span id='snippetDescription'>{description}</span>
+        <span id='snippetTitle'>{linkTitle}</span>
+        <span id='snippetDescription'>{linkDescription}</span>
         <span id='snippetUrl'>{url}</span>
       </Content>
-      <img src={image} alt='url' />
+      <img src={linkImage} alt='url' />
     </LinkSnippetContainer>
   );
 }
