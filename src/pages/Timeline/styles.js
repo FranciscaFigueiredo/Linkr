@@ -2,14 +2,13 @@ import styled from 'styled-components';
 
 const TimelineContainer = styled.div`
   width: 100vw;
-  height: 100vh;
-  margin-top: 72px;
+  margin-top: 53px;
   display: flex;
   justify-content: center;
+  gap: 25px;
 `;
 
 const TimelineParent = styled.div`
-  margin-top: 78px;
   width: 611px;
   display: flex;
   flex-direction: column;

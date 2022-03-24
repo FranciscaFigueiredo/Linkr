@@ -2,12 +2,13 @@ import { useState, useEffect } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
-import UserContext from './contexts/UserContext';
-import SignUp from './pages/SignUp/SignUp';
-import Login from './pages/Login/Login';
-import GlobalStyle from './styles/GlobalStyle';
+import UserContext from "./contexts/UserContext";
+import SignUp from "./pages/SignUp/SignUp";
+import Login from "./pages/Login/Login";
+import GlobalStyle from "./styles/GlobalStyle";
+import Hashtag from "./pages/Hashtag";
 import Timeline from './pages/Timeline/Timeline.js';
+
 
 function App() {
   const [user, setUser] = useState(null);
@@ -36,11 +37,13 @@ function App() {
             }
           />
           <Route path='/timeline' element={<Timeline />} />
+          <Route path="/hashtag/:hashtag" element={<Hashtag/>}/>
         </Routes>
       </UserContext.Provider>
       <ToastContainer />
     </BrowserRouter>
   );
+
 }
 
 export default App;

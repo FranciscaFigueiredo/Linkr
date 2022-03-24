@@ -20,7 +20,6 @@ function postPublish(body, token) {
   });
   return promise;
 }
-
 function postLogin(body) {
   const promise = axios.post(`${api}/users/login`, body);
   return promise;
@@ -35,5 +34,9 @@ function logout({ token }) {
   const promise = axios.delete(`${api}/users/logout`, config);
   return promise;
 }
+function getHashtag() {
+  const promise = axios.get(`${api}/hashtag`);
+  return promise;
+}
+export { postSignUp, postPublish, postLogin, logout, getPosts, getHashtag };
 
-export { postSignUp, postPublish, postLogin, logout, getPosts };
