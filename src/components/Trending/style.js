@@ -35,6 +35,7 @@ const BodyTrending = styled.div`
     padding: 9px 16px 12px 16px;
 
     p{
+        color:#FFFFFF;
         font-weight: 700;
         font-size: 19px;
         line-height: 23px;
