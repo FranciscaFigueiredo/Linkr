@@ -14,13 +14,13 @@ import { useNavigate } from 'react-router-dom';
 import getPostsData from '../../utils/getPostsData.js';
 import treatLikes from '../../utils/treatLikes.js';
 
-export default function Posts({ refresh }) {
+export default function Posts({ refresh, hashtag }) {
   const [posts, setPosts] = useState();
   const navigate = useNavigate();
 
   useEffect(() => {
-    getPostsData(setPosts);
-  }, [refresh]);
+    getPostsData(setPosts, hashtag);
+  }, [refresh, hashtag]);
 
   return posts ? (
     <PostsContainer>
