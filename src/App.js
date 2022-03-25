@@ -14,11 +14,15 @@ function App() {
   const [user, setUser] = useState(null);
   const [token, setToken] = useState(null);
 
-  useEffect(() => {
-    if (user === null) {
-      setUser(JSON.parse(sessionStorage.getItem('user')));
-    }
-  }, [user, token]);
+  // useEffect(() => {
+  //   if (user === null) {
+  //     setUser(JSON.parse(sessionStorage.getItem('user')));
+  //   }
+  // }, [user, token]);
+  if (user === null && sessionStorage.getItem('user')) {
+    setUser(JSON.parse(sessionStorage.getItem('user')));
+    setToken(JSON.parse(sessionStorage.getItem('user')).token);
+  }
 
   return (
     <BrowserRouter>

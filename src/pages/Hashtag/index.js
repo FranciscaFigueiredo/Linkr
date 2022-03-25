@@ -14,7 +14,7 @@ export default function Hashtag(){
       <TimelineContainer>
         <TimelineParent>
           <span id='title'># {hashtag}</span>
-          <Posts />
+          <Posts hashtag={hashtag} />
         </TimelineParent>
         <Trending/>
       </TimelineContainer>
