@@ -25,6 +25,7 @@ const Content = styled.div`
   flex-direction: column;
   justify-content: space-between;
   padding: 24px 0 24px 24px;
+  margin-right: 20px;
   word-break: break-all;
 
   #snippetTitle {

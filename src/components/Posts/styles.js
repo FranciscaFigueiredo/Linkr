@@ -79,4 +79,10 @@ const PostContent = styled.div`
   }
 `;
 
-export { PostsContainer, Post, PostSidebar, PostContent };
+const Hashtag = styled.span`
+  color:#FFFFFF;
+  font-weight: 700;
+  cursor: pointer;
+`;
+
+export { PostsContainer, Post, PostSidebar, PostContent, Hashtag };
