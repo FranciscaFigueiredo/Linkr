@@ -14,6 +14,9 @@ const TrendingContainer = styled.div`
     flex-direction: column;
 
     gap: 15px;
+    @media (max-width: 611px){
+        display: none;
+    }
 `;
 const HeaderTrending = styled.div`
     width: 100%;

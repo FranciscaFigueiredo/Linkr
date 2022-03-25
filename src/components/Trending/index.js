@@ -11,13 +11,13 @@ export default function Trending(){
         promise.then((answer)=>{
             const list = answer.data.map((data)=>
                 <Link to={'/hashtag/'+data.name}>
-                    <p>#{data.name}</p>
+                    <p># {data.name}</p>
                 </Link>
             );
             setListHashtags(list);
         });
-        promise.catch(()=>{
-          console.log("errp");
+        promise.catch((error)=>{
+          console.log(error);
         });
       },[]);
 

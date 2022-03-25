@@ -20,6 +20,7 @@ export default function Header() {
                 <Link to='/timeline'>
                     <Title>Linkr</Title>
                 </Link>
+                <input/>
                 <Menu onClick={ () => setMenu(!menu) }>
                     <ArrowMenu menu={ menu } />
                     <Avatar src={ pictureUrl } alt="" />
