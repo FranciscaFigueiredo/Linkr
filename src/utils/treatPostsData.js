@@ -1,6 +1,6 @@
 export function treatPostsData(rawPosts) {
   const posts = [];
-
+  console.log(rawPosts);
   rawPosts.forEach((rawPost, index) => {
     const { like_id: id, like_user_id: user_id } = rawPost;
     const postsIds = posts.map((post) => post.id);

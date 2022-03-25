@@ -1,20 +1,20 @@
 import { useEffect, useState } from 'react';
-import getPostsData from '../../utils/getPostsData.js';
 import { LinkSnippet } from '../LinkSnippet/index.js';
 import Loader from '../Loader.js';
 import { Post, PostContent, PostsContainer, PostSidebar } from './styles.js';
+import getPostsData from '../../utils/getPostsData.js';
 
-export default function Posts() {
+export default function Posts({ refresh }) {
   const [posts, setPosts] = useState();
 
   useEffect(() => {
     getPostsData(setPosts);
-  }, []);
+  }, [refresh]);
 
   return posts ? (
     <PostsContainer>
       {posts.length > 0 ? (
-        posts.map((post) => {
+        posts.reverse().map((post) => {
           return (
             <Post key={post.id}>
               <PostSidebar>
