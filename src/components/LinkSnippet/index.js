@@ -24,7 +24,11 @@ export function LinkSnippet({
         )}
         <span id='snippetUrl'>{url}</span>
       </Content>
-      {linkImage ? <img src={linkImage} /> : <img src={noImage} />}
+      {linkImage ? (
+        <img src={linkImage} alt='' />
+      ) : (
+        <img src={noImage} alt='' />
+      )}
     </LinkSnippetContainer>
   );
 }

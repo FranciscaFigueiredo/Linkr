@@ -1,24 +1,24 @@
 export function treatPostsData(rawPosts) {
   const posts = [];
-  console.log(rawPosts);
 
   function deleteKeysFromObject(object) {
-    delete object.like_id;
-    delete object.like_post_id;
-    delete object.like_user_id;
+    delete object.likeId;
+    delete object.likeUserId;
+    delete object.likeUsername;
   }
 
-  rawPosts.forEach((rawPost, index) => {
-    const { like_id: id, like_user_id: user_id } = rawPost;
+  rawPosts.forEach((rawPost) => {
+    const { likeId: id, likeUserId: userId, likeUsername: username } = rawPost;
     const postsIds = posts.map((post) => post.id);
     const indexOfFoundRawPost = postsIds.indexOf(rawPost.id);
 
     if (indexOfFoundRawPost === -1) {
       const likes = [];
-      rawPost.like_id &&
+      rawPost.likeId &&
         likes.push({
           id,
-          user_id,
+          userId,
+          username,
         });
 
       deleteKeysFromObject(rawPost);
@@ -32,11 +32,11 @@ export function treatPostsData(rawPosts) {
 
       post.likes.push({
         id,
-        user_id,
+        userId,
+        username,
       });
     }
   });
-  console.log(posts);
 
   return posts;
 }
