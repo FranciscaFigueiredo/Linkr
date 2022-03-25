@@ -33,6 +33,7 @@ export default function Login({ user, setUser, setToken }) {
       token: res.data.token,
     });
     sessionStorage.setItem('user', user);
+    setUser(user);
 
     setTimeout(() => {
       navigate('/timeline');
@@ -116,3 +117,4 @@ export default function Login({ user, setUser, setToken }) {
     </PageContainer>
   );
 }
+

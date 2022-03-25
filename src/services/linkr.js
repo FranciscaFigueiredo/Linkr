@@ -7,11 +7,11 @@ function postSignUp(body) {
 }
 
 function getPosts() {
-  return axios.get(`${api}/posts`, {
-    headers: {
-      Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTY0ODE4MDA5NiwiZXhwIjoxNjQ4MzUyODk2fQ.BgtRqJyjN2069e4tCYcDg1BV9P2bOSWgpEyU4FZRrYc`,
-    },
-  });
+  return axios.get(`${api}/posts`);
+}
+
+function getLikes() {
+  return axios.get(`${api}/likes`);
 }
 
 function postPublish(body, token) {
@@ -20,7 +20,6 @@ function postPublish(body, token) {
   });
   return promise;
 }
-
 function postLogin(body) {
   const promise = axios.post(`${api}/users/login`, body);
   return promise;
@@ -33,6 +32,10 @@ function logout({ token }) {
     },
   };
   const promise = axios.delete(`${api}/users/logout`, config);
+  return promise;
+}
+function getHashtag() {
+  const promise = axios.get(`${api}/hashtag`);
   return promise;
 }
 
@@ -56,4 +59,14 @@ function dislikeThePost({ id, token }) {
   return promise;
 }
 
-export { postSignUp, postPublish, postLogin, logout, getPosts, likeThePost, dislikeThePost };
+export {
+  postSignUp,
+  postPublish,
+  postLogin,
+  logout,
+  getPosts,
+  getLikes,
+  getHashtag,
+  likeThePost,
+  dislikeThePost,
+};
