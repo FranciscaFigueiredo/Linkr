@@ -15,7 +15,7 @@ import getPostsData from '../../utils/getPostsData.js';
 import treatLikes from '../../utils/treatLikes.js';
 import getPostsDataById from '../../utils/getPostsDataById.js';
 
-export default function Posts({refresh, id, setName}) {
+export default function Posts({ refresh, id, setName, hashtag}) {
   const [posts, setPosts] = useState();
   const navigate = useNavigate();
 
@@ -23,9 +23,9 @@ export default function Posts({refresh, id, setName}) {
       if(id){
         getPostsDataById(setPosts, id);
       }else{
-        getPostsData(setPosts);
+        getPostsData(setPosts, hashtag);
       }
-    }, [refresh]);
+    }, [refresh, hashtag]);
 
   if(posts && id){
     setName(posts[0].username)

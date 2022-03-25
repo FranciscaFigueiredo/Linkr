@@ -6,7 +6,11 @@ function postSignUp(body) {
   return promise;
 }
 
-function getPosts() {
+function getPosts(hashtag) {
+  if(hashtag){
+    return axios.get(`${api}/hashtag/${hashtag}`);
+  }
+  
   return axios.get(`${api}/posts`);
 }
 
