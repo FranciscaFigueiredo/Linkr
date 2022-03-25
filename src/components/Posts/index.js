@@ -26,7 +26,7 @@ export default function Posts({refresh}) {
   return posts ? (
     <PostsContainer>
       {posts.length > 0 ? (
-        posts.reverse().map((post) => {
+        posts.map((post) => {
           return (
             <Post key={post.id}>
               <PostSidebar>
