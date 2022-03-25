@@ -9,7 +9,7 @@ function postSignUp(body) {
 function getPosts() {
   return axios.get(`${api}/posts`, {
     headers: {
-      Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTY0Nzk3NzYwOSwiZXhwIjoxNjQ4MTUwNDA5fQ.300UH6vu-9BoFyGc3mFTH8YfeIevYNCa2mY213IxIcc`,
+      Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTY0ODE4MDA5NiwiZXhwIjoxNjQ4MzUyODk2fQ.BgtRqJyjN2069e4tCYcDg1BV9P2bOSWgpEyU4FZRrYc`,
     },
   });
 }
@@ -36,4 +36,24 @@ function logout({ token }) {
   return promise;
 }
 
-export { postSignUp, postPublish, postLogin, logout, getPosts };
+function likeThePost({ id, token }) {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+  const promise = axios.post(`${api}/posts/${id}/like`, {}, config);
+  return promise;
+}
+
+function dislikeThePost({ id, token }) {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+  const promise = axios.delete(`${api}/posts/${id}/like`, config);
+  return promise;
+}
+
+export { postSignUp, postPublish, postLogin, logout, getPosts, likeThePost, dislikeThePost };

@@ -1,12 +1,17 @@
-import { useEffect, useState } from 'react';
-import { getPosts } from '../../services/linkr.js';
+import { useContext, useEffect, useState } from 'react';
+import UserContext from '../../contexts/UserContext.js';
+import { dislikeThePost, getPosts, likeThePost } from '../../services/linkr.js';
 import { LinkSnippet } from '../LinkSnippet/index.js';
 import Loader from '../Loader.js';
 import { toastError } from '../toasts.js';
-import { Post, PostContent, PostsContainer, PostSidebar } from './styles.js';
+import { Heart, HeartRed, Post, PostContent, PostsContainer, PostSidebar } from './styles.js';
 
 export default function Posts() {
   const [posts, setPosts] = useState();
+
+  const { token } = useContext(UserContext);
+
+  const [liked, setLiked] = useState(false);
 
   useEffect(() => {
     getPosts()
@@ -18,6 +23,18 @@ export default function Posts() {
       });
   }, []);
 
+  function like(id) {
+    likeThePost({ id, token })
+      .then((res) => setLiked(true))
+      .catch((err) => console.error());
+  }
+
+  function dislike(id) {
+    dislikeThePost({ id, token })
+      .then((res) => setLiked(false))
+      .catch((err) => console.error());
+  }
+
   return posts ? (
     <PostsContainer>
       {posts.length > 0 ? (
@@ -26,6 +43,11 @@ export default function Posts() {
             <Post key={post.id}>
               <PostSidebar>
                 <img src={post.userPic} alt='user pic' />
+                {
+                  liked ?
+                    <HeartRed onClick={ () => dislike(post.id) } />
+                  : <Heart onClick={ () => like(post.id) } />
+                }
               </PostSidebar>
               <PostContent>
                 <span id='name'>{post.username}</span>

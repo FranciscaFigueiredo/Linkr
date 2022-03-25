@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { FaRegHeart,FaHeart } from 'react-icons/fa'
 
 const PostsContainer = styled.div`
   width: 100%;
@@ -70,4 +71,28 @@ const PostContent = styled.div`
   }
 `;
 
-export { PostsContainer, Post, PostSidebar, PostContent };
+const Heart = styled(FaRegHeart)`
+    color: #ffffff;
+    font-size: 18px;
+    text-align: center;
+
+    transform: ${(props) => props.menu ? "rotate(180deg)" : ""};
+
+    cursor: pointer;
+
+    margin: 15px auto;
+`
+
+const HeartRed = styled(FaHeart)`
+    color: #ff0000;
+    font-size: 18px;
+    text-align: center;
+
+    transform: ${(props) => props.menu ? "rotate(180deg)" : ""};
+
+    cursor: pointer;
+
+    margin: 15px auto;
+`
+
+export { PostsContainer, Post, PostSidebar, PostContent, Heart, HeartRed };

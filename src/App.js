@@ -17,6 +17,10 @@ function App() {
     if (user === null) {
       setUser(JSON.parse(sessionStorage.getItem('user')));
     }
+
+    if (user) {
+      setToken(user.token)
+    }
   }, [user, token]);
 
   return (
