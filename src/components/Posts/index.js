@@ -8,20 +8,32 @@ import { Post, PostContent, PostsContainer, PostSidebar, Hashtag } from './style
 import ReactHashtag from "@mdnm/react-hashtag";
 import { useNavigate } from 'react-router-dom';
 
-export default function Posts({refresh}) {
+export default function Posts({refresh, id}) {
   const [posts, setPosts] = useState();
   const { token } = useContext(UserContext);
   const navigate = useNavigate()
 
-  useEffect(() => {
-    getPosts(token || JSON.parse(sessionStorage.getItem('user')).token)
-      .then((res) => setPosts(res.data))
-      .catch(() => {
-        toastError(
-          'An error occured while trying to fetch the posts, please refresh the page'
-        );
-      });
-  }, [refresh]);
+  if(id){
+    useEffect(() => {
+      getPosts(token || JSON.parse(sessionStorage.getItem('user')).token)
+        .then((res) => setPosts(res.data))
+        .catch(() => {
+          toastError(
+            'An error occured while trying to fetch the posts, please refresh the page'
+          );
+        });
+    }, []);
+  }else{
+    useEffect(() => {
+      getPosts(token || JSON.parse(sessionStorage.getItem('user')).token)
+        .then((res) => setPosts(res.data))
+        .catch(() => {
+          toastError(
+            'An error occured while trying to fetch the posts, please refresh the page'
+          );
+        });
+    }, [refresh]);
+  }
 
   return posts ? (
     <PostsContainer>

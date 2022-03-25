@@ -8,6 +8,7 @@ import Login from "./pages/Login/Login";
 import GlobalStyle from "./styles/GlobalStyle";
 import Hashtag from "./pages/Hashtag";
 import Timeline from './pages/Timeline/Timeline.js';
+import User from "./pages/User"
 
 
 function App() {
@@ -38,6 +39,7 @@ function App() {
           />
           <Route path='/timeline' element={<Timeline />} />
           <Route path="/hashtag/:hashtag" element={<Hashtag/>}/>
+          <Route path='/users/:id' element={<User />} />
         </Routes>
       </UserContext.Provider>
       <ToastContainer />
