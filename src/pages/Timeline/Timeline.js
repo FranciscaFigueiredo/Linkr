@@ -17,7 +17,7 @@ export default function Timeline() {
           <Posts refresh={refresh} />
         </TimelineParent>
         <div>
-          <Trending/>
+          <Trending refresh={refresh}/>
         </div>
       </TimelineContainer>
     </>

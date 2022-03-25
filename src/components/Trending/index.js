@@ -2,24 +2,14 @@ import { TrendingContainer, HeaderTrending, BodyTrending } from "./style";
 import { useEffect, useState } from "react";
 import { getHashtag } from "../../services/linkr";
 import { Link } from "react-router-dom";
+import getHashtagsData from "../../utils/getHashtagsData";
 
-export default function Trending(){
+export default function Trending({ refresh }){
     const [listHashtags, setListHashtags] = useState([]);
-
+    
     useEffect(()=>{
-        const promise = getHashtag();
-        promise.then((answer)=>{
-            const list = answer.data.map((data)=>
-                <Link to={'/hashtag/'+data.name}>
-                    <p># {data.name}</p>
-                </Link>
-            );
-            setListHashtags(list);
-        });
-        promise.catch((error)=>{
-          console.log(error);
-        });
-      },[]);
+        getHashtagsData(setListHashtags);
+    },[refresh]);
 
     return (
         <TrendingContainer>

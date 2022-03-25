@@ -20,7 +20,7 @@ export default function Posts({ refresh, hashtag }) {
 
   useEffect(() => {
     getPostsData(setPosts, hashtag);
-  }, [refresh]);
+  }, [refresh, hashtag]);
 
   return posts ? (
     <PostsContainer>
