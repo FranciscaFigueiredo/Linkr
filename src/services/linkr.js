@@ -6,12 +6,12 @@ function postSignUp(body) {
   return promise;
 }
 
-function getPosts(token) {
-  return axios.get(`${api}/posts`, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
+function getPosts() {
+  return axios.get(`${api}/posts`);
+}
+
+function getLikes() {
+  return axios.get(`${api}/likes`);
 }
 
 function postPublish(body, token) {
@@ -38,5 +38,13 @@ function getHashtag() {
   const promise = axios.get(`${api}/hashtag`);
   return promise;
 }
-export { postSignUp, postPublish, postLogin, logout, getPosts, getHashtag };
 
+export {
+  postSignUp,
+  postPublish,
+  postLogin,
+  logout,
+  getPosts,
+  getLikes,
+  getHashtag,
+};

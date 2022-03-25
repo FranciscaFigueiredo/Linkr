@@ -9,14 +9,14 @@ export default function Timeline() {
   const [refresh, setRefresh] = useState(true)
   return (
     <>
-      <Header/>
+      <Header />
       <TimelineContainer>
         <TimelineParent>
           <span id='title'>timeline</span>
           <Publish refresh={refresh} setRefresh={setRefresh} />
           <Posts refresh={refresh} />
         </TimelineParent>
-        <Trending/>
+        <Trending />
       </TimelineContainer>
     </>
   );
