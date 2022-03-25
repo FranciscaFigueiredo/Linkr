@@ -10,6 +10,7 @@ function getPosts(hashtag) {
   if(hashtag){
     return axios.get(`${api}/hashtag/${hashtag}`);
   }
+  
   return axios.get(`${api}/posts`);
 }
 
