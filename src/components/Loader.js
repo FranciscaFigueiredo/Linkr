@@ -16,8 +16,13 @@ const LoaderContainer = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 5px;
+  margin-top: 29px;
 
   span {
     font: 400 17px 'Lato';
+  }
+
+  @media (max-width: 611px) {
+    margin-top: 16px;
   }
 `;

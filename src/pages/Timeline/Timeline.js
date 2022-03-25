@@ -9,7 +9,7 @@ export default function Timeline() {
   const [refresh, setRefresh] = useState(true)
   return (
     <>
-      <Header/>
+      <Header />
       <TimelineContainer>
         <TimelineParent>
           <span id='title'>timeline</span>

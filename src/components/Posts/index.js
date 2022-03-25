@@ -1,25 +1,25 @@
-import { useEffect, useState, useContext } from 'react';
-import UserContext from '../../contexts/UserContext';
-import { getPosts } from '../../services/linkr.js';
+import { useEffect, useState } from 'react';
 import { LinkSnippet } from '../LinkSnippet/index.js';
 import Loader from '../Loader.js';
-import { toastError } from '../toasts.js';
-import { Post, PostContent, PostsContainer, PostSidebar, Hashtag } from './styles.js';
-import ReactHashtag from "@mdnm/react-hashtag";
+import {
+  Post,
+  PostContent,
+  PostsContainer,
+  PostSidebar,
+  Hashtag,
+} from './styles.js';
+import ReactHashtag from '@mdnm/react-hashtag';
+import ReactTooltip from 'react-tooltip';
 import { useNavigate } from 'react-router-dom';
+import getPostsData from '../../utils/getPostsData.js';
+import treatLikes from '../../utils/treatLikes.js';
 
-export default function Posts({refresh, hashtag}) {
+export default function Posts({ refresh, hashtag }) {
   const [posts, setPosts] = useState();
-  const { token } = useContext(UserContext);
   const navigate = useNavigate();
+
   useEffect(() => {
-    getPosts(token || JSON.parse(sessionStorage.getItem('user')).token, hashtag)
-      .then((res) => setPosts(res.data))
-      .catch(() => {
-        toastError(
-          'An error occured while trying to fetch the posts, please refresh the page'
-        );
-      });
+    getPostsData(setPosts, hashtag);
   }, [refresh]);
 
   return posts ? (
@@ -30,20 +30,29 @@ export default function Posts({refresh, hashtag}) {
             <Post key={post.id}>
               <PostSidebar>
                 <img src={post.userPic} alt='user pic' />
+                <img src={post.userPic} alt='' data-tip={treatLikes(post)} />
               </PostSidebar>
               <PostContent>
                 <span id='name'>{post.username}</span>
-                {post.comment && <span id='comment'><ReactHashtag
-                  renderHashtag={(hashtagValue) => <Hashtag onClick={() => navigate(`/hashtag/${hashtagValue.substr(1)}`)}>
-                    {hashtagValue}</Hashtag>}
-                >{post.comment}</ReactHashtag></span>}
+                {post.comment && (
+                  <span id='comment'>
+                    <ReactHashtag
+                      renderHashtag={(hashtagValue) => (
+                        <Hashtag
+                          onClick={() =>
+                            navigate(`/hashtag/${hashtagValue.substr(1)}`)
+                          }
+                        >
+                          {hashtagValue}
+                        </Hashtag>
+                      )}
+                    >
+                      {post.comment}
+                    </ReactHashtag>
+                  </span>
+                )}
                 <a href={post.url} target='_blank' rel='noreferrer'>
-                  <LinkSnippet>
-                    {post.linkTitle}
-                    {post.linkDescription}
-                    {post.linkImage}
-                    {post.url}
-                  </LinkSnippet>
+                  <LinkSnippet post={post} />
                 </a>
               </PostContent>
             </Post>
@@ -52,6 +61,7 @@ export default function Posts({refresh, hashtag}) {
       ) : (
         <span id='noPosts'>There are no posts yet</span>
       )}
+      <ReactTooltip />
     </PostsContainer>
   ) : (
     <Loader />
