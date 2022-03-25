@@ -16,7 +16,9 @@ export default function Timeline() {
           <Publish refresh={refresh} setRefresh={setRefresh} />
           <Posts refresh={refresh} />
         </TimelineParent>
-        <Trending/>
+        <div>
+          <Trending/>
+        </div>
       </TimelineContainer>
     </>
   );

@@ -3,7 +3,6 @@ import styled from "styled-components";
 const TrendingContainer = styled.div`
     width: 301px;
     min-height: 70px;
-    max-height: 300px;
 
     margin: 105px 0px 0px 0px;
 
