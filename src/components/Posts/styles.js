@@ -6,7 +6,6 @@ const PostsContainer = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 16px;
-  margin-top: 29px;
 
   #noPosts {
     font: 700 17px 'Lato';
@@ -14,22 +13,32 @@ const PostsContainer = styled.div`
 
   @media (max-width: 611px) {
     margin-top: 0;
+    gap: 5px;
   }
 `;
 
 const Post = styled.div`
   width: 100%;
-  height: 276px;
+  height: auto;
   background-color: #171717;
   border-radius: 16px;
   padding: 20px;
   display: flex;
   flex-direction: row;
   align-items: stretch;
+  word-wrap: break-word;
+
+  &:first-of-type {
+    margin-top: 29px;
+  }
 
   @media (max-width: 611px) {
-    margin-top: 16px;
     border-radius: 0;
+    height: auto;
+
+    &:first-of-type {
+      margin-top: 16px;
+    }
   }
 `;
 
@@ -62,6 +71,7 @@ const PostContent = styled.div`
 
   #name {
     font: 400 17px 'Lato';
+    cursor: pointer;
   }
 
   #comment {

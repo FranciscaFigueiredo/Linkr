@@ -1,14 +1,34 @@
 import { Content, LinkSnippetContainer } from './styles.js';
+import noImage from '../../assets/noImage.png';
+import treatLongString from '../../utils/treatLinkDescription.js';
 
-export function LinkSnippet({ children: [title, description, image, url] }) {
+export function LinkSnippet({
+  post: { linkTitle, linkDescription, linkImage, url },
+}) {
   return (
     <LinkSnippetContainer>
       <Content>
-        <span id='snippetTitle'>{title}</span>
-        <span id='snippetDescription'>{description}</span>
+        {linkTitle ? (
+          <span id='snippetTitle'>{linkTitle}</span>
+        ) : (
+          <span id='snippetTitle'>No title available for this url</span>
+        )}
+        {linkDescription ? (
+          <span id='snippetDescription'>
+            {treatLongString(linkDescription)}
+          </span>
+        ) : (
+          <span id='snippetDescription'>
+            No description available for this url
+          </span>
+        )}
         <span id='snippetUrl'>{url}</span>
       </Content>
-      <img src={image} alt='url' />
+      {linkImage ? (
+        <img src={linkImage} alt='' />
+      ) : (
+        <img src={noImage} alt='' />
+      )}
     </LinkSnippetContainer>
   );
 }
