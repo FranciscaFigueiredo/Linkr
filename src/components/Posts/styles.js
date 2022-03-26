@@ -9,6 +9,7 @@ const PostsContainer = styled.div`
 
   #noPosts {
     font: 700 17px 'Lato';
+    margin-top: 29px;
   }
 
   @media (max-width: 611px) {
@@ -81,7 +82,7 @@ const PostContent = styled.div`
 `;
 
 const Hashtag = styled.span`
-  color:#FFFFFF;
+  color: #ffffff;
   font-weight: 700;
   cursor: pointer;
 `;
