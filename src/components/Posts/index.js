@@ -13,14 +13,23 @@ import ReactTooltip from 'react-tooltip';
 import { useNavigate } from 'react-router-dom';
 import getPostsData from '../../utils/getPostsData.js';
 import treatLikes from '../../utils/treatLikes.js';
+import getPostsDataById from '../../utils/getPostsDataById.js';
 
-export default function Posts({ refresh, hashtag }) {
+export default function Posts({ refresh, id, setName, hashtag}) {
   const [posts, setPosts] = useState();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    getPostsData(setPosts, hashtag);
-  }, [refresh, hashtag]);
+    useEffect(() => {
+      if(id){
+        getPostsDataById(setPosts, id);
+      }else{
+        getPostsData(setPosts, hashtag);
+      }
+    }, [refresh, hashtag]);
+
+  if(posts && id){
+    setName(posts[0].username)
+  }
 
   return posts ? (
     <PostsContainer>
@@ -33,7 +42,13 @@ export default function Posts({ refresh, hashtag }) {
                 <img src={post.userPic} alt='' data-tip={treatLikes(post)} />
               </PostSidebar>
               <PostContent>
-                <span id='name'>{post.username}</span>
+                <span id='name'
+                  onClick={() =>
+                    navigate(`/users/${post.userId}`)
+                  }  
+                >
+                    {post.username}
+                </span>
                 {post.comment && (
                   <span id='comment'>
                     <ReactHashtag
