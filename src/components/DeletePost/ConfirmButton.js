@@ -10,16 +10,15 @@ export default function ConfirmButton() {
 
   const { token } = useContext(UserContext);
   const { setIsModalOpen } = useContext(ModalContext);
-  const { setPosts } = useContext(PostsContext);
+  const { setPosts, postId } = useContext(PostsContext);
 
   if (isLoading) return <ThreeDots color='white' width={40} height={40} />;
   else
     return (
       <div
-        onClick={async () => {
+        onClick={() => {
           setIsLoading(true);
-          await handleDeletePost(token, setIsModalOpen, setPosts);
-          setIsLoading(false);
+          handleDeletePost(token, setIsModalOpen, setPosts, postId);
         }}
       >
         Yes, delete it

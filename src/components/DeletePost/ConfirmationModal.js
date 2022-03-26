@@ -5,7 +5,8 @@ import ModalContent from './ModalContent.js';
 import './modalStyle.css';
 
 export default function ConfirmationModal() {
-  const { isModalOpen } = useContext(ModalContext); //TODO PUT isModalOpen inside isOpen prop of Modal
+  const { isModalOpen } = useContext(ModalContext);
+
   Modal.setAppElement('#root');
 
   return (

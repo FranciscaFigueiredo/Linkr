@@ -47,9 +47,9 @@ function getHashtag() {
   return promise;
 }
 
-function deletePost(token) {
+function deletePost(token, postId) {
   const config = createConfig(token);
-  return axios.delete(`${api}/posts`, config);
+  return axios.delete(`${api}/posts/${postId}`, config);
 }
 
 export {
