@@ -42,6 +42,10 @@ function getHashtag() {
   const promise = axios.get(`${api}/hashtag`);
   return promise;
 }
+function getUserByText(text){
+  const promise = axios.get(`${api}/users?text=${text}`);
+  return promise;
+}
 
 export {
   postSignUp,
@@ -51,4 +55,5 @@ export {
   getPosts,
   getLikes,
   getHashtag,
+  getUserByText,
 };
