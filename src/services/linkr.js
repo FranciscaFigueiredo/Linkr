@@ -43,6 +43,11 @@ function getHashtag() {
   return promise;
 }
 
+function getPostsById(id){
+  const promise = axios.get(`${api}/users/${id}`);
+  return promise;
+}
+
 export {
   postSignUp,
   postPublish,
@@ -51,4 +56,5 @@ export {
   getPosts,
   getLikes,
   getHashtag,
+  getPostsById,
 };
