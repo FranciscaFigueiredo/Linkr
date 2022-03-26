@@ -15,6 +15,10 @@ const Container = styled.div`
   align-self: start;
 
   margin-top: 13px;
+
+  @media (max-width: 940px) {
+    display: none;
+  }
 `;
 const HeaderStyle = styled.div`
   width: 100%;

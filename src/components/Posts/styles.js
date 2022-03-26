@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { GrEdit } from 'react-icons/gr';
 
 const PostsContainer = styled.div`
   width: 100%;
@@ -27,6 +28,8 @@ const Post = styled.div`
   flex-direction: row;
   align-items: stretch;
   word-wrap: break-word;
+
+  position: relative;
 
   &:first-of-type {
     margin-top: 29px;
@@ -86,4 +89,24 @@ const Hashtag = styled.span`
   cursor: pointer;
 `;
 
-export { PostsContainer, Post, PostSidebar, PostContent, Hashtag };
+const Options = styled.div`
+  all: unset;
+  position: absolute;
+  right: 22px;
+  top: 23px;
+  z-index: 5;
+
+  display: flex;
+  gap: 10px;
+`;
+
+const Edit = styled(GrEdit)`
+  color: #ffffff;  
+  font-size: 20px;
+
+  &:hover{
+    cursor:pointer;
+  }
+`;
+
+export { PostsContainer, Post, PostSidebar, PostContent, Hashtag, Options, Edit };

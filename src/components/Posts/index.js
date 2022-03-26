@@ -7,6 +7,8 @@ import {
   PostsContainer,
   PostSidebar,
   Hashtag,
+  Options,
+  Edit
 } from './styles.js';
 import ReactHashtag from '@mdnm/react-hashtag';
 import ReactTooltip from 'react-tooltip';
@@ -14,9 +16,16 @@ import { useNavigate } from 'react-router-dom';
 import getPostsData from '../../utils/getPostsData.js';
 import treatLikes from '../../utils/treatLikes.js';
 import getPostsDataById from '../../utils/getPostsDataById.js';
+import { UserLoginValidation } from '../../services/userLogin';
 
 export default function Posts({ refresh, id, setName, hashtag}) {
   const [posts, setPosts] = useState();
+  const [edit, setEdit] = useState({
+    status: false,
+    idPost: null
+  });
+  const x = <p>oi</p>;
+  const { user } = UserLoginValidation();
   const navigate = useNavigate();
 
     useEffect(() => {
@@ -37,6 +46,15 @@ export default function Posts({ refresh, id, setName, hashtag}) {
         posts.map((post) => {
           return (
             <Post key={post.id}>
+              {(user.username === post.username) ? 
+                <Options>
+                  <Edit onClick={()=> setEdit({
+                    status: true,
+                    idPost: post.id
+                  })}/>
+                </Options> :
+                ""
+              }
               <PostSidebar>
                 <img src={post.userPic} alt='user pic' />
                 <img src={post.userPic} alt='' data-tip={treatLikes(post)} />
@@ -82,3 +100,4 @@ export default function Posts({ refresh, id, setName, hashtag}) {
     <Loader />
   );
 }
+
