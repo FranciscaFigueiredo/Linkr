@@ -28,6 +28,7 @@ const Post = styled.div`
   flex-direction: row;
   align-items: stretch;
   word-wrap: break-word;
+  position: relative;
 
   &:first-of-type {
     margin-top: 29px;

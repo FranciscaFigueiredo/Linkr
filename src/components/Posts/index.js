@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect } from 'react';
 import { LinkSnippet } from '../LinkSnippet/index.js';
 import Loader from '../Loader.js';
 import {
@@ -13,10 +13,12 @@ import ReactTooltip from 'react-tooltip';
 import { useNavigate } from 'react-router-dom';
 import getPostsData from '../../utils/getPostsData.js';
 import treatLikes from '../../utils/treatLikes.js';
+import { DeletePost } from '../DeletePost/';
+import PostsContext from '../../contexts/PostsContext.js';
 import getPostsDataById from '../../utils/getPostsDataById.js';
 
 export default function Posts({ refresh, id, setName, hashtag }) {
-  const [posts, setPosts] = useState();
+  const { posts, setPosts } = useContext(PostsContext);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -69,6 +71,7 @@ export default function Posts({ refresh, id, setName, hashtag }) {
                   <LinkSnippet post={post} />
                 </a>
               </PostContent>
+              <DeletePost post={post} />
             </Post>
           );
         })
