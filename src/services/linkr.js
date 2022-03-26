@@ -1,6 +1,14 @@
 import axios from 'axios';
 import { api } from './apiUrl';
 
+function createConfig(token) {
+  return {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+}
+
 function postSignUp(body) {
   const promise = axios.post(`${api}/users`, body);
   return promise;
@@ -39,6 +47,11 @@ function getHashtag() {
   return promise;
 }
 
+function deletePost(token) {
+  const config = createConfig(token);
+  return axios.delete(`${api}/posts`, config);
+}
+
 export {
   postSignUp,
   postPublish,
@@ -47,4 +60,5 @@ export {
   getPosts,
   getLikes,
   getHashtag,
+  deletePost,
 };
