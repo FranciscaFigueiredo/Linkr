@@ -15,7 +15,7 @@ export default function SearchUser(){
   const [users, setUsers] = useState([]);
 
   const list = users.map((data)=>
-    <Link to={`/user/${data.id}`}>
+    <Link to={`/users/${data.id}`}>
       <User>
         <img src={data.picture_url} alt='username'/>
         <p>{data.username}</p>
