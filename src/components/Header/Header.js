@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { UserLoginValidation } from '../../services/userLogin';
+import SearchUser from '../SearchUser';
 import { ArrowMenu, Avatar, Menu, Navbar, Title } from './HeaderStyle';
 import MenuActions from './Menu';
 
@@ -18,6 +19,7 @@ export default function Header() {
         <Link to='/timeline'>
           <Title>Linkr</Title>
         </Link>
+        <SearchUser/>
         <Menu onClick={() => setMenu(!menu)}>
           <ArrowMenu menu={menu} />
           <Avatar src={pictureUrl} alt='' />

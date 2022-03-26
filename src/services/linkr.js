@@ -50,6 +50,10 @@ function getHashtag() {
   const promise = axios.get(`${api}/hashtag`);
   return promise;
 }
+function getUserByText(text){
+  const promise = axios.get(`${api}/users?text=${text}`);
+  return promise;
+}
 
 function deletePost(token, postId) {
   const config = createConfig(token);
@@ -69,5 +73,6 @@ export {
   getLikes,
   getHashtag,
   deletePost,
+  getUserByText,
   getPostsById,
 };
