@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 import ModalContext from '../../contexts/ModalContext.js';
 import ConfirmButton from './ConfirmButton.js';
 import { ButtonsContainer } from './styles.js';

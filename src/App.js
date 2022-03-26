@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -10,6 +10,7 @@ import Hashtag from './pages/Hashtag';
 import Timeline from './pages/Timeline/Timeline.js';
 import { ModalProvider } from './contexts/ModalContext.js';
 import { PostsProvider } from './contexts/PostsContext.js';
+import User from './pages/User';
 
 function App() {
   const [user, setUser] = useState(null);
@@ -41,6 +42,7 @@ function App() {
               />
               <Route path='/timeline' element={<Timeline />} />
               <Route path='/hashtag/:hashtag' element={<Hashtag />} />
+              <Route path='/users/:id' element={<User />} />
             </Routes>
           </PostsProvider>
         </ModalProvider>

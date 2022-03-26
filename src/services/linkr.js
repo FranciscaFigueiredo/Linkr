@@ -14,7 +14,11 @@ function postSignUp(body) {
   return promise;
 }
 
-function getPosts() {
+function getPosts(hashtag) {
+  if (hashtag) {
+    return axios.get(`${api}/hashtag/${hashtag}`);
+  }
+
   return axios.get(`${api}/posts`);
 }
 
@@ -51,6 +55,10 @@ function deletePost(token, postId) {
   const config = createConfig(token);
   return axios.delete(`${api}/posts/${postId}`, config);
 }
+function getPostsById(id) {
+  const promise = axios.get(`${api}/users/${id}`);
+  return promise;
+}
 
 export {
   postSignUp,
@@ -61,4 +69,5 @@ export {
   getLikes,
   getHashtag,
   deletePost,
+  getPostsById,
 };

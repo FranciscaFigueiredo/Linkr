@@ -72,6 +72,7 @@ const PostContent = styled.div`
 
   #name {
     font: 400 17px 'Lato';
+    cursor: pointer;
   }
 
   #comment {

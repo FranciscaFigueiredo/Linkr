@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect } from 'react';
 import { LinkSnippet } from '../LinkSnippet/index.js';
 import Loader from '../Loader.js';
 import {
@@ -15,14 +15,23 @@ import getPostsData from '../../utils/getPostsData.js';
 import treatLikes from '../../utils/treatLikes.js';
 import { DeletePost } from '../DeletePost/';
 import PostsContext from '../../contexts/PostsContext.js';
+import getPostsDataById from '../../utils/getPostsDataById.js';
 
-export default function Posts({ refresh }) {
+export default function Posts({ refresh, id, setName, hashtag }) {
   const { posts, setPosts } = useContext(PostsContext);
   const navigate = useNavigate();
 
   useEffect(() => {
-    getPostsData(setPosts);
-  }, [refresh]);
+    if (id) {
+      getPostsDataById(setPosts, id);
+    } else {
+      getPostsData(setPosts, hashtag);
+    }
+  }, [refresh, hashtag]);
+
+  if (posts && id) {
+    setName(posts[0].username);
+  }
 
   return posts ? (
     <PostsContainer>
@@ -35,7 +44,12 @@ export default function Posts({ refresh }) {
                 <img src={post.userPic} alt='' data-tip={treatLikes(post)} />
               </PostSidebar>
               <PostContent>
-                <span id='name'>{post.username}</span>
+                <span
+                  id='name'
+                  onClick={() => navigate(`/users/${post.userId}`)}
+                >
+                  {post.username}
+                </span>
                 {post.comment && (
                   <span id='comment'>
                     <ReactHashtag
