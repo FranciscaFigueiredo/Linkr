@@ -27,6 +27,7 @@ const Post = styled.div`
   flex-direction: row;
   align-items: stretch;
   word-wrap: break-word;
+  position: relative;
 
   &:first-of-type {
     margin-top: 29px;
@@ -81,7 +82,7 @@ const PostContent = styled.div`
 `;
 
 const Hashtag = styled.span`
-  color:#FFFFFF;
+  color: #ffffff;
   font-weight: 700;
   cursor: pointer;
 `;
