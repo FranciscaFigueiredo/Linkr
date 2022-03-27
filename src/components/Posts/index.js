@@ -43,9 +43,6 @@ export default function Posts({ refresh, id, setName, hashtag, setRefresh }) {
     }
   }, [refresh, hashtag, id]);
   
-  if (posts && id) {
-    setName(posts[0].username);
-  }
 
   return posts ? (
     <PostsContainer>
