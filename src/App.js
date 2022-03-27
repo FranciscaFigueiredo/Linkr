@@ -10,7 +10,7 @@ import Hashtag from './pages/Hashtag';
 import Timeline from './pages/Timeline/Timeline.js';
 import { ModalProvider } from './contexts/ModalContext.js';
 import { PostsProvider } from './contexts/PostsContext.js';
-import User from './pages/User';
+import UserTimeline from './pages/UserTimeline';
 
 function App() {
   const [user, setUser] = useState(null);
@@ -37,7 +37,7 @@ function App() {
               />
               <Route path='/timeline' element={<Timeline />} />
               <Route path='/hashtag/:hashtag' element={<Hashtag />} />
-              <Route path='/users/:id' element={<User />} />
+              <Route path='/users/:id' element={<UserTimeline />} />
             </Routes>
           </PostsProvider>
         </ModalProvider>

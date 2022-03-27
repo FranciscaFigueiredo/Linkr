@@ -59,7 +59,13 @@ function deletePost(token, postId) {
   const config = createConfig(token);
   return axios.delete(`${api}/posts/${postId}`, config);
 }
+
 function getPostsById(id) {
+  const promise = axios.get(`${api}/posts/${id}`);
+  return promise;
+}
+
+function getUserById(id) {
   const promise = axios.get(`${api}/users/${id}`);
   return promise;
 }
@@ -87,4 +93,5 @@ export {
   getUserByText,
   getPostsById,
   updateComment,
+  getUserById,
 };

@@ -41,7 +41,7 @@ export default function Posts({ refresh, id, setName, hashtag, setRefresh }) {
     } else {
       getPostsData(setPosts, hashtag);
     }
-  }, [refresh, hashtag]);
+  }, [refresh, hashtag, id]);
   
   if (posts && id) {
     setName(posts[0].username);
@@ -72,7 +72,9 @@ export default function Posts({ refresh, id, setName, hashtag, setRefresh }) {
               <PostContent>
                 <span
                   id='name'
-                  onClick={() => navigate(`/users/${post.userId}`)}
+                  onClick={() => 
+                    navigate(`/users/${post.userId}`)
+                  }
                 >
                   {post.username}
                 </span>
@@ -94,7 +96,7 @@ export default function Posts({ refresh, id, setName, hashtag, setRefresh }) {
                     <ReactHashtag
                       renderHashtag={(hashtagValue) => (
                         <Hashtag
-                          onClick={() =>
+                          onClick={() => 
                             navigate(`/hashtag/${hashtagValue.substr(1)}`)
                           }
                         >
