@@ -13,7 +13,6 @@ export default function UserTimeline(){
     useEffect(()=>{
         const promise = getUserById(id)
         promise.then(res => {
-            console.log(res.data.username);
             setName(res.data.username)
         }).catch(err => console.log(err.response.message));
     },[id])
