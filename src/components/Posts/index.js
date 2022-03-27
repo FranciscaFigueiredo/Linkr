@@ -41,7 +41,6 @@ export default function Posts({ refresh, id, setName, hashtag, setRefresh }) {
     } else {
       getPostsData(setPosts, hashtag);
     }
-
   }, [refresh, hashtag]);
   
   if (posts && id) {

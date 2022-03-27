@@ -32,7 +32,6 @@ const Post = styled.div`
   position: relative;
 
   position: relative;
-
   &:first-of-type {
     margin-top: 29px;
   }
