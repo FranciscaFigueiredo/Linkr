@@ -17,7 +17,7 @@ import { DeletePost } from '../DeletePost/';
 import PostsContext from '../../contexts/PostsContext.js';
 import getPostsDataById from '../../utils/getPostsDataById.js';
 
-export default function Posts({ refresh, id, setName, hashtag }) {
+export default function Posts({ refresh, id, hashtag }) {
   const { posts, setPosts } = useContext(PostsContext);
   const navigate = useNavigate();
 
@@ -27,11 +27,7 @@ export default function Posts({ refresh, id, setName, hashtag }) {
     } else {
       getPostsData(setPosts, hashtag);
     }
-  }, [refresh, hashtag]);
-
-  if (posts && id) {
-    setName(posts[0].username);
-  }
+  }, [refresh, hashtag, id]);
 
   return posts ? (
     <PostsContainer>
@@ -46,7 +42,9 @@ export default function Posts({ refresh, id, setName, hashtag }) {
               <PostContent>
                 <span
                   id='name'
-                  onClick={() => navigate(`/users/${post.userId}`)}
+                  onClick={() => 
+                    navigate(`/users/${post.userId}`)
+                  }
                 >
                   {post.username}
                 </span>
@@ -55,7 +53,7 @@ export default function Posts({ refresh, id, setName, hashtag }) {
                     <ReactHashtag
                       renderHashtag={(hashtagValue) => (
                         <Hashtag
-                          onClick={() =>
+                          onClick={() => 
                             navigate(`/hashtag/${hashtagValue.substr(1)}`)
                           }
                         >
