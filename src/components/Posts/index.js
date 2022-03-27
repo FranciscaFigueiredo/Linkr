@@ -9,7 +9,6 @@ import {
   Hashtag,
   Options,
   Edit,
-  EditArea
 } from './styles.js';
 import ReactHashtag from '@mdnm/react-hashtag';
 import ReactTooltip from 'react-tooltip';
@@ -20,10 +19,9 @@ import { DeletePost } from '../DeletePost/';
 import PostsContext from '../../contexts/PostsContext.js';
 import getPostsDataById from '../../utils/getPostsDataById.js';
 import { UserLoginValidation } from '../../services/userLogin';
-import { updateComment } from '../../services/linkr.js';
-import { toastError } from '../toasts.js';
+import EditPost from '../EditPost/index.js';
 
-export default function Posts({ refresh, id, setName, hashtag }) {
+export default function Posts({ refresh, id, setName, hashtag, setRefresh }) {
   const { posts, setPosts } = useContext(PostsContext);
   const [edit, setEdit] = useState({
     status: false,
@@ -31,10 +29,11 @@ export default function Posts({ refresh, id, setName, hashtag }) {
   });
   const [disabled, setDisabled] = useState(false);
   const [comment, setComment] = useState('');
-  const commentRef = useRef();
-  
+
   const { user } = UserLoginValidation();
   const navigate = useNavigate();
+  const commentRef = useRef();
+  
 
   useEffect(() => {
     if (id) {
@@ -42,6 +41,7 @@ export default function Posts({ refresh, id, setName, hashtag }) {
     } else {
       getPostsData(setPosts, hashtag);
     }
+
   }, [refresh, hashtag]);
   
   if (posts && id) {
@@ -62,7 +62,6 @@ export default function Posts({ refresh, id, setName, hashtag }) {
                       idPost: post.id
                     });
                     setComment(post.comment);
-                    commentRef.current.focus();
                   }}/>
                 </Options> :
                 ""
@@ -79,41 +78,18 @@ export default function Posts({ refresh, id, setName, hashtag }) {
                   {post.username}
                 </span>
                 {(edit.status && edit.idPost===post.id) ? 
-                  <EditArea 
-                  value={comment} 
-                  onChange={e=>setComment(e.target.value)}
-                  ref={(edit.idPost===post.id) ? commentRef : ""}
-                  disabled={disabled}
-                  onKeyDown={e=>{
-                    if(e.keyCode === 27){
-                      setEdit({
-                        status: false,
-                        idPost: null
-                      });
-                    } else if (e.keyCode === 13){
-                      updateComment(user.token, comment, post.id, setDisabled)
-                      .then((ans)=>{
-                        setDisabled(false);
-                        post.comment = comment;
-                        setEdit({
-                          status: false,
-                          idPost: null
-                        });
-                        setComment('');
-                      })
-                      .catch(() => {
-                        toastError(
-                          'An error occurred while trying to update the post, please refresh the page'
-                        );
-                        setDisabled(false);
-                        setEdit({
-                          status: false,
-                          idPost: null
-                        });
-                        setComment('');
-                      });
-                    }
-                  }}/> :
+                  <EditPost>
+                    { comment }
+                    { setComment }
+                    { edit }
+                    { setEdit }
+                    { post }
+                    { disabled }
+                    { setDisabled }
+                    { commentRef }
+                    { refresh }
+                    { setRefresh }
+                  </EditPost> :
                 post.comment && (
                   <span id='comment'>
                     <ReactHashtag

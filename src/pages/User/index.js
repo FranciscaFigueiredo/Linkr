@@ -8,6 +8,7 @@ import { TimelineContainer, TimelineParent } from "../Timeline/styles"
 
 export default function User(){
     const { id } = useParams()
+    const [refresh, setRefresh] = useState(true);
     const [name, setName] = useState('')
     return(
         <>
@@ -15,10 +16,10 @@ export default function User(){
             <TimelineContainer>
                 <TimelineParent>
                     <span id='title'>{`${name}'s posts`}</span>
-                    <Posts id={id} setName={setName} />
+                    <Posts id={id} setName={setName} refresh={refresh} setRefresh={setRefresh}/>
                 </TimelineParent>
                 <div>
-                    <Trending />
+                    <Trending refresh={refresh} />
                 </div>
             </TimelineContainer>
         </>

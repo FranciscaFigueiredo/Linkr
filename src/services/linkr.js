@@ -71,6 +71,7 @@ function updateComment(token, comment, id, setDisabled){
     id
   },config);
   setDisabled(true);
+  
   return promise;
 }
 

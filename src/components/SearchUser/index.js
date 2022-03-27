@@ -29,7 +29,6 @@ export default function SearchUser(){
           minLength={3}
           debounceTimeout={300}
           value = {search}
-          onBlur={()=> setUsers([])}
           onChange={event => {
             setSearch(event.target.value);
             getUserByText(event.target.value)
@@ -39,7 +38,7 @@ export default function SearchUser(){
           placeholder='Search for people'/>
         <Search/>
       </HeaderStyle>
-      <BodyStyle>
+      <BodyStyle onBlur={()=> setUsers([])}>
         {list}
       </BodyStyle>
     </Container>
