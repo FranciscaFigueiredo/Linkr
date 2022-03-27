@@ -1,16 +1,24 @@
 import axios from 'axios';
 import { api } from './apiUrl';
 
+function createConfig(token) {
+  return {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+}
+
 function postSignUp(body) {
   const promise = axios.post(`${api}/users`, body);
   return promise;
 }
 
 function getPosts(hashtag) {
-  if(hashtag){
+  if (hashtag) {
     return axios.get(`${api}/hashtag/${hashtag}`);
   }
-  
+
   return axios.get(`${api}/posts`);
 }
 
@@ -47,8 +55,22 @@ function getUserByText(text){
   return promise;
 }
 
-function getPostsById(id){
+function deletePost(token, postId) {
+  const config = createConfig(token);
+  return axios.delete(`${api}/posts/${postId}`, config);
+}
+function getPostsById(id) {
   const promise = axios.get(`${api}/users/${id}`);
+  return promise;
+}
+function updateComment(token, comment, id, setDisabled){
+  const config = createConfig(token);
+  const promise = axios.put(`${api}/posts`, 
+  {
+    comment,
+    id
+  },config);
+  setDisabled(true);
   return promise;
 }
 
@@ -60,6 +82,8 @@ export {
   getPosts,
   getLikes,
   getHashtag,
+  deletePost,
   getUserByText,
   getPostsById,
+  updateComment,
 };

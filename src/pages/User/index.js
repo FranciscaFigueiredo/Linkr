@@ -17,7 +17,9 @@ export default function User(){
                     <span id='title'>{`${name}'s posts`}</span>
                     <Posts id={id} setName={setName} />
                 </TimelineParent>
-                <Trending />
+                <div>
+                    <Trending />
+                </div>
             </TimelineContainer>
         </>
     )

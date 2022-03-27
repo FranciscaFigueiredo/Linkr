@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { GrEdit } from 'react-icons/gr';
+import { TiPencil } from 'react-icons/ti';
 
 const PostsContainer = styled.div`
   width: 100%;
@@ -10,6 +10,7 @@ const PostsContainer = styled.div`
 
   #noPosts {
     font: 700 17px 'Lato';
+    margin-top: 29px;
   }
 
   @media (max-width: 611px) {
@@ -28,6 +29,7 @@ const Post = styled.div`
   flex-direction: row;
   align-items: stretch;
   word-wrap: break-word;
+  position: relative;
 
   position: relative;
 
@@ -84,7 +86,7 @@ const PostContent = styled.div`
 `;
 
 const Hashtag = styled.span`
-  color:#FFFFFF;
+  color: #ffffff;
   font-weight: 700;
   cursor: pointer;
 `;
@@ -92,21 +94,39 @@ const Hashtag = styled.span`
 const Options = styled.div`
   all: unset;
   position: absolute;
-  right: 22px;
-  top: 23px;
+  right: 45px;
+  top: 20px;
   z-index: 5;
 
   display: flex;
   gap: 10px;
 `;
 
-const Edit = styled(GrEdit)`
-  color: #ffffff;  
-  font-size: 20px;
+const Edit = styled(TiPencil)`
+  color: #FFFFFF;
 
-  &:hover{
-    cursor:pointer;
+  cursor: pointer;
+
+  font-size: 21px;
+`;
+const EditArea = styled.textarea`
+  border: 0px solid #FFFFFF;
+  border-radius: 7px;
+
+  color: #4C4C4C;
+  font-weight: 400;
+  font-size: 14px;
+
+  &::placeholder{
+    color: #4C4C4C;
+    font-weight: 400;
+    font-size: 14px;
+  }
+  &:focus{
+    box-shadow: 0 0 0 0;
+    border: 0 none;
+    outline: 0;
   }
 `;
 
-export { PostsContainer, Post, PostSidebar, PostContent, Hashtag, Options, Edit };
+export { PostsContainer, Post, PostSidebar, PostContent, Hashtag, Options, Edit, EditArea };

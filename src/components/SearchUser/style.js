@@ -89,11 +89,11 @@ const User = styled.div`
   }
 `;
 const Search = styled(AiOutlineSearch)`
-    color: #C6C6C6;
+  color: #C6C6C6;
 
-    cursor: pointer;
+  cursor: pointer;
 
-    font-size: 21px;
+  font-size: 21px;
 `;
 
 export {

@@ -8,7 +8,6 @@ import { ButtonMenu, MenuContainer } from "./HeaderStyle";
 export default function MenuActions({ setMenu, token }) {
     const { user, setUser } = useContext(UserContext);
     const navigate = useNavigate();
-    console.log(user);
     function logoutUser() {
         logout({ token })
             .catch((err) => console.error());

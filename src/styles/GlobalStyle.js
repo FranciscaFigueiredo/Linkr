@@ -1,5 +1,6 @@
 import { createGlobalStyle } from 'styled-components';
- 
+import { ModalContainer } from '../components/DeletePost/styles.js';
+
 const GlobalStyle = createGlobalStyle`
 	* {
 		box-sizing: border-box;
@@ -15,5 +16,5 @@ const GlobalStyle = createGlobalStyle`
     color: #ffffff;
 	}
 `;
- 
+
 export default GlobalStyle;

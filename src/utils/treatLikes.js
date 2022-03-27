@@ -16,6 +16,6 @@ export default function treatLikes(post) {
   if (likedBy.length === 2) return likedBy.join(' and ');
 
   const firstTwo = likedBy.splice(0, 2);
-  console.log(firstTwo);
+
   return firstTwo.join(', ') + ` and other ${likedBy.length} people`;
 }

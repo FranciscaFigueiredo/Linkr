@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import { LinkSnippet } from '../LinkSnippet/index.js';
 import Loader from '../Loader.js';
 import {
@@ -8,36 +8,44 @@ import {
   PostSidebar,
   Hashtag,
   Options,
-  Edit
+  Edit,
+  EditArea
 } from './styles.js';
 import ReactHashtag from '@mdnm/react-hashtag';
 import ReactTooltip from 'react-tooltip';
 import { useNavigate } from 'react-router-dom';
 import getPostsData from '../../utils/getPostsData.js';
 import treatLikes from '../../utils/treatLikes.js';
+import { DeletePost } from '../DeletePost/';
+import PostsContext from '../../contexts/PostsContext.js';
 import getPostsDataById from '../../utils/getPostsDataById.js';
 import { UserLoginValidation } from '../../services/userLogin';
+import { updateComment } from '../../services/linkr.js';
+import { toastError } from '../toasts.js';
 
-export default function Posts({ refresh, id, setName, hashtag}) {
-  const [posts, setPosts] = useState();
+export default function Posts({ refresh, id, setName, hashtag }) {
+  const { posts, setPosts } = useContext(PostsContext);
   const [edit, setEdit] = useState({
     status: false,
     idPost: null
   });
-  const x = <p>oi</p>;
+  const [disabled, setDisabled] = useState(false);
+  const [comment, setComment] = useState('');
+  const commentRef = useRef();
+  
   const { user } = UserLoginValidation();
   const navigate = useNavigate();
 
-    useEffect(() => {
-      if(id){
-        getPostsDataById(setPosts, id);
-      }else{
-        getPostsData(setPosts, hashtag);
-      }
-    }, [refresh, hashtag]);
-
-  if(posts && id){
-    setName(posts[0].username)
+  useEffect(() => {
+    if (id) {
+      getPostsDataById(setPosts, id);
+    } else {
+      getPostsData(setPosts, hashtag);
+    }
+  }, [refresh, hashtag]);
+  
+  if (posts && id) {
+    setName(posts[0].username);
   }
 
   return posts ? (
@@ -48,10 +56,14 @@ export default function Posts({ refresh, id, setName, hashtag}) {
             <Post key={post.id}>
               {(user.username === post.username) ? 
                 <Options>
-                  <Edit onClick={()=> setEdit({
-                    status: true,
-                    idPost: post.id
-                  })}/>
+                  <Edit onClick={()=>{
+                     setEdit({
+                      status: !(edit.status),
+                      idPost: post.id
+                    });
+                    setComment(post.comment);
+                    commentRef.current.focus();
+                  }}/>
                 </Options> :
                 ""
               }
@@ -60,14 +72,49 @@ export default function Posts({ refresh, id, setName, hashtag}) {
                 <img src={post.userPic} alt='' data-tip={treatLikes(post)} />
               </PostSidebar>
               <PostContent>
-                <span id='name'
-                  onClick={() =>
-                    navigate(`/users/${post.userId}`)
-                  }  
+                <span
+                  id='name'
+                  onClick={() => navigate(`/users/${post.userId}`)}
                 >
-                    {post.username}
+                  {post.username}
                 </span>
-                {post.comment && (
+                {(edit.status && edit.idPost===post.id) ? 
+                  <EditArea 
+                  value={comment} 
+                  onChange={e=>setComment(e.target.value)}
+                  ref={(edit.idPost===post.id) ? commentRef : ""}
+                  disabled={disabled}
+                  onKeyDown={e=>{
+                    if(e.keyCode === 27){
+                      setEdit({
+                        status: false,
+                        idPost: null
+                      });
+                    } else if (e.keyCode === 13){
+                      updateComment(user.token, comment, post.id, setDisabled)
+                      .then((ans)=>{
+                        setDisabled(false);
+                        post.comment = comment;
+                        setEdit({
+                          status: false,
+                          idPost: null
+                        });
+                        setComment('');
+                      })
+                      .catch(() => {
+                        toastError(
+                          'An error occurred while trying to update the post, please refresh the page'
+                        );
+                        setDisabled(false);
+                        setEdit({
+                          status: false,
+                          idPost: null
+                        });
+                        setComment('');
+                      });
+                    }
+                  }}/> :
+                post.comment && (
                   <span id='comment'>
                     <ReactHashtag
                       renderHashtag={(hashtagValue) => (
@@ -88,6 +135,7 @@ export default function Posts({ refresh, id, setName, hashtag}) {
                   <LinkSnippet post={post} />
                 </a>
               </PostContent>
+              <DeletePost post={post} />
             </Post>
           );
         })
