@@ -9,6 +9,7 @@ const PostsContainer = styled.div`
 
   #noPosts {
     font: 700 17px 'Lato';
+    margin-top: 29px;
   }
 
   @media (max-width: 611px) {
