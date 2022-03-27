@@ -1,6 +1,6 @@
 import treatUsername from './treatUsername.js';
 
-export default function treatLikes({ post, setLiked}) {
+export default function treatLikes({ post }) {
   if (post.likes.length === 0) return 'No one has liked this post yet';
 
   const likedBy = [];
@@ -9,7 +9,6 @@ export default function treatLikes({ post, setLiked}) {
     like.username = treatUsername(like.username);
     if (like.userId === post.userId) {
       likedBy.push('You');
-      // setLiked(1);
     } else {
       likedBy.push(like.username);
     }

@@ -11,6 +11,7 @@ export default function Like({ post, user, like, dislike }) {
     useEffect(() => {
         setLiked(0);
     }, [liked]);
+    // console.log(post);
 
     if (!!(post.likes.find((like) => like?.username === user?.username))) {
         setLiked(1)

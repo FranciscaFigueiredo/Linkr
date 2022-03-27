@@ -1,17 +1,34 @@
-import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { UserLoginValidation } from '../../services/userLogin';
+import { useContext, useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import UserContext from '../../contexts/UserContext';
 import { ArrowMenu, Avatar, Menu, Navbar, Title } from './HeaderStyle';
 import MenuActions from './Menu';
 
 export default function Header() {
-  const { user } = UserLoginValidation();
-
-  const { pictureUrl, token } = user;
+  const { user } = useContext(UserContext);
+  const navigate = useNavigate();
 
   const [menu, setMenu] = useState(0);
+  let pictureUrl = null;
+  let token = null;
 
-  useEffect(() => {}, [menu, user]);
+  useEffect(() => {
+    if (user === null) {
+        console.log('oi');
+        navigate('/');
+        console.log('navigate');
+        return '';
+    }
+  }, []);
+
+  
+  pictureUrl = user?.pictureUrl;
+  token = user?.token;
+
+  
+  if (!user) {
+    return '';
+  }
   return (
     <>
       <Navbar>

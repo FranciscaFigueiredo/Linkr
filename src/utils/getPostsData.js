@@ -5,6 +5,7 @@ import { treatPostsData } from './treatPostsData.js';
 export default function getPostsData(setPosts) {
   getPosts()
     .then((res) => {
+      console.log(res.data);
       const posts = treatPostsData(res.data);
       setPosts(posts);
     })

@@ -30,6 +30,7 @@ export default function Posts({ refresh, id, setName, hashtag}) {
       getPostsData(setPosts, hashtag);
 
     }, [refresh, hashtag, liked]);
+    
 
     function like(id) {
       likeThePost({ id, token })
