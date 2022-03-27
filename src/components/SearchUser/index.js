@@ -22,6 +22,7 @@ export default function SearchUser(){
       </User>
     </Link>
   );
+  
   return (
     <Container>
       <HeaderStyle>
