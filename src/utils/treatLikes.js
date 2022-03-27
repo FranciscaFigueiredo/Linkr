@@ -1,14 +1,18 @@
 import treatUsername from './treatUsername.js';
 
-export default function treatLikes(post) {
+export default function treatLikes({ post, setLiked}) {
   if (post.likes.length === 0) return 'No one has liked this post yet';
 
   const likedBy = [];
 
   post.likes.forEach((like) => {
     like.username = treatUsername(like.username);
-    if (like.userId === post.userId) likedBy.push('You');
-    else likedBy.push(like.username);
+    if (like.userId === post.userId) {
+      likedBy.push('You');
+      // setLiked(1);
+    } else {
+      likedBy.push(like.username);
+    }
   });
 
   if (likedBy.length === 1 && likedBy[0] === 'You') return 'You';
@@ -16,6 +20,6 @@ export default function treatLikes(post) {
   if (likedBy.length === 2) return likedBy.join(' and ');
 
   const firstTwo = likedBy.splice(0, 2);
-  console.log(firstTwo);
+
   return firstTwo.join(', ') + ` and other ${likedBy.length} people`;
 }

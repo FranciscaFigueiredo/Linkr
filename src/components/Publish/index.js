@@ -1,13 +1,14 @@
-import { useState, useContext } from 'react';
-import UserContext from '../../contexts/UserContext';
+import { useState } from 'react';
 import { postPublish } from '../../services/linkr';
+import { UserLoginValidation } from '../../services/userLogin';
 import Container from './style';
 
 export default function Publish({refresh, setRefresh}) {
   const [link, setLink] = useState('');
   const [comment, setComment] = useState('');
   const [isLoading, setIsLoading] = useState(0);
-  const { token, user } = useContext(UserContext);
+  const { user } = UserLoginValidation()
+  const { token } = user;
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -20,7 +21,7 @@ export default function Publish({refresh, setRefresh}) {
       })
       .catch((err) => {
         alert('Houve um erro ao publicar seu link');
-        console.log(err.response.data)
+        console.error()
       })
       .finally(() => {
         setIsLoading(0);

@@ -9,7 +9,7 @@ export default function Header() {
 
   const { pictureUrl, token } = user;
 
-  const [menu, setMenu] = useState(false);
+  const [menu, setMenu] = useState(0);
 
   useEffect(() => {}, [menu, user]);
   return (

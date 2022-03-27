@@ -1,12 +1,7 @@
 import { useContext, useEffect, useState } from 'react';
-import UserContext from '../../contexts/UserContext.js';
-import { dislikeThePost, likeThePost } from '../../services/linkr.js';
 import { LinkSnippet } from '../LinkSnippet/index.js';
 import Loader from '../Loader.js';
-import { toastError } from '../toasts.js';
 import {
-  Heart,
-  HeartRed,
   Post,
   PostContent,
   PostsContainer,
@@ -17,30 +12,39 @@ import ReactHashtag from '@mdnm/react-hashtag';
 import ReactTooltip from 'react-tooltip';
 import { useNavigate } from 'react-router-dom';
 import getPostsData from '../../utils/getPostsData.js';
-import treatLikes from '../../utils/treatLikes.js';
+import { dislikeThePost, likeThePost } from '../../services/linkr.js';
+import UserContext from '../../contexts/UserContext.js';
+import Like from '../Like.js';
 
-export default function Posts({ refresh }) {
+export default function Posts({ refresh, id, setName, hashtag}) {
+  const { user } = useContext(UserContext)
   const [posts, setPosts] = useState();
   const navigate = useNavigate();
 
   const { token } = useContext(UserContext);
 
-  const [liked, setLiked] = useState(false);
+  const [liked, setLiked] = useState(0);
 
-  useEffect(() => {
-    getPostsData(setPosts);
-  }, [refresh]);
+    useEffect(() => {
+      setLiked(0);
+      getPostsData(setPosts, hashtag);
 
-  function like(id) {
-    likeThePost({ id, token })
-      .then((res) => setLiked(true))
-      .catch((err) => console.error());
-  }
+    }, [refresh, hashtag, liked]);
 
-  function dislike(id) {
-    dislikeThePost({ id, token })
-      .then((res) => setLiked(false))
-      .catch((err) => console.error());
+    function like(id) {
+      likeThePost({ id, token })
+        .then((res) => setLiked(1))
+        .catch((err) => console.error());
+    }
+  
+    function dislike(id) {
+      dislikeThePost({ id, token })
+        .then((res) => setLiked(0))
+        .catch((err) => console.error());
+    }
+
+  if(posts && id){
+    setName(posts[0].username)
   }
 
   return posts ? (
@@ -51,14 +55,16 @@ export default function Posts({ refresh }) {
             <Post key={post.id}>
               <PostSidebar>
                 <img src={post.userPic} alt='user pic' />
-                {
-                  liked ?
-                    <HeartRed onClick={ () => dislike(post.id) } data-tip={treatLikes(post)} />
-                  : <Heart onClick={ () => like(post.id) } data-tip={treatLikes(post)} />
-                }
+                <Like post={ post } user={ user } like={ like } dislike={ dislike} />
               </PostSidebar>
               <PostContent>
-                <span id='name'>{post.username}</span>
+                <span id='name'
+                  onClick={() =>
+                    navigate(`/users/${post.userId}`)
+                  }  
+                >
+                    {post.username}
+                </span>
                 {post.comment && (
                   <span id='comment'>
                     <ReactHashtag

@@ -16,8 +16,8 @@ export default function Trending(){
             );
             setListHashtags(list);
         });
-        promise.catch(()=>{
-          console.log("errp");
+        promise.catch((err)=>{
+          console.error();
         });
       },[]);
 

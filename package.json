@@ -8,6 +8,9 @@
     "@testing-library/react": "^12.1.4",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^0.26.1",
+    "preact": "^10.6.6",
+    "preact-render-to-string": "^5.1.20",
+    "preact-router": "^4.0.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-icons": "^4.3.1",
@@ -42,5 +45,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "preact-cli": "^3.0.0-rc.18"
   }
 }

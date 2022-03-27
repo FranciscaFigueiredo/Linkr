@@ -19,6 +19,7 @@ const Navbar = styled.header`
 
     a {
         all: unset;
+        cursor: pointer;
     }
 `;
 
@@ -35,6 +36,8 @@ const Menu = styled.div`
 
     font-size: 23px;
 	font-weight: bold;
+
+    cursor: pointer;
 `;
 
 const ArrowMenu = styled(IoIosArrowDown)`
