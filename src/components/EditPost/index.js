@@ -7,6 +7,7 @@ import { useEffect, useRef } from 'react';
 export default function EditPost(props){
   const [ comment, setComment, edit, setEdit, post, disabled, setDisabled, commentRef, refresh, setRefresh ] = props.children;
   const { user } = UserLoginValidation();
+  
   useEffect(()=>{
     commentRef.current.focus();
   });
