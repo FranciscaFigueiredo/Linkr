@@ -7,12 +7,13 @@ import { useEffect, useRef } from 'react';
 export default function EditPost(props){
   const [ comment, setComment, edit, setEdit, post, disabled, setDisabled, commentRef, refresh, setRefresh ] = props.children;
   const { user } = UserLoginValidation();
-  
+
   useEffect(()=>{
     commentRef.current.focus();
   });
   
   return(
+
     <EditArea 
       value={comment} 
       onChange={e=>setComment(e.target.value)}
@@ -36,19 +37,19 @@ export default function EditPost(props){
             setComment('');
             setRefresh(!refresh);
           })
-                      .catch(() => {
-                        toastError(
-                          'An error occurred while trying to update the post, please refresh the page'
-                        );
-                        setDisabled(false);
-                        setEdit({
-                          status: false,
-                          idPost: null
-                        });
-                        setComment('');
-                      });
-                    }
-                  }}/>
+          .catch(() => {
+            toastError(
+              'An error occurred while trying to update the post, please refresh the page'
+            );
+            setDisabled(false);
+            setEdit({
+              status: false,
+              idPost: null
+            });
+            setComment('');
+        });
+      }
+    }}/>
   );
 }
 
