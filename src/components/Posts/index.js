@@ -9,16 +9,17 @@ import {
   Hashtag,
   Options,
   Edit,
+  QuantLikes,
 } from './styles.js';
 import ReactHashtag from '@mdnm/react-hashtag';
-import ReactTooltip from 'react-tooltip';
 import { useNavigate } from 'react-router-dom';
 import getPostsData from '../../utils/getPostsData.js';
-import treatLikes from '../../utils/treatLikes.js';
+import { dislikeThePost, likeThePost } from '../../services/linkr.js';
+import UserContext from '../../contexts/UserContext.js';
+import Like from '../Like.js';
 import { DeletePost } from '../DeletePost/';
 import PostsContext from '../../contexts/PostsContext.js';
 import getPostsDataById from '../../utils/getPostsDataById.js';
-import { UserLoginValidation } from '../../services/userLogin';
 import EditPost from '../EditPost/index.js';
 
 export default function Posts({ refresh, id, hashtag, setRefresh }) {
@@ -30,10 +31,14 @@ export default function Posts({ refresh, id, hashtag, setRefresh }) {
   const [disabled, setDisabled] = useState(false);
   const [comment, setComment] = useState('');
 
-  const { user } = UserLoginValidation();
   const navigate = useNavigate();
   const commentRef = useRef();
   
+  const { user } = useContext(UserContext);
+
+  const { token } = useContext(UserContext);
+
+  const [liked, setLiked] = useState(0);
 
   useEffect(() => {
     if (id) {
@@ -41,9 +46,23 @@ export default function Posts({ refresh, id, hashtag, setRefresh }) {
     } else {
       getPostsData(setPosts, hashtag);
     }
-  }, [refresh, hashtag, id]);
-  
+    
+    setLiked(2);
+  }, 
+  [refresh, hashtag, id, liked]);
 
+  function like(id) {
+    likeThePost({ id, token })
+    .then((res) => setLiked(1))
+    .catch((err) => console.error());
+  }
+  
+  function dislike(id) {
+    dislikeThePost({ id, token })
+    .then((res) => setLiked(0))
+    .catch((err) => console.error());
+  }
+  
   return posts.length > 0 ? (
     <PostsContainer>
       {posts.length > 0 ? (
@@ -64,7 +83,12 @@ export default function Posts({ refresh, id, hashtag, setRefresh }) {
               }
               <PostSidebar>
                 <img src={post.userPic} alt='user pic' />
-                <img src={post.userPic} alt='' data-tip={treatLikes(post)} />
+                <Like post={{...post}} likes={ [...post.likes] } user={ user } like={ like } dislike={ dislike} />
+                {
+                  post.likes.length === 1 ?
+                    <QuantLikes> { post.likes.length } like </QuantLikes>
+                    : <QuantLikes> { post.likes.length } likes </QuantLikes>
+                }
               </PostSidebar>
               <PostContent>
                 <span
@@ -114,10 +138,8 @@ export default function Posts({ refresh, id, hashtag, setRefresh }) {
       ) : (
         <span id='noPosts'>There are no posts yet</span>
       )}
-      <ReactTooltip />
     </PostsContainer>
   ) : (
     <Loader />
   );
 }
-

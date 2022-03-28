@@ -2,6 +2,13 @@ import styled from "styled-components";
 
 const Form = styled.form`
     text-align: center;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    margin: 0 auto;
 `
 
 const Input = styled.input`
@@ -23,6 +30,10 @@ const Input = styled.input`
     &placeholder {
         color: #9f9f9f;
     }
+
+    @media (min-width: 611px) {
+		width: 30vw;
+	}
 `
 
 const ButtonSubmit = styled.button`
@@ -40,6 +51,10 @@ const ButtonSubmit = styled.button`
     padding: 0 20px;
 
     border-radius: 6px;
+
+    @media (min-width: 611px) {
+		width: 30vw;
+	}
 `
 
 const Redirect = styled.span`
@@ -55,6 +70,10 @@ const Redirect = styled.span`
     padding: 0 20px;
 
     border-radius: 6px;
+
+    @media (min-width: 611px) {
+		width: 30vw;
+	}
 `
 
 export {

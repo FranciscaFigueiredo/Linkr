@@ -7,7 +7,7 @@ export default function Trending({ refresh }){
     
     useEffect(()=>{
         getHashtagsData(setListHashtags);
-    },[refresh]);
+    }, [refresh]);
 
     return (
         <TrendingContainer>

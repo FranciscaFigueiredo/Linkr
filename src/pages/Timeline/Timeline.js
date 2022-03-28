@@ -2,8 +2,8 @@ import { useState } from 'react';
 import Header from '../../components/Header/Header.js';
 import Posts from '../../components/Posts/';
 import Publish from '../../components/Publish/index.js';
-import Trending from '../../components/Trending/index.js';
 import { TimelineContainer, TimelineParent } from './styles.js';
+import Trending from '../../components/Trending/index.js';
 import ConfirmationModal from '../../components/DeletePost/ConfirmationModal.js';
 
 export default function Timeline() {

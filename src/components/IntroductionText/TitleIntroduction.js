@@ -13,6 +13,13 @@ const Introduction = styled.div`
 	box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 
 	margin: 0 auto 30px;
+
+	@media (min-width: 611px) {
+		width: 60vw;
+		height: 100vh;
+
+		margin: 0;
+	}
 `;
 
 const Title = styled.h1`
@@ -24,6 +31,20 @@ const Title = styled.h1`
 	text-align: center;
 
 	margin: 0 auto;
+
+	@media (min-width: 611px) and (max-width: 1000px){
+		width: 40vw;
+
+		font-size: 80px;
+		text-align: left;
+	}
+
+	@media (min-width: 1000px) and (max-width: 3000px) {
+		width: 40vw;
+
+		font-size: 106px;
+		text-align: left;
+	}	
 `;
 
 const Description = styled.h2`
@@ -36,6 +57,21 @@ const Description = styled.h2`
 	text-align: center;
 
 	margin: 0 auto;
+
+	@media (min-width: 611px) and (max-width: 1000px) {
+		width: 40vw;
+
+		font-size: 30px;
+		text-align: left;
+	}
+
+	@media (min-width: 1000px) and (max-width: 3000px) {
+		width: 40vw;
+
+		font-size: 43px;
+		line-height: 40px;
+		text-align: left;
+	}
 `;
 
 export {

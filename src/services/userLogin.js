@@ -1,13 +1,14 @@
+import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import UserContext from "../contexts/UserContext";
 
 function UserLoginValidation() {
-    const user = JSON.parse(sessionStorage.getItem("user"));
-
+    const [user, setUser] = useState(null);
     const navigate = useNavigate();
 
-    if (user === null) {
-        navigate("/");
-    }
+    useEffect(() => {
+        setUser(JSON.parse(sessionStorage.getItem("user")));   
+    }, [user]);
     
     return {
         user,

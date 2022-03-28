@@ -6,10 +6,10 @@ export default function getPostsDataById(setPosts, id) {
     getPostsById(id)
         .then((res) => {
             const posts = treatPostsData(res.data);
-            setPosts(posts);
+            setPosts([...posts]);
         })
         .catch((error) => {
-            console.log(error);
+            console.error();
             toastError(
                 'An error occured while trying to fetch the posts, please refresh the page'
             );

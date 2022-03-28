@@ -9,7 +9,7 @@ export default function getPostsData(setPosts, hashtag) {
       setPosts([...posts]);
     })
     .catch((error) => {
-      console.log(error);
+      console.error();
       toastError(
         'An error occured while trying to fetch the posts, please refresh the page'
       );

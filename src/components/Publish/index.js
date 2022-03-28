@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react';
+import { useContext, useState } from 'react';
 import UserContext from '../../contexts/UserContext';
 import { postPublish } from '../../services/linkr';
 import Container from './style';
@@ -7,7 +7,10 @@ export default function Publish({refresh, setRefresh}) {
   const [link, setLink] = useState('');
   const [comment, setComment] = useState('');
   const [isLoading, setIsLoading] = useState(0);
-  const { token, user } = useContext(UserContext);
+  const { user } = useContext(UserContext);
+
+  let token = null;
+  token = user?.token;
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -20,17 +23,20 @@ export default function Publish({refresh, setRefresh}) {
       })
       .catch((err) => {
         alert('Houve um erro ao publicar seu link');
-        console.log(err.response.data)
+        console.error()
       })
       .finally(() => {
         setIsLoading(0);
       });
   }
   
+  if (!user) {
+    return '';
+  }
   return (
     <Container>
       <div className='image'>
-        <img src={user.pictureUrl || JSON.parse(sessionStorage.getItem('user')).pictureUrl} alt='Profile' /> 
+        <img src={user?.pictureUrl || JSON.parse(sessionStorage.getItem('user')).pictureUrl} alt='Profile' /> 
       </div>
 
       <form onSubmit={handleSubmit}>

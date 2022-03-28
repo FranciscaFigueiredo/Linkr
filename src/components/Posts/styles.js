@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { FaRegHeart,FaHeart } from 'react-icons/fa'
 import { TiPencil } from 'react-icons/ti';
 
 const PostsContainer = styled.div`
@@ -53,6 +54,10 @@ const PostSidebar = styled.div`
   flex-direction: column;
   align-items: center;
 
+  .likeContainer{
+    margin: 15px auto 2px;
+  }
+
   img {
     width: 80%;
     aspect-ratio: 1;
@@ -83,6 +88,24 @@ const PostContent = styled.div`
     color: #b7b7b7;
   }
 `;
+
+const Heart = styled(FaRegHeart)`
+    color: #ffffff;
+    font-size: 18px;
+    text-align: center;
+
+    cursor: pointer;
+
+`
+
+const HeartRed = styled(FaHeart)`
+    color: #ff0000;
+    font-size: 18px;
+    text-align: center;
+
+    cursor: pointer;
+
+`
 
 const Hashtag = styled.span`
   color: #ffffff;
@@ -128,4 +151,10 @@ const EditArea = styled.textarea`
   }
 `;
 
-export { PostsContainer, Post, PostSidebar, PostContent, Hashtag, Options, Edit, EditArea };
+const QuantLikes = styled.h4`
+  font-size: 11px;
+	font-weight: 400;
+	line-height: 15px;
+`;
+
+export { PostsContainer, Post, PostSidebar, PostContent, Hashtag, Heart, HeartRed, Options, Edit, EditArea, QuantLikes };

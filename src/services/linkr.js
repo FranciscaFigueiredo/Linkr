@@ -18,8 +18,7 @@ function getPosts(hashtag) {
   if (hashtag) {
     return axios.get(`${api}/hashtag/${hashtag}`);
   }
-
-  return axios.get(`${api}/posts`);
+  return axios.get(`${api}/posts`)
 }
 
 function getLikes() {
@@ -81,6 +80,26 @@ function updateComment(token, comment, id, setDisabled){
   return promise;
 }
 
+function likeThePost({ id, token }) {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+  const promise = axios.post(`${api}/posts/${id}/like`, {}, config);
+  return promise;
+}
+
+function dislikeThePost({ id, token }) {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+  const promise = axios.delete(`${api}/posts/${id}/like`, config);
+  return promise;
+}
+
 export {
   postSignUp,
   postPublish,
@@ -89,6 +108,8 @@ export {
   getPosts,
   getLikes,
   getHashtag,
+  likeThePost,
+  dislikeThePost,
   deletePost,
   getUserByText,
   getPostsById,

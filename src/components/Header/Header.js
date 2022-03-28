@@ -1,18 +1,32 @@
-import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { UserLoginValidation } from '../../services/userLogin';
+import { useContext, useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import UserContext from '../../contexts/UserContext';
 import SearchUser from '../SearchUser';
 import { ArrowMenu, Avatar, Menu, Navbar, Title } from './HeaderStyle';
 import MenuActions from './Menu';
 
 export default function Header() {
-  const { user } = UserLoginValidation();
+  const { user } = useContext(UserContext);
+  const navigate = useNavigate();
 
-  const { pictureUrl, token } = user;
+  const [menu, setMenu] = useState(0);
+  let pictureUrl = null;
+  let token = null;
 
-  const [menu, setMenu] = useState(false);
+  useEffect(() => {
+    if (user === null) {
+        navigate('/');
+        return '';
+    }
+  }, []);
+  
+  pictureUrl = user?.pictureUrl;
+  token = user?.token;
 
-  useEffect(() => {}, [menu, user]);
+  
+  if (!user) {
+    return '';
+  }
   return (
     <>
       <Navbar>
@@ -25,7 +39,7 @@ export default function Header() {
           <Avatar src={pictureUrl} alt='' />
         </Menu>
       </Navbar>
-      {menu ? <MenuActions setMenu={setMenu} token={token} /> : ''}
+      {menu ? <MenuActions user={user.id} setMenu={setMenu} token={token} /> : ''}
     </>
   );
 }
