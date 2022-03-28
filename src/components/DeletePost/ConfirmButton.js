@@ -5,7 +5,7 @@ import PostsContext from '../../contexts/PostsContext.js';
 import UserContext from '../../contexts/UserContext.js';
 import handleDeletePost from './handleDeletePost.js';
 
-export default function ConfirmButton() {
+export default function ConfirmButton({ hashtagParams, idParams }) {
   const [isLoading, setIsLoading] = useState(false);
 
   const { token } = useContext(UserContext);
@@ -18,7 +18,14 @@ export default function ConfirmButton() {
       <div
         onClick={() => {
           setIsLoading(true);
-          handleDeletePost(token, setIsModalOpen, setPosts, postId);
+          handleDeletePost(
+            token,
+            setIsModalOpen,
+            setPosts,
+            postId,
+            hashtagParams,
+            idParams
+          );
         }}
       >
         Yes, delete it

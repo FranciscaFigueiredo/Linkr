@@ -12,7 +12,7 @@ import {
   QuantLikes,
 } from './styles.js';
 import ReactHashtag from '@mdnm/react-hashtag';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import getPostsData from '../../utils/getPostsData.js';
 import { dislikeThePost, likeThePost } from '../../services/linkr.js';
 import UserContext from '../../contexts/UserContext.js';
@@ -22,7 +22,7 @@ import PostsContext from '../../contexts/PostsContext.js';
 import getPostsDataById from '../../utils/getPostsDataById.js';
 import EditPost from '../EditPost/index.js';
 
-export default function Posts({ refresh, id, hashtag, setRefresh }) {
+export default function Posts({ refresh, setRefresh }) {
   const { posts, setPosts } = useContext(PostsContext);
   const [edit, setEdit] = useState({
     status: false,
@@ -39,6 +39,8 @@ export default function Posts({ refresh, id, hashtag, setRefresh }) {
   const { token } = useContext(UserContext);
 
   const [liked, setLiked] = useState(0);
+
+  const { id, hashtag } = useParams();
 
   useEffect(() => {
     if (id) {

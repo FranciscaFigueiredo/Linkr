@@ -16,9 +16,10 @@ function postSignUp(body) {
 
 function getPosts(hashtag) {
   if (hashtag) {
+    console.log({ if: 'if' });
     return axios.get(`${api}/hashtag/${hashtag}`);
   }
-  return axios.get(`${api}/posts`)
+  return axios.get(`${api}/posts`);
 }
 
 function getLikes() {
@@ -49,7 +50,7 @@ function getHashtag() {
   const promise = axios.get(`${api}/hashtag`);
   return promise;
 }
-function getUserByText(text){
+function getUserByText(text) {
   const promise = axios.get(`${api}/users?text=${text}`);
   return promise;
 }
@@ -68,15 +69,18 @@ function getUserById(id) {
   const promise = axios.get(`${api}/users/${id}`);
   return promise;
 }
-function updateComment(token, comment, id, setDisabled){
+function updateComment(token, comment, id, setDisabled) {
   const config = createConfig(token);
-  const promise = axios.put(`${api}/posts`, 
-  {
-    comment,
-    id
-  },config);
+  const promise = axios.put(
+    `${api}/posts`,
+    {
+      comment,
+      id,
+    },
+    config
+  );
   setDisabled(true);
-  
+
   return promise;
 }
 
