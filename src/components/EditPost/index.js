@@ -1,16 +1,17 @@
 import { updateComment } from '../../services/linkr.js';
 import { toastError } from '../toasts.js';
-import { UserLoginValidation } from '../../services/userLogin';
 import styled from 'styled-components';
-import { useEffect, useRef } from 'react';
+import { useContext, useEffect } from 'react';
+import UserContext from '../../contexts/UserContext.js';
 
 export default function EditPost(props){
-  const [ comment, setComment, edit, setEdit, post, disabled, setDisabled, commentRef, refresh, setRefresh ] = props.children;
-  const { user } = UserLoginValidation();
+  const [ comment, setComment, setEdit, post, disabled, setDisabled, commentRef, refresh, setRefresh ] = props.children;
+  const { user } = useContext(UserContext);
 
   useEffect(()=>{
     commentRef.current.focus();
   },[]);
+  console.log(commentRef);
   
   return(
 

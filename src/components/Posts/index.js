@@ -31,7 +31,8 @@ export default function Posts({ refresh, id, hashtag, setRefresh }) {
   const [comment, setComment] = useState('');
 
   const navigate = useNavigate();
-  const commentRef = useRef();
+  const commentRef = useRef(null);
+  console.log(commentRef);
   
 
   const { user } = useContext(UserContext);
@@ -96,7 +97,6 @@ export default function Posts({ refresh, id, hashtag, setRefresh }) {
                   <EditPost>
                     { comment }
                     { setComment }
-                    { edit }
                     { setEdit }
                     { post }
                     { disabled }
