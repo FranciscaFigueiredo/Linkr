@@ -29,7 +29,7 @@ export default function Posts({ refresh, id, hashtag }) {
     }
   }, [refresh, hashtag, id]);
 
-  return posts ? (
+  return posts.length > 0 ? (
     <PostsContainer>
       {posts.length > 0 ? (
         posts.map((post) => {
@@ -42,9 +42,7 @@ export default function Posts({ refresh, id, hashtag }) {
               <PostContent>
                 <span
                   id='name'
-                  onClick={() => 
-                    navigate(`/users/${post.userId}`)
-                  }
+                  onClick={() => navigate(`/users/${post.userId}`)}
                 >
                   {post.username}
                 </span>
@@ -53,7 +51,7 @@ export default function Posts({ refresh, id, hashtag }) {
                     <ReactHashtag
                       renderHashtag={(hashtagValue) => (
                         <Hashtag
-                          onClick={() => 
+                          onClick={() =>
                             navigate(`/hashtag/${hashtagValue.substr(1)}`)
                           }
                         >
