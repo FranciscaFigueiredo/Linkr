@@ -35,6 +35,7 @@ export default function Login({ user, setUser, setToken }) {
     });
     sessionStorage.setItem('user', user);
     setUser(user);
+    console.log(user,'login')
 
     setTimeout(() => {
       navigate('/timeline');

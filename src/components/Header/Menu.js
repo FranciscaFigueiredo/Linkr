@@ -20,7 +20,7 @@ export default function MenuActions({ setMenu, token, logoutUser }) {
         <MenuContainer onClick={ () => setMenu(false) } >
             <ButtonsContainer>
                 <ButtonMenu>
-                    <Link to={`/users/${user.userId}`} >
+                    <Link to={`/users/${user.userId || JSON.parse(sessionStorage.getItem('user')).userId}`} >
                         Profile
                     </Link>
                 </ButtonMenu>
