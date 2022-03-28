@@ -1,7 +1,5 @@
 import { TrendingContainer, HeaderTrending, BodyTrending } from "./style";
 import { useEffect, useState } from "react";
-import { getHashtag } from "../../services/linkr";
-import { Link } from "react-router-dom";
 import getHashtagsData from "../../utils/getHashtagsData";
 
 export default function Trending({ refresh }){

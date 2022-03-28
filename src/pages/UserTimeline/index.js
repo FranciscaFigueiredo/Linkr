@@ -9,6 +9,7 @@ import { TimelineContainer, TimelineParent } from "../Timeline/styles"
 
 export default function UserTimeline(){
     const { id } = useParams()
+    const [refresh, setRefresh] = useState(true);
     const [name, setName] = useState('')
     useEffect(()=>{
         const promise = getUserById(id)
@@ -22,9 +23,11 @@ export default function UserTimeline(){
             <TimelineContainer>
                 <TimelineParent>
                     <span id='title'>{`${name}'s posts`}</span>
-                    <Posts id={id} />
+                    <Posts id={id} refresh={refresh} setRefresh={setRefresh}/>
                 </TimelineParent>
-                <Trending />
+                <div>
+                    <Trending refresh={refresh} />
+                </div>
             </TimelineContainer>
         </>
     )
