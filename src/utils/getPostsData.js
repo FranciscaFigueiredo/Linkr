@@ -6,7 +6,6 @@ export default function getPostsData(setPosts, hashtag) {
   getPosts(hashtag)
     .then((res) => {
       const posts = treatPostsData(res.data);
-      console.log({treatedPosts :posts});
       setPosts(posts);
     })
     .catch((error) => {

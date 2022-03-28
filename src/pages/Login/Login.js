@@ -28,6 +28,7 @@ export default function Login({ user, setUser, setToken }) {
     setToken(res.data.token);
 
     const user = JSON.stringify({
+      userId: res.data.userId,
       username: res.data.username,
       pictureUrl: res.data.pictureUrl,
       token: res.data.token,
