@@ -15,7 +15,7 @@ export default function SearchUser(){
   const [users, setUsers] = useState([]);
 
   const list = users.map((data)=>
-    <Link to={`/users/${data.id}`} key={data.id}>
+    <Link to={`/users/${data.id}`} key={data.id} onClick={() => setSearch('')}>
       <User>
         <img src={data.picture_url} alt='username'/>
         <p>{data.username}</p>
@@ -36,11 +36,12 @@ export default function SearchUser(){
             .then((answer)=> setUsers(answer.data))
             .catch(()=> alert("erro"));
           }}
-          placeholder='Search for people'/>
+          placeholder='Search for people'
+          />
         <Search/>
       </HeaderStyle>
       <BodyStyle>
-        {list}
+        {search ? list : ''}
       </BodyStyle>
     </Container>
   );
