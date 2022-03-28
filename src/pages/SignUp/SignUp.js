@@ -98,10 +98,10 @@ export default function SignUp() {
                     onChange={(event) => (setPictureUrl(event.target.value))}
                 />
                 <ButtonSubmit disabled={disable}>Sign Up</ButtonSubmit>
+                <Link to='/'>
+                    <Redirect>Switch back to log in</Redirect>
+                </Link>
             </Form>
-            <Link to='/'>
-                <Redirect>Switch back to log in</Redirect>
-            </Link>
 
             {
                 modalError ?

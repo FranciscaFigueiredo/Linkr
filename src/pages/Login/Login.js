@@ -103,10 +103,11 @@ export default function Login({ user, setUser, setToken }) {
           onChange={(event) => setPassword(event.target.value)}
         />
         <ButtonSubmit disabled={disable}>Log In</ButtonSubmit>
+        <Link to='/sign-up'>
+          <Redirect>First time? Create an account!</Redirect>
+        </Link>
       </Form>
-      <Link to='/sign-up'>
-        <Redirect>First time? Create an account!</Redirect>
-      </Link>
+      
 
       {modalError ? (
         <ModalError message={message} setModal={setModalError} />

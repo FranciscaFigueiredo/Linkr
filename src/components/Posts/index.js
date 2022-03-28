@@ -33,7 +33,6 @@ export default function Posts({ refresh, id, hashtag, setRefresh }) {
   const navigate = useNavigate();
   const commentRef = useRef();
   
-
   const { user } = useContext(UserContext);
 
   const { token } = useContext(UserContext);
