@@ -32,12 +32,19 @@ const Title = styled.h1`
 
 	margin: 0 auto;
 
-	@media (min-width: 611px) {
+	@media (min-width: 611px) and (max-width: 1000px){
+		width: 40vw;
+
+		font-size: 80px;
+		text-align: left;
+	}
+
+	@media (min-width: 1000px) and (max-width: 3000px) {
 		width: 40vw;
 
 		font-size: 106px;
 		text-align: left;
-	}
+	}	
 `;
 
 const Description = styled.h2`
@@ -51,7 +58,14 @@ const Description = styled.h2`
 
 	margin: 0 auto;
 
-	@media (min-width: 611px) {
+	@media (min-width: 611px) and (max-width: 1000px) {
+		width: 40vw;
+
+		font-size: 30px;
+		text-align: left;
+	}
+
+	@media (min-width: 1000px) and (max-width: 3000px) {
 		width: 40vw;
 
 		font-size: 43px;
