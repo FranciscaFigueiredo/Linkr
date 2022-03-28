@@ -9,6 +9,7 @@ import {
   Hashtag,
   Options,
   Edit,
+  QuantLikes,
 } from './styles.js';
 import ReactHashtag from '@mdnm/react-hashtag';
 import { useNavigate } from 'react-router-dom';
@@ -34,7 +35,6 @@ export default function Posts({ refresh, id, hashtag, setRefresh }) {
   const commentRef = useRef(null);
   console.log(commentRef);
   
-
   const { user } = useContext(UserContext);
 
   const { token } = useContext(UserContext);
@@ -85,6 +85,11 @@ export default function Posts({ refresh, id, hashtag, setRefresh }) {
               <PostSidebar>
                 <img src={post.userPic} alt='user pic' />
                 <Like post={{...post}} likes={ [...post.likes] } user={ user } like={ like } dislike={ dislike} />
+                {
+                  post.likes.length === 1 ?
+                    <QuantLikes> { post.likes.length } like </QuantLikes>
+                    : <QuantLikes> { post.likes.length } likes </QuantLikes>
+                }
               </PostSidebar>
               <PostContent>
                 <span

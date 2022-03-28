@@ -6,6 +6,7 @@ import UserContext from '../../contexts/UserContext.js';
 
 export default function EditPost(props){
   const [ comment, setComment, setEdit, post, disabled, setDisabled, commentRef, refresh, setRefresh ] = props.children;
+
   const { user } = useContext(UserContext);
 
   useEffect(()=>{

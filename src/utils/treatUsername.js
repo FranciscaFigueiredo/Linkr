@@ -5,5 +5,5 @@ export default function treatUsername(username) {
 
   if (username.length > 10) return username?.substring(0, 10) + '...';
 
-  return username
+  return username;
 }

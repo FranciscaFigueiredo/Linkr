@@ -1,11 +1,11 @@
 import { useContext } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import UserContext from "../../contexts/UserContext";
 import { logout } from "../../services/linkr";
-import { ButtonMenu, MenuContainer } from "./HeaderStyle";
+import { ButtonMenu, ButtonsContainer, MenuContainer } from "./HeaderStyle";
 
-export default function MenuActions({ setMenu, token }) {
-    const { setUser } = useContext(UserContext);
+export default function MenuActions({ setMenu, token, logoutUser }) {
+    const { user, setUser } = useContext(UserContext);
     const navigate = useNavigate();
 
     function logoutUser() {
@@ -18,7 +18,15 @@ export default function MenuActions({ setMenu, token }) {
 
     return (
         <MenuContainer onClick={ () => setMenu(false) } >
-            <ButtonMenu onClick={ logoutUser }>Logout</ButtonMenu>
+            <ButtonsContainer>
+                <ButtonMenu>
+                    <Link to={`/users/${user.userId}`} >
+                        Profile
+                    </Link>
+                </ButtonMenu>
+                
+                <ButtonMenu onClick={ logoutUser }>Logout</ButtonMenu>
+            </ButtonsContainer>
         </MenuContainer>
     );
 }

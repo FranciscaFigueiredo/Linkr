@@ -19,7 +19,6 @@ export default function Header() {
         return '';
     }
   }, []);
-
   
   pictureUrl = user?.pictureUrl;
   token = user?.token;
@@ -40,7 +39,7 @@ export default function Header() {
           <Avatar src={pictureUrl} alt='' />
         </Menu>
       </Navbar>
-      {menu ? <MenuActions setMenu={setMenu} token={token} /> : ''}
+      {menu ? <MenuActions user={user.id} setMenu={setMenu} token={token} /> : ''}
     </>
   );
 }

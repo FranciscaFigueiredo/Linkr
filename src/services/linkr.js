@@ -18,7 +18,6 @@ function getPosts(hashtag) {
   if (hashtag) {
     return axios.get(`${api}/hashtag/${hashtag}`);
   }
-  // const prom = axios.get(`${api}/posts`).then((res) => console.log({res:res.data}));
   return axios.get(`${api}/posts`)
 }
 
