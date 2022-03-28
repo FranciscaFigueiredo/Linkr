@@ -6,12 +6,9 @@ export default function treatLikes(post) {
   const likedBy = [];
 
   post.likes.forEach((like) => {
-    like.username = treatUsername(like.username);
-    if (like.userId === post.userId) {
-      likedBy.push('You');
-    } else {
-      likedBy.push(like.username);
-    }
+    const treatedUsername = treatUsername(like.username);
+    if (like.userId === post.userId) likedBy.push('You');
+    else likedBy.push(treatedUsername);
   });
 
   if (likedBy.length === 1 && likedBy[0] === 'You') return 'You';

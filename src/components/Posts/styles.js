@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { FaRegHeart,FaHeart } from 'react-icons/fa'
+import { TiPencil } from 'react-icons/ti';
 
 const PostsContainer = styled.div`
   width: 100%;
@@ -31,6 +32,7 @@ const Post = styled.div`
   word-wrap: break-word;
   position: relative;
 
+  position: relative;
   &:first-of-type {
     margin-top: 29px;
   }
@@ -51,6 +53,10 @@ const PostSidebar = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  .likeContainer{
+    margin: 15px auto;
+  }
 
   img {
     width: 80%;
@@ -88,11 +94,8 @@ const Heart = styled(FaRegHeart)`
     font-size: 18px;
     text-align: center;
 
-    transform: ${(props) => props.menu ? "rotate(180deg)" : ""};
-
     cursor: pointer;
 
-    margin: 15px auto;
 `
 
 const HeartRed = styled(FaHeart)`
@@ -100,11 +103,8 @@ const HeartRed = styled(FaHeart)`
     font-size: 18px;
     text-align: center;
 
-    transform: ${(props) => props.menu ? "rotate(180deg)" : ""};
-
     cursor: pointer;
 
-    margin: 15px auto;
 `
 
 const Hashtag = styled.span`
@@ -113,4 +113,42 @@ const Hashtag = styled.span`
   cursor: pointer;
 `;
 
-export { PostsContainer, Post, PostSidebar, PostContent, Heart, HeartRed, Hashtag };
+const Options = styled.div`
+  all: unset;
+  position: absolute;
+  right: 45px;
+  top: 20px;
+  z-index: 5;
+
+  display: flex;
+  gap: 10px;
+`;
+
+const Edit = styled(TiPencil)`
+  color: #FFFFFF;
+
+  cursor: pointer;
+
+  font-size: 21px;
+`;
+const EditArea = styled.textarea`
+  border: 0px solid #FFFFFF;
+  border-radius: 7px;
+
+  color: #4C4C4C;
+  font-weight: 400;
+  font-size: 14px;
+
+  &::placeholder{
+    color: #4C4C4C;
+    font-weight: 400;
+    font-size: 14px;
+  }
+  &:focus{
+    box-shadow: 0 0 0 0;
+    border: 0 none;
+    outline: 0;
+  }
+`;
+
+export { PostsContainer, Post, PostSidebar, PostContent, Hashtag, Heart, HeartRed, Options, Edit, EditArea };

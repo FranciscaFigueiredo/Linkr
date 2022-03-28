@@ -6,7 +6,7 @@ export default function getPostsDataById(setPosts, id) {
     getPostsById(id)
         .then((res) => {
             const posts = treatPostsData(res.data);
-            setPosts(posts);
+            setPosts([...posts]);
         })
         .catch((error) => {
             console.error();
