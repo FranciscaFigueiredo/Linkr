@@ -16,11 +16,13 @@ export default function Like({ post, likes, user, like, dislike }) {
         }
     }, []);
 
-    return (<div className="likeContainer" data-tip={treatLikes(post)}>
-        {   liked ?
-            <HeartRed onClick={() => { dislike(post.id); setLiked(0) } }  />
-            : <Heart onClick={() => { like(post.id); setLiked(1) } }  />
-        }
-        <ReactTooltip /></div>
+    return (
+        <div className="likeContainer" data-tip={treatLikes(post)}>
+            {   liked ?
+                <HeartRed onClick={() => { dislike(post.id); setLiked(0) } }  />
+                : <Heart onClick={() => { like(post.id); setLiked(1) } }  />
+            }
+            <ReactTooltip />
+        </div>
     );
 }

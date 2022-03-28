@@ -55,7 +55,7 @@ const PostSidebar = styled.div`
   align-items: center;
 
   .likeContainer{
-    margin: 15px auto;
+    margin: 15px auto 2px;
   }
 
   img {
@@ -151,4 +151,10 @@ const EditArea = styled.textarea`
   }
 `;
 
-export { PostsContainer, Post, PostSidebar, PostContent, Hashtag, Heart, HeartRed, Options, Edit, EditArea };
+const QuantLikes = styled.h4`
+  font-size: 11px;
+	font-weight: 400;
+	line-height: 15px;
+`;
+
+export { PostsContainer, Post, PostSidebar, PostContent, Hashtag, Heart, HeartRed, Options, Edit, EditArea, QuantLikes };
