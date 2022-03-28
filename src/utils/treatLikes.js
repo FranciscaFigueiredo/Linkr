@@ -11,7 +11,7 @@ export default function treatLikes(post, user) {
     if (like.username === loggedUsername) likedBy.unshift('You');
     else likedBy.push(treatedUsername);
   });
-  console.log({ likedBy });
+
   if (likedBy.length === 1) return likedBy[0];
 
   if (likedBy.length === 2) return likedBy.join(' and ');
