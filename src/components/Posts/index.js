@@ -21,7 +21,7 @@ import getPostsDataById from '../../utils/getPostsDataById.js';
 import { UserLoginValidation } from '../../services/userLogin';
 import EditPost from '../EditPost/index.js';
 
-export default function Posts({ refresh, id, setName, hashtag, setRefresh }) {
+export default function Posts({ refresh, id, hashtag, setRefresh }) {
   const { posts, setPosts } = useContext(PostsContext);
   const [edit, setEdit] = useState({
     status: false,
