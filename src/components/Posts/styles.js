@@ -10,6 +10,7 @@ const PostsContainer = styled.div`
 
   #noPosts {
     font: 700 17px 'Lato';
+    margin-top: 29px;
   }
 
   @media (max-width: 611px) {
@@ -28,6 +29,7 @@ const Post = styled.div`
   flex-direction: row;
   align-items: stretch;
   word-wrap: break-word;
+  position: relative;
 
   &:first-of-type {
     margin-top: 29px;
@@ -72,6 +74,7 @@ const PostContent = styled.div`
 
   #name {
     font: 400 17px 'Lato';
+    cursor: pointer;
   }
 
   #comment {
@@ -105,7 +108,7 @@ const HeartRed = styled(FaHeart)`
 `
 
 const Hashtag = styled.span`
-  color:#FFFFFF;
+  color: #ffffff;
   font-weight: 700;
   cursor: pointer;
 `;

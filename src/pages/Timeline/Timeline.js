@@ -4,9 +4,11 @@ import Posts from '../../components/Posts/';
 import Publish from '../../components/Publish/index.js';
 import { TimelineContainer, TimelineParent } from './styles.js';
 import Trending from '../../components/Trending/index.js';
+import ConfirmationModal from '../../components/DeletePost/ConfirmationModal.js';
 
 export default function Timeline() {
-  const [refresh, setRefresh] = useState(true)
+  const [refresh, setRefresh] = useState(true);
+
   return (
     <>
       <Header />
@@ -16,7 +18,10 @@ export default function Timeline() {
           <Publish refresh={refresh} setRefresh={setRefresh} />
           <Posts refresh={refresh} />
         </TimelineParent>
-        <Trending />
+        <div>
+          <Trending refresh={refresh} />
+        </div>
+        <ConfirmationModal />
       </TimelineContainer>
     </>
   );

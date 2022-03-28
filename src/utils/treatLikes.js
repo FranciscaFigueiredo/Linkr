@@ -1,6 +1,6 @@
 import treatUsername from './treatUsername.js';
 
-export default function treatLikes({ post }) {
+export default function treatLikes(post) {
   if (post.likes.length === 0) return 'No one has liked this post yet';
 
   const likedBy = [];

@@ -1,13 +1,25 @@
 import axios from 'axios';
 import { api } from './apiUrl';
 
+function createConfig(token) {
+  return {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+}
+
 function postSignUp(body) {
   const promise = axios.post(`${api}/users`, body);
   return promise;
 }
 
-function getPosts() {
-  return axios.get(`${api}/posts`);
+function getPosts(hashtag) {
+  if (hashtag) {
+    return axios.get(`${api}/hashtag/${hashtag}`);
+  }
+  // const prom = axios.get(`${api}/posts`).then((res) => console.log({res:res.data}));
+  return axios.get(`${api}/posts`)
 }
 
 function getLikes() {
@@ -36,6 +48,25 @@ function logout({ token }) {
 }
 function getHashtag() {
   const promise = axios.get(`${api}/hashtag`);
+  return promise;
+}
+function getUserByText(text){
+  const promise = axios.get(`${api}/users?text=${text}`);
+  return promise;
+}
+
+function deletePost(token, postId) {
+  const config = createConfig(token);
+  return axios.delete(`${api}/posts/${postId}`, config);
+}
+
+function getPostsById(id) {
+  const promise = axios.get(`${api}/posts/${id}`);
+  return promise;
+}
+
+function getUserById(id) {
+  const promise = axios.get(`${api}/users/${id}`);
   return promise;
 }
 
@@ -69,4 +100,8 @@ export {
   getHashtag,
   likeThePost,
   dislikeThePost,
+  deletePost,
+  getUserByText,
+  getPostsById,
+  getUserById,
 };

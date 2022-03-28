@@ -15,23 +15,31 @@ import getPostsData from '../../utils/getPostsData.js';
 import { dislikeThePost, likeThePost } from '../../services/linkr.js';
 import UserContext from '../../contexts/UserContext.js';
 import Like from '../Like.js';
+import { DeletePost } from '../DeletePost/';
+import PostsContext from '../../contexts/PostsContext.js';
+import getPostsDataById from '../../utils/getPostsDataById.js';
 
-export default function Posts({ refresh, id, setName, hashtag}) {
-  const { user } = useContext(UserContext)
-  const [posts, setPosts] = useState();
+export default function Posts({ refresh, id, hashtag }) {
+  const { posts, setPosts } = useContext(PostsContext);
   const navigate = useNavigate();
+
+  const { user } = useContext(UserContext);
 
   const { token } = useContext(UserContext);
 
   const [liked, setLiked] = useState(0);
 
     useEffect(() => {
+      if (id) {
+        getPostsDataById(setPosts, id);
+      } else {
+        getPostsData(setPosts, hashtag);
+      }
+
       setLiked(0);
       getPostsData(setPosts, hashtag);
-
-    }, [refresh, hashtag, liked]);
+    }, [refresh, hashtag, id, liked]);
     
-
     function like(id) {
       likeThePost({ id, token })
         .then((res) => setLiked(1))
@@ -43,11 +51,6 @@ export default function Posts({ refresh, id, setName, hashtag}) {
         .then((res) => setLiked(0))
         .catch((err) => console.error());
     }
-
-  if(posts && id){
-    setName(posts[0].username)
-  }
-
   return posts ? (
     <PostsContainer>
       {posts.length > 0 ? (
@@ -56,22 +59,23 @@ export default function Posts({ refresh, id, setName, hashtag}) {
             <Post key={post.id}>
               <PostSidebar>
                 <img src={post.userPic} alt='user pic' />
-                <Like post={ post } user={ user } like={ like } dislike={ dislike} />
+                <Like post={{...post}} likes={ [...post.likes] } user={ user } like={ like } dislike={ dislike} />
               </PostSidebar>
               <PostContent>
-                <span id='name'
-                  onClick={() =>
+                <span
+                  id='name'
+                  onClick={() => 
                     navigate(`/users/${post.userId}`)
-                  }  
+                  }
                 >
-                    {post.username}
+                  {post.username}
                 </span>
                 {post.comment && (
                   <span id='comment'>
                     <ReactHashtag
                       renderHashtag={(hashtagValue) => (
                         <Hashtag
-                          onClick={() =>
+                          onClick={() => 
                             navigate(`/hashtag/${hashtagValue.substr(1)}`)
                           }
                         >
@@ -87,13 +91,13 @@ export default function Posts({ refresh, id, setName, hashtag}) {
                   <LinkSnippet post={post} />
                 </a>
               </PostContent>
+              <DeletePost post={post} />
             </Post>
           );
         })
       ) : (
         <span id='noPosts'>There are no posts yet</span>
       )}
-      <ReactTooltip />
     </PostsContainer>
   ) : (
     <Loader />

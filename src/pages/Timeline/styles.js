@@ -6,6 +6,10 @@ const TimelineContainer = styled.div`
   display: flex;
   justify-content: center;
   gap: 25px;
+
+  @media (max-width: 940px) {
+    gap: 0;
+  }
 `;
 
 const TimelineParent = styled.div`

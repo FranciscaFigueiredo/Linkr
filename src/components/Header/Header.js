@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import UserContext from '../../contexts/UserContext';
+import SearchUser from '../SearchUser';
 import { ArrowMenu, Avatar, Menu, Navbar, Title } from './HeaderStyle';
 import MenuActions from './Menu';
 
@@ -14,9 +15,7 @@ export default function Header() {
 
   useEffect(() => {
     if (user === null) {
-        console.log('oi');
         navigate('/');
-        console.log('navigate');
         return '';
     }
   }, []);
@@ -35,6 +34,7 @@ export default function Header() {
         <Link to='/timeline'>
           <Title>Linkr</Title>
         </Link>
+        <SearchUser/>
         <Menu onClick={() => setMenu(!menu)}>
           <ArrowMenu menu={menu} />
           <Avatar src={pictureUrl} alt='' />
@@ -44,3 +44,4 @@ export default function Header() {
     </>
   );
 }
+

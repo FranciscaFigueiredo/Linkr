@@ -12,7 +12,6 @@ const TrendingContainer = styled.div`
 
   display: flex;
   flex-direction: column;
-
   gap: 15px;
 
   @media (max-width: 940px) {
