@@ -69,6 +69,17 @@ function getUserById(id) {
   const promise = axios.get(`${api}/users/${id}`);
   return promise;
 }
+function updateComment(token, comment, id, setDisabled){
+  const config = createConfig(token);
+  const promise = axios.put(`${api}/posts`, 
+  {
+    comment,
+    id
+  },config);
+  setDisabled(true);
+  
+  return promise;
+}
 
 function likeThePost({ id, token }) {
   const config = {
@@ -103,5 +114,6 @@ export {
   deletePost,
   getUserByText,
   getPostsById,
+  updateComment,
   getUserById,
 };

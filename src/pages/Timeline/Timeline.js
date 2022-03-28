@@ -16,7 +16,7 @@ export default function Timeline() {
         <TimelineParent>
           <span id='title'>timeline</span>
           <Publish refresh={refresh} setRefresh={setRefresh} />
-          <Posts refresh={refresh} />
+          <Posts refresh={refresh} setRefresh={setRefresh}/>
         </TimelineParent>
         <div>
           <Trending refresh={refresh} />

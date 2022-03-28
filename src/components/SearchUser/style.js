@@ -15,6 +15,10 @@ const Container = styled.div`
   align-self: start;
 
   margin-top: 13px;
+
+  @media (max-width: 940px) {
+    display: none;
+  }
 `;
 const HeaderStyle = styled.div`
   width: 100%;
@@ -85,11 +89,11 @@ const User = styled.div`
   }
 `;
 const Search = styled(AiOutlineSearch)`
-    color: #C6C6C6;
+  color: #C6C6C6;
 
-    cursor: pointer;
+  cursor: pointer;
 
-    font-size: 21px;
+  font-size: 21px;
 `;
 
 export {

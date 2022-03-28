@@ -9,12 +9,6 @@ function UserLoginValidation() {
     useEffect(() => {
         setUser(JSON.parse(sessionStorage.getItem("user")));   
     }, [user]);
-
-    // if (user === null) {
-    //     // console.log('oi');
-    //     navigate('/');
-    //     return
-    // }
     
     return {
         user,

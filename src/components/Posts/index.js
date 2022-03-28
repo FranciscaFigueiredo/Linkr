@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import { LinkSnippet } from '../LinkSnippet/index.js';
 import Loader from '../Loader.js';
 import {
@@ -7,9 +7,10 @@ import {
   PostsContainer,
   PostSidebar,
   Hashtag,
+  Options,
+  Edit,
 } from './styles.js';
 import ReactHashtag from '@mdnm/react-hashtag';
-import ReactTooltip from 'react-tooltip';
 import { useNavigate } from 'react-router-dom';
 import getPostsData from '../../utils/getPostsData.js';
 import { dislikeThePost, likeThePost } from '../../services/linkr.js';
@@ -18,10 +19,20 @@ import Like from '../Like.js';
 import { DeletePost } from '../DeletePost/';
 import PostsContext from '../../contexts/PostsContext.js';
 import getPostsDataById from '../../utils/getPostsDataById.js';
+import EditPost from '../EditPost/index.js';
 
-export default function Posts({ refresh, id, hashtag }) {
+export default function Posts({ refresh, id, hashtag, setRefresh }) {
   const { posts, setPosts } = useContext(PostsContext);
+  const [edit, setEdit] = useState({
+    status: false,
+    idPost: null
+  });
+  const [disabled, setDisabled] = useState(false);
+  const [comment, setComment] = useState('');
+
   const navigate = useNavigate();
+  const commentRef = useRef();
+  
 
   const { user } = useContext(UserContext);
 
@@ -29,35 +40,47 @@ export default function Posts({ refresh, id, hashtag }) {
 
   const [liked, setLiked] = useState(0);
 
-    useEffect(() => {
-      if (id) {
-        getPostsDataById(setPosts, id);
-      } else {
-        getPostsData(setPosts, hashtag);
-      }
-
-      setLiked(2);
+  useEffect(() => {
+    if (id) {
+      getPostsDataById(setPosts, id);
+    } else {
       getPostsData(setPosts, hashtag);
-    }, [refresh, hashtag, id, liked]);
+    }
     
-    function like(id) {
-      likeThePost({ id, token })
-        .then((res) => setLiked(1))
-        .catch((err) => console.error());
-    }
-  
-    function dislike(id) {
-      dislikeThePost({ id, token })
-        .then((res) => setLiked(0))
-        .catch((err) => console.error());
-    }
+    setLiked(2);
+  }, 
+  [refresh, hashtag, id, liked]);
 
+  function like(id) {
+    likeThePost({ id, token })
+    .then((res) => setLiked(1))
+    .catch((err) => console.error());
+  }
+  
+  function dislike(id) {
+    dislikeThePost({ id, token })
+    .then((res) => setLiked(0))
+    .catch((err) => console.error());
+  }
+  
   return posts.length > 0 ? (
     <PostsContainer>
       {posts.length > 0 ? (
         posts.map((post) => {
           return (
             <Post key={post.id}>
+              {(user.username === post.username) ? 
+                <Options>
+                  <Edit onClick={()=>{
+                     setEdit({
+                      status: !(edit.status),
+                      idPost: post.id
+                    });
+                    setComment(post.comment);
+                  }}/>
+                </Options> :
+                ""
+              }
               <PostSidebar>
                 <img src={post.userPic} alt='user pic' />
                 <Like post={{...post}} likes={ [...post.likes] } user={ user } like={ like } dislike={ dislike} />
@@ -69,7 +92,20 @@ export default function Posts({ refresh, id, hashtag }) {
                 >
                   {post.username}
                 </span>
-                {post.comment && (
+                {(edit.status && edit.idPost===post.id) ? 
+                  <EditPost>
+                    { comment }
+                    { setComment }
+                    { edit }
+                    { setEdit }
+                    { post }
+                    { disabled }
+                    { setDisabled }
+                    { commentRef }
+                    { refresh }
+                    { setRefresh }
+                  </EditPost> :
+                post.comment && (
                   <span id='comment'>
                     <ReactHashtag
                       renderHashtag={(hashtagValue) => (
