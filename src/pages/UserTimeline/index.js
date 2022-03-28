@@ -23,7 +23,7 @@ export default function UserTimeline(){
             <TimelineContainer>
                 <TimelineParent>
                     <span id='title'>{`${name}'s posts`}</span>
-                    <Posts id={id} setName={setName} refresh={refresh} setRefresh={setRefresh}/>
+                    <Posts id={id} refresh={refresh} setRefresh={setRefresh}/>
                 </TimelineParent>
                 <div>
                     <Trending refresh={refresh} />
