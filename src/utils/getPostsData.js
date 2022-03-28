@@ -13,5 +13,8 @@ export default function getPostsData(setPosts, hashtag, setIsLoading) {
       toastError(
         'An error occured while trying to fetch the posts, please refresh the page'
       );
-    }).finally(() => { setIsLoading(1) });
+    })
+    .finally(() => {
+      setIsLoading(1);
+    });
 }

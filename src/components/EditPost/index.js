@@ -4,70 +4,82 @@ import styled from 'styled-components';
 import { useContext, useEffect } from 'react';
 import UserContext from '../../contexts/UserContext.js';
 
-export default function EditPost(props){
-  const [ comment, setComment, setEdit, post, disabled, setDisabled, commentRef, refresh, setRefresh ] = props.children;
+export default function EditPost(props) {
+  const [
+    comment,
+    setComment,
+    setEdit,
+    post,
+    disabled,
+    setDisabled,
+    commentRef,
+    refresh,
+    setRefresh,
+  ] = props.children;
 
   const { user } = useContext(UserContext);
 
-  useEffect(()=>{
+  useEffect(() => {
     commentRef.current.focus();
-  },[]);
-  
-  return(
+  }, []);
 
-    <EditArea 
-      value={comment} 
-      onChange={e=>setComment(e.target.value)}
+  return (
+    <EditArea
+      value={comment}
+      onChange={(e) => setComment(e.target.value)}
       ref={commentRef}
       disabled={disabled}
-      onKeyDown={e=>{
-        if(e.keyCode === 27){
+      onKeyDown={(e) => {
+        if (e.keyCode === 27) {
           setEdit({
             status: false,
-            idPost: null
-        });
-        } else if (e.keyCode === 13){
+            idPost: null,
+          });
+        } else if (e.keyCode === 13) {
           updateComment(user.token, comment, post.id, setDisabled)
-          .then((ans)=>{
-            setDisabled(false);
-            post.comment = comment;
-            setEdit({
-              status: false,
-              idPost: null
+            .then(() => {
+              setDisabled(false);
+              post.comment = comment;
+              setEdit({
+                status: false,
+                idPost: null,
+              });
+              setComment('');
+              setTimeout(() => {
+                setRefresh(!refresh);
+              }, 100);
+            })
+            .catch(() => {
+              toastError(
+                'An error occurred while trying to update the post, please refresh the page'
+              );
+              setDisabled(false);
+              setEdit({
+                status: false,
+                idPost: null,
+              });
+              setComment('');
             });
-            setComment('');
-            setRefresh(!refresh);
-          })
-          .catch(() => {
-            toastError(
-              'An error occurred while trying to update the post, please refresh the page'
-            );
-            setDisabled(false);
-            setEdit({
-              status: false,
-              idPost: null
-            });
-            setComment('');
-        });
-      }
-    }}/>
+        }
+      }}
+    />
   );
 }
 
 const EditArea = styled.textarea`
-  border: 0px solid #FFFFFF;
+  border: 0px solid #ffffff;
   border-radius: 7px;
 
-  color: #4C4C4C;
+  color: #4c4c4c;
   font-weight: 400;
   font-size: 14px;
 
-  &::placeholder{
-    color: #4C4C4C;
+  &::placeholder {
+    color: #4c4c4c;
     font-weight: 400;
     font-size: 14px;
   }
-  &:focus{
+  &:focus {
     box-shadow: 0 0 0 0;
     border: 0 none;
     outline: 0;

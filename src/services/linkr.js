@@ -16,7 +16,6 @@ function postSignUp(body) {
 
 function getPosts(hashtag) {
   if (hashtag) {
-    console.log({ if: 'if' });
     return axios.get(`${api}/hashtag/${hashtag}`);
   }
   return axios.get(`${api}/posts`);

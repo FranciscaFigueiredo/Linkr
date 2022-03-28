@@ -34,7 +34,7 @@ export default function Posts({ refresh, setRefresh }) {
 
   const navigate = useNavigate();
   const commentRef = useRef(null);
-  
+
   const { user } = useContext(UserContext);
 
   const { token } = useContext(UserContext);
@@ -42,7 +42,6 @@ export default function Posts({ refresh, setRefresh }) {
   const [liked, setLiked] = useState(0);
 
   const { id, hashtag } = useParams();
-
   useEffect(() => {
     setIsLoading(0);
     if (id) {
@@ -65,7 +64,7 @@ export default function Posts({ refresh, setRefresh }) {
       .then((res) => setLiked(0))
       .catch((err) => console.error());
   }
-  
+
   return isLoading ? (
     <PostsContainer>
       {posts.length > 0 ? (
@@ -105,7 +104,9 @@ export default function Posts({ refresh, setRefresh }) {
               <PostContent>
                 <span
                   id='name'
-                  onClick={() => {navigate(`/users/${post.userId}`);}}
+                  onClick={() => {
+                    navigate(`/users/${post.userId}`);
+                  }}
                 >
                   {post.username}
                 </span>

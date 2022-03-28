@@ -35,7 +35,6 @@ export default function Login({ user, setUser, setToken }) {
     });
     sessionStorage.setItem('user', user);
     setUser(user);
-    console.log(user,'login')
 
     setTimeout(() => {
       navigate('/timeline');
@@ -45,7 +44,7 @@ export default function Login({ user, setUser, setToken }) {
   function login(event) {
     event.preventDefault();
     setDisable(true);
-    
+
     postLogin({
       email,
       password,
@@ -108,7 +107,6 @@ export default function Login({ user, setUser, setToken }) {
           <Redirect>First time? Create an account!</Redirect>
         </Link>
       </Form>
-      
 
       {modalError ? (
         <ModalError message={message} setModal={setModalError} />
@@ -120,4 +118,3 @@ export default function Login({ user, setUser, setToken }) {
     </PageContainer>
   );
 }
-
