@@ -106,6 +106,8 @@ const ButtonMenu = styled.button`
     background-color: #171717;
     border-end-start-radius: 20px;
 
+    cursor: pointer;
+
     &:first-child {
         border-radius: 0;
     }
