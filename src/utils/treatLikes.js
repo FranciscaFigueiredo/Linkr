@@ -2,9 +2,9 @@ import treatUsername from './treatUsername.js';
 
 export default function treatLikes(post, user) {
   const { username: loggedUsername } = user;
-  if (post.likes.length === 0) return 'No one has liked this post yet';
-
   const likedBy = [];
+
+  if (post.likes.length === 0) return 'No one has liked this post yet';
 
   post.likes.forEach((like) => {
     const treatedUsername = treatUsername(like.username);

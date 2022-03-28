@@ -9,12 +9,10 @@ import {
   Hashtag,
   Options,
   Edit,
-  QuantLikes,
 } from './styles.js';
 import ReactHashtag from '@mdnm/react-hashtag';
 import { useNavigate, useParams } from 'react-router-dom';
 import getPostsData from '../../utils/getPostsData.js';
-import { dislikeThePost, likeThePost } from '../../services/linkr.js';
 import UserContext from '../../contexts/UserContext.js';
 import Like from '../Like.js';
 import { DeletePost } from '../DeletePost/';
@@ -37,10 +35,6 @@ export default function Posts({ refresh, setRefresh }) {
 
   const { user } = useContext(UserContext);
 
-  const { token } = useContext(UserContext);
-
-  const [liked, setLiked] = useState(0);
-
   const { id, hashtag } = useParams();
   useEffect(() => {
     setIsLoading(0);
@@ -49,21 +43,7 @@ export default function Posts({ refresh, setRefresh }) {
     } else {
       getPostsData(setPosts, hashtag, setIsLoading);
     }
-
-    setLiked(2);
-  }, [refresh, hashtag, id, liked]);
-
-  function like(id) {
-    likeThePost({ id, token })
-      .then((res) => setLiked(1))
-      .catch((err) => console.error());
-  }
-
-  function dislike(id) {
-    dislikeThePost({ id, token })
-      .then((res) => setLiked(0))
-      .catch((err) => console.error());
-  }
+  }, [refresh, hashtag, id]);
 
   return isLoading ? (
     <PostsContainer>
@@ -88,18 +68,7 @@ export default function Posts({ refresh, setRefresh }) {
               )}
               <PostSidebar>
                 <img src={post.userPic} alt='user pic' />
-                <Like
-                  post={{ ...post }}
-                  likes={[...post.likes]}
-                  user={user}
-                  like={like}
-                  dislike={dislike}
-                />
-                {post.likes.length === 1 ? (
-                  <QuantLikes> {post.likes.length} like </QuantLikes>
-                ) : (
-                  <QuantLikes> {post.likes.length} likes </QuantLikes>
-                )}
+                <Like post={{ ...post }} likes={[...post.likes]} user={user} />
               </PostSidebar>
               <PostContent>
                 <span
