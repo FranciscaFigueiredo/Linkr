@@ -52,6 +52,10 @@ const PostSidebar = styled.div`
   flex-direction: column;
   align-items: center;
 
+  .likeContainer{
+    margin: 15px auto;
+  }
+
   img {
     width: 80%;
     aspect-ratio: 1;
@@ -88,11 +92,8 @@ const Heart = styled(FaRegHeart)`
     font-size: 18px;
     text-align: center;
 
-    transform: ${(props) => props.menu ? "rotate(180deg)" : ""};
-
     cursor: pointer;
 
-    margin: 15px auto;
 `
 
 const HeartRed = styled(FaHeart)`
@@ -100,11 +101,8 @@ const HeartRed = styled(FaHeart)`
     font-size: 18px;
     text-align: center;
 
-    transform: ${(props) => props.menu ? "rotate(180deg)" : ""};
-
     cursor: pointer;
 
-    margin: 15px auto;
 `
 
 const Hashtag = styled.span`

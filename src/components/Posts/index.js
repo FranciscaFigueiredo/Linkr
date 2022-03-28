@@ -36,7 +36,7 @@ export default function Posts({ refresh, id, hashtag }) {
         getPostsData(setPosts, hashtag);
       }
 
-      setLiked(0);
+      setLiked(2);
       getPostsData(setPosts, hashtag);
     }, [refresh, hashtag, id, liked]);
     
