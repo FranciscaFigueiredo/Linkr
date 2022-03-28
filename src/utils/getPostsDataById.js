@@ -2,7 +2,7 @@ import { toastError } from '../components/toasts.js';
 import { getPostsById } from '../services/linkr.js';
 import { treatPostsData } from './treatPostsData.js';
 
-export default function getPostsDataById(setPosts, id) {
+export default function getPostsDataById(setPosts, id, setIsLoading) {
     getPostsById(id)
         .then((res) => {
             const posts = treatPostsData(res.data);
@@ -13,5 +13,5 @@ export default function getPostsDataById(setPosts, id) {
             toastError(
                 'An error occured while trying to fetch the posts, please refresh the page'
             );
-        });
+        }).finally(() => { setIsLoading(1) });
 }

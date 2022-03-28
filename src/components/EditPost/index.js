@@ -12,7 +12,6 @@ export default function EditPost(props){
   useEffect(()=>{
     commentRef.current.focus();
   },[]);
-  console.log(commentRef);
   
   return(
 

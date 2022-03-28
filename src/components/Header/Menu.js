@@ -7,6 +7,7 @@ import { ButtonMenu, ButtonsContainer, MenuContainer } from "./HeaderStyle";
 export default function MenuActions({ setMenu, token, logoutUser }) {
     const { user, setUser } = useContext(UserContext);
     const navigate = useNavigate();
+    console.log(user,'user');
 
     function logoutUser() {
         logout({ token })
@@ -20,7 +21,7 @@ export default function MenuActions({ setMenu, token, logoutUser }) {
         <MenuContainer onClick={ () => setMenu(false) } >
             <ButtonsContainer>
                 <ButtonMenu>
-                    <Link to={`/users/${user.userId}`} >
+                    <Link to={`/users/${user.userId || JSON.parse(sessionStorage.getItem('user')).userId}`} >
                         Profile
                     </Link>
                 </ButtonMenu>

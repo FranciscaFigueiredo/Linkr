@@ -11,6 +11,7 @@ export default function UserTimeline(){
     const { id } = useParams()
     const [refresh, setRefresh] = useState(true);
     const [name, setName] = useState('')
+
     useEffect(()=>{
         const promise = getUserById(id)
         promise.then(res => {
