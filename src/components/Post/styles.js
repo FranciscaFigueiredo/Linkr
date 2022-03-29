@@ -2,6 +2,9 @@ import { FaHeart, FaRegHeart } from 'react-icons/fa';
 import { TiPencil } from 'react-icons/ti';
 import styled from 'styled-components';
 
+const Container = styled.div`
+  width: 100%;
+`;
 const PostContainer = styled.div`
   width: 100%;
   height: auto;
@@ -138,6 +141,7 @@ const QuantLikes = styled.h4`
 `;
 
 export {
+  Container,
   PostContainer,
   PostSidebarContainer,
   PostContent,
