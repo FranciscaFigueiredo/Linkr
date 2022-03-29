@@ -4,11 +4,14 @@ import { DeletePostButton } from './DeletePost/index.js';
 import PostSidebar from './PostSidebar.js';
 import PostUsername from './PostUsername.js';
 import PostComment from './PostComment.js';
+import RepostButton from '../RepostButton/index.js';
+
 
 export default function Post({ post, refresh, setRefresh }) {
   return (
     <PostContainer key={post.id}>
       <PostSidebar post={post} />
+      <RepostButton post={post} />
       <PostContent>
         <PostUsername post={post} />
         <PostComment post={post} refresh={refresh} setRefresh={setRefresh} />

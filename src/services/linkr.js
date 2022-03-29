@@ -103,6 +103,30 @@ function dislikeThePost({ id, token }) {
   return promise;
 }
 
+function repost(token, postId){
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+
+  const promise = axios.post(`${api}/reposts/${postId}`, {}, config)
+
+  return promise
+}
+
+function deleteRepost(token, postId){
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+
+  const promise = axios.delete(`${api}/reposts/${postId}`, config)
+
+  return promise
+}
+
 export {
   postSignUp,
   postPublish,
@@ -118,4 +142,6 @@ export {
   getPostsById,
   updateComment,
   getUserById,
+  repost,
+  deleteRepost,
 };

@@ -19,7 +19,6 @@ export default function Posts({ refresh, setRefresh }) {
     if (id) {
       getPostsDataById(setPosts, id);
     } else {
-      console.log('log');
       getPostsData(setPosts, hashtag);
     }
     setIsLoading(false);
