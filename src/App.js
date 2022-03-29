@@ -22,7 +22,7 @@ function App() {
     }
 
     if (user) {
-      setToken(user.token)
+      setToken(user.token);
     }
   }, [user, token]);
 

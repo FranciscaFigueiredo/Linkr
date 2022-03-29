@@ -4,7 +4,7 @@ const DeleteButtonContainer = styled.div`
   width: 14px;
   aspect-ratio: 1;
   position: absolute;
-  top: 22px;
+  top: 20px;
   right: 22px;
   cursor: pointer;
 

@@ -44,7 +44,7 @@ export default function Login({ user, setUser, setToken }) {
   function login(event) {
     event.preventDefault();
     setDisable(true);
-    
+
     postLogin({
       email,
       password,
@@ -118,4 +118,3 @@ export default function Login({ user, setUser, setToken }) {
     </PageContainer>
   );
 }
-
