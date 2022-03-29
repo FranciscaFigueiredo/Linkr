@@ -107,7 +107,6 @@ export default function Login({ user, setUser, setToken }) {
           <Redirect>First time? Create an account!</Redirect>
         </Link>
       </Form>
-      
 
       {modalError ? (
         <ModalError message={message} setModal={setModalError} />

@@ -4,7 +4,7 @@ import UserContext from "../../contexts/UserContext";
 import { logout } from "../../services/linkr";
 import { ButtonMenu, ButtonsContainer, MenuContainer } from "./HeaderStyle";
 
-export default function MenuActions({ setMenu, token, logoutUser }) {
+export default function MenuActions({ setMenu, token }) {
     const { user, setUser } = useContext(UserContext);
     const navigate = useNavigate();
 
