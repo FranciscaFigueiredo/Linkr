@@ -14,24 +14,6 @@ function postSignUp(body) {
   return promise;
 }
 
-function getPosts(hashtag) {
-  if (hashtag) {
-    return axios.get(`${api}/hashtag/${hashtag}`);
-  }
-
-  return axios.get(`${api}/posts`);
-}
-
-function getLikes() {
-  return axios.get(`${api}/likes`);
-}
-
-function postPublish(body, token) {
-  const promise = axios.post(`${api}/posts`, body, {
-    headers: { Authorization: `Bearer ${token}` },
-  });
-  return promise;
-}
 function postLogin(body) {
   const promise = axios.post(`${api}/users/login`, body);
   return promise;
@@ -46,12 +28,48 @@ function logout({ token }) {
   const promise = axios.delete(`${api}/users/logout`, config);
   return promise;
 }
-function getHashtag() {
-  const promise = axios.get(`${api}/hashtag`);
+
+function getUserById(id) {
+  const promise = axios.get(`${api}/users/${id}`);
   return promise;
 }
-function getUserByText(text){
+
+function getUserByText(text) {
   const promise = axios.get(`${api}/users?text=${text}`);
+  return promise;
+}
+
+function getPosts(hashtag) {
+  if (hashtag) {
+    return axios.get(`${api}/hashtag/${hashtag}`);
+  }
+  return axios.get(`${api}/posts`);
+}
+
+function getPostsById(id) {
+  const promise = axios.get(`${api}/posts/${id}`);
+  return promise;
+}
+
+function postPublish(body, token) {
+  const promise = axios.post(`${api}/posts`, body, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+  return promise;
+}
+
+function updateComment(token, comment, id, setDisabled) {
+  const config = createConfig(token);
+  const promise = axios.put(
+    `${api}/posts`,
+    {
+      comment,
+      id,
+    },
+    config
+  );
+  setDisabled(true);
+
   return promise;
 }
 
@@ -60,38 +78,48 @@ function deletePost(token, postId) {
   return axios.delete(`${api}/posts/${postId}`, config);
 }
 
-function getPostsById(id) {
-  const promise = axios.get(`${api}/posts/${id}`);
+function getHashtag() {
+  const promise = axios.get(`${api}/hashtag`);
   return promise;
 }
 
-function getUserById(id) {
-  const promise = axios.get(`${api}/users/${id}`);
+function getLikes() {
+  return axios.get(`${api}/likes`);
+}
+
+function likeThePost({ id, token }) {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+  const promise = axios.post(`${api}/posts/${id}/like`, {}, config);
   return promise;
 }
-function updateComment(token, comment, id, setDisabled){
-  const config = createConfig(token);
-  const promise = axios.put(`${api}/posts`, 
-  {
-    comment,
-    id
-  },config);
-  setDisabled(true);
-  
+
+function dislikeThePost({ id, token }) {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+  const promise = axios.delete(`${api}/posts/${id}/like`, config);
   return promise;
 }
 
 export {
   postSignUp,
-  postPublish,
   postLogin,
   logout,
-  getPosts,
-  getLikes,
-  getHashtag,
-  deletePost,
-  getUserByText,
-  getPostsById,
-  updateComment,
   getUserById,
+  getUserByText,
+  getPosts,
+  getPostsById,
+  postPublish,
+  updateComment,
+  deletePost,
+  getHashtag,
+  getLikes,
+  likeThePost,
+  dislikeThePost,
 };

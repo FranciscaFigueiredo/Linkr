@@ -19,6 +19,7 @@ const Navbar = styled.header`
 
     a {
         all: unset;
+        cursor: pointer;
     }
 `;
 
@@ -35,6 +36,8 @@ const Menu = styled.div`
 
     font-size: 23px;
 	font-weight: bold;
+
+    cursor: pointer;
 `;
 
 const ArrowMenu = styled(IoIosArrowDown)`
@@ -58,10 +61,33 @@ const MenuContainer = styled.div`
 	width: 100vw;
     height: 100vh;
 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+	justify-content: flex-start;
+
     position: absolute;
     left: 0;
     top: 72px;
     z-index: 10;
+
+    a {
+        all: unset;
+    }
+`;
+
+const ButtonsContainer = styled.div`
+	/* width: 100vw; */
+    /* height: 100vh; */
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+	justify-content: flex-start;
+
+    position: absolute;
+    right: 0;
+    top: 0; 
 
     a {
         all: unset;
@@ -80,9 +106,11 @@ const ButtonMenu = styled.button`
     background-color: #171717;
     border-end-start-radius: 20px;
 
-    position: absolute;
-    right: 0;
-    top: 0;
+    cursor: pointer;
+
+    &:first-child {
+        border-radius: 0;
+    }
 
     &:hover {
         background-color: #1877f2;
@@ -96,5 +124,6 @@ export {
     ArrowMenu,
     Avatar,
     MenuContainer,
+    ButtonsContainer,
     ButtonMenu,
 }

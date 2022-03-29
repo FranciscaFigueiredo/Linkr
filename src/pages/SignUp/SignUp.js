@@ -10,7 +10,7 @@ import { PageContainer } from "../../styles/ContainerStyle";
 import { ButtonSubmit, Form, Input, Redirect } from "../../styles/FormStyle";
 
 export default function SignUp() {
-    const navigate = useNavigate()
+    const navigate = useNavigate();
 
     const [disable, setDisable] = useState(false);
     const [modalSuccess, setModalSuccess] = useState(false);
@@ -98,10 +98,10 @@ export default function SignUp() {
                     onChange={(event) => (setPictureUrl(event.target.value))}
                 />
                 <ButtonSubmit disabled={disable}>Sign Up</ButtonSubmit>
+                <Link to='/'>
+                    <Redirect>Switch back to log in</Redirect>
+                </Link>
             </Form>
-            <Link to='/'>
-                <Redirect>Switch back to log in</Redirect>
-            </Link>
 
             {
                 modalError ?

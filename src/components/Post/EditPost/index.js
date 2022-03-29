@@ -1,27 +1,18 @@
-import { updateComment } from '../../services/linkr.js';
-import { toastError } from '../toasts.js';
 import styled from 'styled-components';
-import { useContext, useEffect } from 'react';
-import UserContext from '../../contexts/UserContext.js';
+import { useContext, useEffect, useState } from 'react';
+import UserContext from '../../../contexts/UserContext.js';
+import { updateComment } from '../../../services/linkr.js';
+import { toastError } from '../../toasts.js';
 
 export default function EditPost(props) {
-  const [
-    comment,
-    setComment,
-    setEdit,
-    post,
-    disabled,
-    setDisabled,
-    commentRef,
-    refresh,
-    setRefresh,
-  ] = props.children;
+  const [comment, setComment, setEdit, post, commentRef, refresh, setRefresh] =
+    props.children;
 
   const { user } = useContext(UserContext);
-
+  const [disabled, setDisabled] = useState(false);
   useEffect(() => {
     commentRef.current.focus();
-  }, []);
+  }, [commentRef]);
 
   return (
     <EditArea
@@ -47,7 +38,7 @@ export default function EditPost(props) {
               setComment('');
               setTimeout(() => {
                 setRefresh(!refresh);
-              }, 500);
+              }, 100);
             })
             .catch(() => {
               toastError(

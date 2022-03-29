@@ -25,7 +25,7 @@ export function treatPostsData(rawPosts) {
 
       posts.push({
         ...rawPost,
-        likes,
+        likes: [...likes],
       });
     } else {
       const post = posts[indexOfFoundRawPost];

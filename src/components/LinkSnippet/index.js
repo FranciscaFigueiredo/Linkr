@@ -6,29 +6,31 @@ export function LinkSnippet({
   post: { linkTitle, linkDescription, linkImage, url },
 }) {
   return (
-    <LinkSnippetContainer>
-      <Content>
-        {linkTitle ? (
-          <span id='snippetTitle'>{linkTitle}</span>
+    <a href={url} target='_blank' rel='noreferrer'>
+      <LinkSnippetContainer>
+        <Content>
+          {linkTitle ? (
+            <span id='snippetTitle'>{linkTitle}</span>
+          ) : (
+            <span id='snippetTitle'>No title available for this url</span>
+          )}
+          {linkDescription ? (
+            <span id='snippetDescription'>
+              {treatLongString(linkDescription)}
+            </span>
+          ) : (
+            <span id='snippetDescription'>
+              No description available for this url
+            </span>
+          )}
+          <span id='snippetUrl'>{url}</span>
+        </Content>
+        {linkImage ? (
+          <img src={linkImage} alt='' />
         ) : (
-          <span id='snippetTitle'>No title available for this url</span>
+          <img src={noImage} alt='' />
         )}
-        {linkDescription ? (
-          <span id='snippetDescription'>
-            {treatLongString(linkDescription)}
-          </span>
-        ) : (
-          <span id='snippetDescription'>
-            No description available for this url
-          </span>
-        )}
-        <span id='snippetUrl'>{url}</span>
-      </Content>
-      {linkImage ? (
-        <img src={linkImage} alt='' />
-      ) : (
-        <img src={noImage} alt='' />
-      )}
-    </LinkSnippetContainer>
+      </LinkSnippetContainer>
+    </a>
   );
 }

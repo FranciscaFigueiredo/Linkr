@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -16,10 +16,15 @@ function App() {
   const [user, setUser] = useState(null);
   const [token, setToken] = useState(null);
 
-  if (user === null && sessionStorage.getItem('user')) {
-    setUser(JSON.parse(sessionStorage.getItem('user')));
-    setToken(JSON.parse(sessionStorage.getItem('user')).token);
-  }
+  useEffect(() => {
+    if (user === null) {
+      setUser(JSON.parse(sessionStorage.getItem('user')));
+    }
+
+    if (user) {
+      setToken(user.token);
+    }
+  }, [user, token]);
 
   return (
     <BrowserRouter>

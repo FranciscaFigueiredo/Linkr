@@ -1,5 +1,4 @@
 import { createGlobalStyle } from 'styled-components';
-import { ModalContainer } from '../components/DeletePost/styles.js';
 
 const GlobalStyle = createGlobalStyle`
 	* {

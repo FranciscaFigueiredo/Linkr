@@ -13,7 +13,7 @@ export default function getHashtagsData(setListHashtags) {
       setListHashtags(list);
     })
     .catch((error)=>{
-          console.log(error);
+          console.error();
           toastError(
             'An error occured while trying to fetch the hashtags, please refresh the page'
           );

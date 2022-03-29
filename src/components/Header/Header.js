@@ -1,32 +1,47 @@
-import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { UserLoginValidation } from '../../services/userLogin';
+import { useContext, useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import UserContext from '../../contexts/UserContext';
 import SearchUser from '../SearchUser';
 import { ArrowMenu, Avatar, Menu, Navbar, Title } from './HeaderStyle';
 import MenuActions from './Menu';
 
 export default function Header() {
-  const { user } = UserLoginValidation();
+  const user = JSON.parse(sessionStorage.getItem('user'));
+  const navigate = useNavigate();
+  const [menu, setMenu] = useState(0);
+  let pictureUrl = null;
+  let token = null;
 
-  const { pictureUrl, token } = user;
+  useEffect(() => {
+    if (user === null) {
+      navigate('/');
+      return '';
+    }
+  }, []);
 
-  const [menu, setMenu] = useState(false);
+  pictureUrl = user?.pictureUrl;
+  token = user?.token;
 
-  useEffect(() => {}, [menu, user]);
+  if (!user) {
+    return '';
+  }
   return (
     <>
       <Navbar>
         <Link to='/timeline'>
           <Title>Linkr</Title>
         </Link>
-        <SearchUser/>
+        <SearchUser />
         <Menu onClick={() => setMenu(!menu)}>
           <ArrowMenu menu={menu} />
           <Avatar src={pictureUrl} alt='' />
         </Menu>
       </Navbar>
-      {menu ? <MenuActions setMenu={setMenu} token={token} /> : ''}
+      {menu ? (
+        <MenuActions user={user.id} setMenu={setMenu} token={token} />
+      ) : (
+        ''
+      )}
     </>
   );
 }
-

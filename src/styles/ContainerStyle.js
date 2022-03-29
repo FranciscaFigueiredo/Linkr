@@ -12,6 +12,10 @@ const PageContainer = styled.div`
 	margin: 0 auto;
 
     position: relative;
+
+	@media (min-width: 611px) {
+		flex-direction: row;
+	}
 `;
 
 export {

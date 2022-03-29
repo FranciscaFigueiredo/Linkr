@@ -6,10 +6,10 @@ export default function getPostsData(setPosts, hashtag) {
   getPosts(hashtag)
     .then((res) => {
       const posts = treatPostsData(res.data);
-      setPosts(posts);
+      setPosts([...posts]);
     })
-    .catch((error) => {
-      console.log(error);
+    .catch(() => {
+      console.error();
       toastError(
         'An error occured while trying to fetch the posts, please refresh the page'
       );

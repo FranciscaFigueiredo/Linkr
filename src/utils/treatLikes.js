@@ -1,17 +1,18 @@
 import treatUsername from './treatUsername.js';
 
-export default function treatLikes(post) {
-  if (post.likes.length === 0) return 'No one has liked this post yet';
-
+export default function treatLikes(post, user) {
+  const { username: loggedUsername } = user;
   const likedBy = [];
 
+  if (post.likes.length === 0) return 'No one has liked this post yet';
+
   post.likes.forEach((like) => {
-    like.username = treatUsername(like.username);
-    if (like.userId === post.userId) likedBy.push('You');
-    else likedBy.push(like.username);
+    const treatedUsername = treatUsername(like.username);
+    if (like.username === loggedUsername) likedBy.unshift('You');
+    else likedBy.push(treatedUsername);
   });
 
-  if (likedBy.length === 1 && likedBy[0] === 'You') return 'You';
+  if (likedBy.length === 1) return likedBy[0];
 
   if (likedBy.length === 2) return likedBy.join(' and ');
 
