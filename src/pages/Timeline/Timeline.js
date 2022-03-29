@@ -4,7 +4,7 @@ import Posts from '../../components/Posts/';
 import Publish from '../../components/Publish/index.js';
 import { TimelineContainer, TimelineParent } from './styles.js';
 import Trending from '../../components/Trending/index.js';
-import DeletePostModal from '../../components/DeletePost/ConfirmationModal.js';
+import DeletePostModal from '../../components/Post/DeletePost/ConfirmationModal.js';
 
 export default function Timeline() {
   const [refresh, setRefresh] = useState(true);

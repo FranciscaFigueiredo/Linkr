@@ -1,8 +1,8 @@
 import { useContext, useState } from 'react';
 import { ThreeDots } from 'react-loader-spinner';
-import ModalContext from '../../contexts/ModalContext.js';
-import PostsContext from '../../contexts/PostsContext.js';
-import UserContext from '../../contexts/UserContext.js';
+import ModalContext from '../../../contexts/ModalContext.js';
+import PostsContext from '../../../contexts/PostsContext.js';
+import UserContext from '../../../contexts/UserContext.js';
 import handleDeletePost from './handleDeletePost.js';
 
 export default function ConfirmButton({ hashtagParams, idParams }) {

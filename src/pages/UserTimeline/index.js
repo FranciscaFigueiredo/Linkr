@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import DeletePostModal from '../../components/DeletePost/ConfirmationModal.js';
+import DeletePostModal from '../../components/Post/DeletePost/ConfirmationModal.js';
 import Header from '../../components/Header/Header';
 import Posts from '../../components/Posts';
 import Trending from '../../components/Trending';

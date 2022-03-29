@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import { useParams } from 'react-router-dom';
-import ModalContext from '../../contexts/ModalContext.js';
+import ModalContext from '../../../contexts/ModalContext.js';
 import ConfirmButton from './ConfirmButton.js';
 import { ButtonsContainer } from './styles.js';
 

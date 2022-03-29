@@ -3,8 +3,8 @@ import Posts from '../../components/Posts/';
 import Trending from '../../components/Trending/index.js';
 import { TimelineContainer, TimelineParent } from './style.js';
 import { useParams } from 'react-router';
-import DeletePostModal from '../../components/DeletePost/ConfirmationModal.js';
 import { useState } from 'react';
+import DeletePostModal from '../../components/Post/DeletePost/ConfirmationModal.js';
 
 export default function Hashtag() {
   const { hashtag } = useParams();

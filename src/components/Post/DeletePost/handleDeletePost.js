@@ -1,7 +1,7 @@
-import { deletePost } from '../../services/linkr.js';
-import getPostsData from '../../utils/getPostsData.js';
-import getPostsDataById from '../../utils/getPostsDataById.js';
-import { toastError, toastSuccess } from '../toasts.js';
+import { deletePost } from '../../../services/linkr.js';
+import getPostsData from '../../../utils/getPostsData.js';
+import getPostsDataById from '../../../utils/getPostsDataById.js';
+import { toastError, toastSuccess } from '../../toasts.js';
 
 export default async function handleDeletePost(
   token,
