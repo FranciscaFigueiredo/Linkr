@@ -36,7 +36,14 @@ export default function Posts({ refresh, setRefresh }) {
   return (
     <PostsContainer>
       {posts.map((post) => {
-        return <Post post={post} refresh={refresh} setRefresh={setRefresh} />;
+        return (
+          <Post
+            key={post.id}
+            post={post}
+            refresh={refresh}
+            setRefresh={setRefresh}
+          />
+        );
       })}
     </PostsContainer>
   );
