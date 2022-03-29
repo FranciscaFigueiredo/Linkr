@@ -47,7 +47,7 @@ export default function EditPost(props) {
               setComment('');
               setTimeout(() => {
                 setRefresh(!refresh);
-              }, 100);
+              }, 500);
             })
             .catch(() => {
               toastError(

@@ -19,7 +19,9 @@ export default function Publish({refresh, setRefresh}) {
       .then(() => {
         setLink('');
         setComment('');
-        setRefresh(!refresh);
+        setTimeout(() => {
+          setRefresh(!refresh);
+        }, 500);
       })
       .catch((err) => {
         alert('Houve um erro ao publicar seu link');
