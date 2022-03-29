@@ -17,7 +17,9 @@ const Container = styled.div`
   margin-top: 13px;
 
   @media (max-width: 940px) {
-    display: none;
+    width: 350px;
+    position: absolute;
+    top: 82px;
   }
 `;
 const HeaderStyle = styled.div`
@@ -50,6 +52,11 @@ const HeaderStyle = styled.div`
     box-shadow: 0 0 0 0;
     border: 0 none;
     outline: 0;
+  }
+  @media (max-width: 940px) {
+    input{
+      width: 300px;
+    }
   }
 `;
 const BodyStyle = styled.div`
