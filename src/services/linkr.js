@@ -21,6 +21,13 @@ function getPosts(hashtag) {
   return axios.get(`${api}/posts`);
 }
 
+function loadPosts({ postsLength, token }){
+  const config = createConfig(token);
+  
+  const promise = axios.get(`${api}/posts?olderThan=${postsLength}`, config);
+  return promise;
+  }
+
 function getLikes() {
   return axios.get(`${api}/likes`);
 }
@@ -109,6 +116,7 @@ export {
   postLogin,
   logout,
   getPosts,
+  loadPosts,
   getLikes,
   getHashtag,
   likeThePost,

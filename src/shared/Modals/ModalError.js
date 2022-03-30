@@ -1,20 +1,17 @@
-import { useContext } from 'react';
 import Modal from 'react-modal';
-import ModalContext from '../../contexts/ModalContext.js';
-import Buttons from '../../components/DeletePost/Buttons';
-import { ModalContentContainer } from '../../components/DeletePost/styles.js';
-import '../../components/DeletePost/modalStyle.css';
+import { ButtonsContainer, ModalContentContainer } from '../../components/Post/DeletePost/styles.js';
+import '../../components/Post/DeletePost/modalStyle.css';
 
-export default function ModalError({ message, setModal }) {
-    const { isModalOpen } = useContext(ModalContext);
-
+export default function ModalError({ message, isModalOpen, setIsModalOpen }) {
     Modal.setAppElement('#root');
 
     return (
         <Modal isOpen={isModalOpen} className='Modal' overlayClassName='Overlay'>
             <ModalContentContainer>
                 <span id='ModalQuestion'>{message}</span>
-                <Buttons />
+                <ButtonsContainer>
+                    <div onClick={() => setIsModalOpen(false)}>Ok</div>
+                </ButtonsContainer>
             </ModalContentContainer>
         </Modal>
     );
