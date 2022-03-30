@@ -152,6 +152,8 @@ const QuantLikes = styled.h4`
   font-size: 11px;
   font-weight: 400;
   line-height: 15px;
+  cursor: default;
+
 `;
 
 export {
