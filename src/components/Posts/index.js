@@ -17,11 +17,11 @@ export default function Posts({ refresh, setRefresh }) {
   useEffect(() => {
     setIsLoading(true);
     if (id) {
-      getPostsDataById(setPosts, id).then(() => {
+      getPostsDataById(setPosts, id).finally(() => {
         setIsLoading(false);
       });
     } else {
-      getPostsData(setPosts, hashtag).then(() => {
+      getPostsData(setPosts, hashtag).finally(() => {
         setIsLoading(false);
       });
     }

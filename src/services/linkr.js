@@ -34,8 +34,8 @@ function getUserById(id) {
   return promise;
 }
 
-function getUserByText(text) {
-  const promise = axios.get(`${api}/users?text=${text}`);
+function getUserByText(text, userId) {
+  const promise = axios.get(`${api}/users?text=${text}&id=${userId}`);
   return promise;
 }
 
