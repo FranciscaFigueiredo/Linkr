@@ -5,16 +5,14 @@ import PostSidebar from './PostSidebar.js';
 import PostUsername from './PostUsername.js';
 import PostComment from './PostComment.js';
 import RepostTopBar from './RepostTopBar/index.js';
-import RepostContext from '../../contexts/RepostsContext'
-import { useState } from 'react';
+import  { RepostProvider } from '../../contexts/RepostsContext'
 import Comments from './Comments/index.js';
 
+
 export default function Post({ post, refresh, setRefresh }) {
-  const [reposts, setReposts] = useState([])
-  const [myRepost, setMyRepost] = useState(null)
-  const [modal, setModal] = useState(false)
+
   return (
-    <RepostContext.Provider value={{ reposts, setReposts, myRepost, setMyRepost, modal, setModal }}>
+    <RepostProvider >
     <Container>
       <RepostTopBar post={post}/>
       <PostContainer>
@@ -28,6 +26,6 @@ export default function Post({ post, refresh, setRefresh }) {
       </PostContainer>
       <Comments post={post} />
     </Container>
-  </RepostContext.Provider>
+    </RepostProvider>
   );
 }
