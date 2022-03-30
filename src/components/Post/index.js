@@ -9,7 +9,7 @@ import Comments from './Comments/index.js';
 export default function Post({ post, refresh, setRefresh }) {
   return (
     <Container>
-      <PostContainer key={post.id}>
+      <PostContainer>
         <PostSidebar post={post} />
         <PostContent>
           <PostUsername post={post} />
