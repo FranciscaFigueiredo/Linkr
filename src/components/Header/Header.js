@@ -1,6 +1,5 @@
-import { useContext, useEffect, useState } from 'react';
+import {  useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import UserContext from '../../contexts/UserContext';
 import SearchUser from '../SearchUser';
 import { ArrowMenu, Avatar, Menu, Navbar, Title } from './HeaderStyle';
 import MenuActions from './Menu';
