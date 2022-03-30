@@ -81,7 +81,6 @@ function deletePost(token, postId) {
 function publishComment(token, postId, textValue) {
   const config = createConfig(token);
   const body = { textValue };
-  console.log({ config });
   return axios.post(`${api}/posts/${postId}/comments`, body, config);
 }
 
@@ -114,6 +113,42 @@ function dislikeThePost({ id, token }) {
   return promise;
 }
 
+function repost(token, postId){
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+
+  const promise = axios.post(`${api}/reposts/${postId}`, {}, config)
+
+  return promise
+}
+
+function deleteRepost(token, postId){
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+
+  const promise = axios.delete(`${api}/reposts/${postId}`, config)
+
+  return promise
+}
+
+function isReposted(token, postId) {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+
+  const promise = axios.get(`${api}/reposts/${postId}`, config)
+
+  return promise
+}
+
 export {
   postSignUp,
   postLogin,
@@ -130,4 +165,7 @@ export {
   getLikes,
   likeThePost,
   dislikeThePost,
+  repost,
+  deleteRepost,
+  isReposted,
 };

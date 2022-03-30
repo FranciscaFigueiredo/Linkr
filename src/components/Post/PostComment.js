@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import EditPostButton from './EditPost/EditPostButton.js';
 import EditPost from './EditPost/index.js';
 import { Hashtag } from './styles.js';
+import { v4 } from "uuid"
 
 export default function PostComment({ post, refresh, setRefresh }) {
   const navigate = useNavigate();
@@ -39,7 +40,7 @@ export default function PostComment({ post, refresh, setRefresh }) {
           <span id='comment'>
             <ReactHashtag
               renderHashtag={(hashtagValue) => (
-                <Hashtag
+                  <Hashtag key={v4()}
                   onClick={() => navigate(`/hashtag/${hashtagValue.substr(1)}`)}
                 >
                   {hashtagValue}
