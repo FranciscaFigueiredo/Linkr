@@ -47,7 +47,7 @@ export default function Like({ post, likes, user }) {
 
   return (
     <>
-      <div className='likeContainer' data-tip={tooltip}>
+      <div className='likeContainer'>
         {liked ? (
           <HeartRed
             onClick={() => {
@@ -63,13 +63,19 @@ export default function Like({ post, likes, user }) {
             }}
           />
         )}
-        <ReactTooltip />
       </div>
       {localPost.likes.length === 1 ? (
-        <QuantLikes> {localPost.likes.length} like </QuantLikes>
+        <QuantLikes data-tip={tooltip}>
+          {' '}
+          {localPost.likes.length} like{' '}
+        </QuantLikes>
       ) : (
-        <QuantLikes> {localPost.likes.length} likes </QuantLikes>
+        <QuantLikes data-tip={tooltip}>
+          {' '}
+          {localPost.likes.length} likes{' '}
+        </QuantLikes>
       )}
+      <ReactTooltip className='Tooltip' place='bottom' type='light' />
     </>
   );
 }

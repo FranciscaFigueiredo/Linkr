@@ -48,6 +48,12 @@ const PostSidebarContainer = styled.div`
     aspect-ratio: 1;
     border-radius: 100%;
   }
+
+  .Tooltip {
+    font: 700 11px 'Lato';
+    padding: 6px 9px 5px 6px;
+    border-radius: 3px;
+  }
 `;
 
 const PostContent = styled.div`
