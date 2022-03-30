@@ -21,12 +21,13 @@ export default function RepostTopBar({post}){
     }else{
         setMyRepost(false)
     }
+    console.log(reposts);
 
     return (
         <Container isNone={reposts.length}>
             <div>
                 <img src={repostImg} alt="repost" />
-                <p>Re-posted by <span>{myRepost ? 'you' : 'Fulano'}</span></p>
+                <p>Re-posted by <span>{myRepost ? 'you' : reposts[0]?.username}</span></p>
             </div>
         </Container>
     )

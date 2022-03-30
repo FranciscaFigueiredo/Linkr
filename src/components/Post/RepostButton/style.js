@@ -10,8 +10,9 @@ const Container = styled.div`
         width: 20px;
         height: 18px;
         background-color: transparent;
-
         margin-bottom: 5px;
+
+        cursor: ${({isDisabled}) => isDisabled || 'pointer'};
     }
 
     img{

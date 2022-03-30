@@ -14,23 +14,6 @@ function postSignUp(body) {
   return promise;
 }
 
-function getPosts(hashtag) {
-  if (hashtag) {
-    return axios.get(`${api}/hashtag/${hashtag}`);
-  }
-  return axios.get(`${api}/posts`);
-}
-
-function getLikes() {
-  return axios.get(`${api}/likes`);
-}
-
-function postPublish(body, token) {
-  const promise = axios.post(`${api}/posts`, body, {
-    headers: { Authorization: `Bearer ${token}` },
-  });
-  return promise;
-}
 function postLogin(body) {
   const promise = axios.post(`${api}/users/login`, body);
   return promise;
@@ -45,18 +28,22 @@ function logout({ token }) {
   const promise = axios.delete(`${api}/users/logout`, config);
   return promise;
 }
-function getHashtag() {
-  const promise = axios.get(`${api}/hashtag`);
+
+function getUserById(id) {
+  const promise = axios.get(`${api}/users/${id}`);
   return promise;
 }
+
 function getUserByText(text) {
   const promise = axios.get(`${api}/users?text=${text}`);
   return promise;
 }
 
-function deletePost(token, postId) {
-  const config = createConfig(token);
-  return axios.delete(`${api}/posts/${postId}`, config);
+function getPosts(hashtag) {
+  if (hashtag) {
+    return axios.get(`${api}/hashtag/${hashtag}`);
+  }
+  return axios.get(`${api}/posts`);
 }
 
 function getPostsById(id) {
@@ -64,10 +51,13 @@ function getPostsById(id) {
   return promise;
 }
 
-function getUserById(id) {
-  const promise = axios.get(`${api}/users/${id}`);
+function postPublish(body, token) {
+  const promise = axios.post(`${api}/posts`, body, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
   return promise;
 }
+
 function updateComment(token, comment, id, setDisabled) {
   const config = createConfig(token);
   const promise = axios.put(
@@ -81,6 +71,27 @@ function updateComment(token, comment, id, setDisabled) {
   setDisabled(true);
 
   return promise;
+}
+
+function deletePost(token, postId) {
+  const config = createConfig(token);
+  return axios.delete(`${api}/posts/${postId}`, config);
+}
+
+function publishComment(token, postId, textValue) {
+  const config = createConfig(token);
+  const body = { textValue };
+  console.log({ config });
+  return axios.post(`${api}/posts/${postId}/comments`, body, config);
+}
+
+function getHashtag() {
+  const promise = axios.get(`${api}/hashtag`);
+  return promise;
+}
+
+function getLikes() {
+  return axios.get(`${api}/likes`);
 }
 
 function likeThePost({ id, token }) {
@@ -141,19 +152,20 @@ function isReposted(token, postId) {
 
 export {
   postSignUp,
-  postPublish,
   postLogin,
   logout,
+  getUserById,
+  getUserByText,
   getPosts,
-  getLikes,
+  getPostsById,
+  postPublish,
+  updateComment,
+  deletePost,
+  publishComment,
   getHashtag,
+  getLikes,
   likeThePost,
   dislikeThePost,
-  deletePost,
-  getUserByText,
-  getPostsById,
-  updateComment,
-  getUserById,
   repost,
   deleteRepost,
   isReposted,

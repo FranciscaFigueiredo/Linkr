@@ -24,7 +24,7 @@ export default function RepostButton({post}){
     }
 
     return (
-        <Container>
+        <Container isDisabled={isDisabled}>
             <button
             onClick={handleClick}
             disabled={isDisabled}
