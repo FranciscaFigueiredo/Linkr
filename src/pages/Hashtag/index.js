@@ -14,7 +14,9 @@ export default function Hashtag() {
       <Header />
       <TimelineContainer>
         <TimelineParent>
-          <span id='title'># {hashtag}</span>
+          <div id='titleContainer'>
+            <span id='title'># {hashtag}</span>
+          </div>
           <Posts hashtag={hashtag} refresh={refresh} setRefresh={setRefresh} />
         </TimelineParent>
         <div>

@@ -6,16 +6,20 @@ import Posts from '../../components/Posts';
 import Trending from '../../components/Trending';
 import { getUserById } from '../../services/linkr';
 import { TimelineContainer, TimelineParent } from '../Timeline/styles';
+import FollowButtom from '../../components/FollowButtom/index.js';
 
 export default function UserTimeline() {
   const { id } = useParams();
   const [refresh, setRefresh] = useState(true);
   const [name, setName] = useState('');
+  const [image, setImage] = useState('');
+  
   useEffect(() => {
     const promise = getUserById(id);
     promise
       .then((res) => {
         setName(res.data.username);
+        setImage(res.data.picture_url);
       })
       .catch((err) => console.log(err.response.message));
   }, [id]);
@@ -24,10 +28,14 @@ export default function UserTimeline() {
       <Header />
       <TimelineContainer>
         <TimelineParent>
-          <span id='title'>{`${name}'s posts`}</span>
+          <div id='titleContainer'>
+            <img src={image} alt={name}/>
+            <span id='title'>{`${name}'s posts`}</span>
+          </div>
           <Posts id={id} refresh={refresh} setRefresh={setRefresh} />
         </TimelineParent>
-        <div>
+        <div id='subContainer'>
+          <FollowButtom isFollowed={false}/>
           <Trending refresh={refresh} />
         </div>
         <DeletePostModal />

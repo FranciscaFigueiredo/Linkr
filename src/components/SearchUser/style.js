@@ -15,11 +15,15 @@ const Container = styled.div`
   align-self: start;
 
   margin-top: 13px;
-
   @media (max-width: 940px) {
-    width: 350px;
+    width: 450px;
+  }
+  @media (max-width: 650px) {
+    width: 95%;
     position: absolute;
-    top: 82px;
+    top: 76px;
+    left:0px;
+    margin: 10px 10px 0px 10px;
   }
 `;
 const HeaderStyle = styled.div`
@@ -56,6 +60,11 @@ const HeaderStyle = styled.div`
   @media (max-width: 940px) {
     input{
       width: 300px;
+    }
+  }
+  @media (max-width: 650px) {
+    input{
+      width: 80%;
     }
   }
 `;
