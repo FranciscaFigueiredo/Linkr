@@ -3,7 +3,7 @@ import { getPosts } from '../services/linkr.js';
 import { treatPostsData } from './treatPostsData.js';
 
 export default function getPostsData(setPosts, hashtag) {
-  getPosts(hashtag)
+  return getPosts(hashtag)
     .then((res) => {
       const posts = treatPostsData(res.data);
       setPosts([...posts]);
