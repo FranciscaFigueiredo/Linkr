@@ -78,6 +78,13 @@ function deletePost(token, postId) {
   return axios.delete(`${api}/posts/${postId}`, config);
 }
 
+function publishComment(token, postId, textValue) {
+  const config = createConfig(token);
+  const body = { textValue };
+  console.log({ config });
+  return axios.post(`${api}/posts/${postId}/comments`, body, config);
+}
+
 function getHashtag() {
   const promise = axios.get(`${api}/hashtag`);
   return promise;
@@ -118,6 +125,7 @@ export {
   postPublish,
   updateComment,
   deletePost,
+  publishComment,
   getHashtag,
   getLikes,
   likeThePost,
