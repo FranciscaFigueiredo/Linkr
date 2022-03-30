@@ -5,12 +5,16 @@ import PostSidebar from './PostSidebar.js';
 import PostUsername from './PostUsername.js';
 import PostComment from './PostComment.js';
 import Comments from './Comments/index.js';
+import { useState } from 'react';
 
 export default function Post({ post, refresh, setRefresh }) {
+  const [showComments, setShowComments] = useState(false);
+  const commentsProps = { showComments, setShowComments };
+
   return (
     <Container>
       <PostContainer>
-        <PostSidebar post={post} />
+        <PostSidebar post={post} commentsProps={commentsProps} />
         <PostContent>
           <PostUsername post={post} />
           <PostComment post={post} refresh={refresh} setRefresh={setRefresh} />
@@ -18,7 +22,7 @@ export default function Post({ post, refresh, setRefresh }) {
         </PostContent>
         <DeletePostButton post={post} />
       </PostContainer>
-      <Comments post={post} />
+      <Comments post={post} commentsProps={commentsProps} />
     </Container>
   );
 }

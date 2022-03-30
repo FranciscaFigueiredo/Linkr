@@ -37,6 +37,6 @@ export function treatPostsData(rawPosts) {
       });
     }
   });
-
+  console.log({ posts });
   return posts;
 }
