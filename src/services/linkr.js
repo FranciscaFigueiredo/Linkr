@@ -127,6 +127,18 @@ function deleteRepost(token, postId){
   return promise
 }
 
+function isReposted(token, postId) {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+
+  const promise = axios.get(`${api}/reposts/${postId}`, config)
+
+  return promise
+}
+
 export {
   postSignUp,
   postPublish,
@@ -144,4 +156,5 @@ export {
   getUserById,
   repost,
   deleteRepost,
+  isReposted,
 };
