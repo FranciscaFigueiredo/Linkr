@@ -21,7 +21,6 @@ export default function RepostTopBar({post}){
     }else{
         setMyRepost(false)
     }
-    console.log(reposts);
 
     return (
         <Container isNone={reposts.length}>
