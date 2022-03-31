@@ -1,7 +1,9 @@
+import { useContext } from 'react';
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
 import IntroductionText from '../../components/IntroductionText/IntroductionText';
+import ModalContext from '../../contexts/ModalContext';
 import { postLogin } from '../../services/linkr';
 import ModalError from '../../shared/Modals/ModalError';
 import ModalSuccess from '../../shared/Modals/ModalSuccess';
@@ -11,10 +13,10 @@ import { ButtonSubmit, Form, Input, Redirect } from '../../styles/FormStyle';
 
 export default function Login({ user, setUser, setToken }) {
   const navigate = useNavigate();
+  const { isModalOpen, setIsModalOpen } = useContext(ModalContext);
 
   const [disable, setDisable] = useState(false);
   const [modalSuccess, setModalSuccess] = useState(false);
-  const [modalError, setModalError] = useState(false);
   const [message, setMessage] = useState('');
 
   const [email, setEmail] = useState('');
@@ -62,18 +64,18 @@ export default function Login({ user, setUser, setToken }) {
 
         if (err.response.status === 422) {
           setMessage('Digite dados válidos');
-          setModalError(true);
+          setIsModalOpen(true);
         }
 
         if (err.response.status === 401) {
           setEmail('');
           setMessage(err.response.data);
-          setModalError(true);
+          setIsModalOpen(true);
         }
 
         if (err.response.status === 500) {
           setMessage('Servidor fora de área, tente novamente mais tarde');
-          setModalError(true);
+          setIsModalOpen(true);
 
           setTimeout(() => {
             navigate('/');
@@ -108,8 +110,8 @@ export default function Login({ user, setUser, setToken }) {
         </Link>
       </Form>
 
-      {modalError ? (
-        <ModalError message={message} setModal={setModalError} />
+      {isModalOpen ? (
+        <ModalError message={message} isModalOpen={ isModalOpen } setIsModalOpen={setIsModalOpen} />
       ) : (
         ''
       )}

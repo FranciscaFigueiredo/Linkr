@@ -14,6 +14,20 @@ function postSignUp(body) {
   return promise;
 }
 
+function getPosts(hashtag) {
+  if (hashtag) {
+    return axios.get(`${api}/hashtag/${hashtag}`);
+  } 
+  return axios.get(`${api}/posts`);
+}
+
+function loadPosts({ postsLength, token }){
+  const config = createConfig(token);
+  
+  const promise = axios.get(`${api}/posts?olderThan=${postsLength}`, config);
+  return promise;
+}
+
 function postLogin(body) {
   const promise = axios.post(`${api}/users/login`, body);
   return promise;
@@ -40,15 +54,13 @@ function getUserByText(text, userId) {
   return promise;
 }
 
-function getPosts(hashtag) {
-  if (hashtag) {
-    return axios.get(`${api}/hashtag/${hashtag}`);
-  } 
-  return axios.get(`${api}/posts`);
-}
-
 function getPostsById(id) {
   const promise = axios.get(`${api}/posts/${id}`);
+  return promise;
+}
+
+function getPostsByIdOrder({ postsLength, id }) {
+  const promise = axios.get(`${api}/posts/${id}?olderThan=${postsLength}`);
   return promise;
 }
 
@@ -183,15 +195,17 @@ export {
   getUserById,
   getUserByText,
   getPosts,
+  loadPosts,
   getPostsById,
   postPublish,
   updateComment,
-  deletePost,
   publishComment,
   getHashtag,
   getLikes,
   likeThePost,
   dislikeThePost,
+  deletePost,
+  getPostsByIdOrder,
   followUser,
   unfollowUser,
   repost,
