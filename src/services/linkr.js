@@ -63,6 +63,11 @@ function getPostsByIdOrder({ postsLength, id }) {
   return promise;
 }
 
+function checkPostsQuantity() {
+  const promise = axios.get(`${api}/posts/quantity`);
+  return promise;
+}
+
 function postPublish(body, token) {
   const promise = axios.post(`${api}/posts`, body, {
     headers: { Authorization: `Bearer ${token}` },
@@ -170,6 +175,8 @@ export {
   getPosts,
   loadPosts,
   getPostsById,
+  getPostsByIdOrder,
+  checkPostsQuantity,
   postPublish,
   updateComment,
   publishComment,
@@ -178,7 +185,6 @@ export {
   likeThePost,
   dislikeThePost,
   deletePost,
-  getPostsByIdOrder,
   repost,
   deleteRepost,
   isReposted,
