@@ -6,8 +6,8 @@ import {
   Search,
 } from './style';
 import {DebounceInput} from 'react-debounce-input';
-import { useState } from "react";
-import { getUserByText } from "../../services/linkr";
+import { useEffect, useState } from "react";
+import { getFollows, getUserByText } from "../../services/linkr";
 import { Link } from 'react-router-dom';
 
 export default function SearchUser(){
@@ -15,11 +15,16 @@ export default function SearchUser(){
   const [users, setUsers] = useState([]);
   const user = JSON.parse(sessionStorage.getItem('user'))
   const spans = <><span className='dot'>•</span><span> following</span></>
-  
-  //useefecct pega array de followed usa filter com array users, onde followed_id bate com users.id é novo layout
-  
+  const [follows, setFollows] = useState([]);
+
+  useEffect(() => {
+    const promise = getFollows(user.token)
+    promise.then(res => setFollows(res.data))
+    promise.catch(res => console.log(res.response))
+  },[])
+    
   const list = users.map((data)=>{
-    const isFollower = true; // chumbado
+    const isFollower = follows.find(v => v.followed_id === data.id);
     return (
     <Link to={`/users/${data.id}`} key={data.id} onClick={() => setSearch('')}>
       <User>
