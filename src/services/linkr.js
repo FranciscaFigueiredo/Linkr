@@ -34,15 +34,15 @@ function getUserById(id) {
   return promise;
 }
 
-function getUserByText(text) {
-  const promise = axios.get(`${api}/users?text=${text}`);
+function getUserByText(text, userId) {
+  const promise = axios.get(`${api}/users?text=${text}&id=${userId}`);
   return promise;
 }
 
 function getPosts(hashtag) {
   if (hashtag) {
     return axios.get(`${api}/hashtag/${hashtag}`);
-  }
+  } 
   return axios.get(`${api}/posts`);
 }
 
@@ -149,6 +149,18 @@ function isReposted(token, postId) {
   return promise
 }
 
+function getFollows(token) {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+
+  const promise = axios.get(`${api}/follows`, config)
+
+  return promise
+}
+
 export {
   postSignUp,
   postLogin,
@@ -168,4 +180,5 @@ export {
   repost,
   deleteRepost,
   isReposted,
+  getFollows,
 };
