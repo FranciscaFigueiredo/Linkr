@@ -7,7 +7,7 @@ import {
 } from './style';
 import {DebounceInput} from 'react-debounce-input';
 import { useEffect, useState } from "react";
-import { getFollows, getUserByText } from "../../services/linkr";
+import { getUserByText } from "../../services/linkr";
 import { Link } from 'react-router-dom';
 
 export default function SearchUser(){
@@ -18,9 +18,7 @@ export default function SearchUser(){
   const [follows, setFollows] = useState([]);
 
   useEffect(() => {
-    const promise = getFollows(user.token)
-    promise.then(res => setFollows(res.data))
-    promise.catch(res => console.log(res.response))
+    setFollows(JSON.parse(localStorage.getItem('follows')))
   },[])
     
   const list = users.map((data)=>{
