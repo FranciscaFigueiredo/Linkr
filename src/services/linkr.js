@@ -29,8 +29,9 @@ function logout({ token }) {
   return promise;
 }
 
-function getUserById(id) {
-  const promise = axios.get(`${api}/users/${id}`);
+function getUserById(id, token) {
+  const config = createConfig(token);
+  const promise = axios.get(`${api}/users/${id}`, config);
   return promise;
 }
 
@@ -112,6 +113,20 @@ function dislikeThePost({ id, token }) {
   const promise = axios.delete(`${api}/posts/${id}/like`, config);
   return promise;
 }
+function followUser(token, followedId){
+  const config = createConfig(token);
+  return axios.post(`${api}/users/follow`,  
+  {
+    followedId 
+  }, config);
+}
+function unfollowUser(token, followedId){
+  const config = createConfig(token);
+  return axios.post(`${api}/users/unfollow`,  
+  {
+    followedId 
+  }, config);
+}
 
 function repost(token, postId){
   const config = {
@@ -177,6 +192,8 @@ export {
   getLikes,
   likeThePost,
   dislikeThePost,
+  followUser,
+  unfollowUser,
   repost,
   deleteRepost,
   isReposted,
