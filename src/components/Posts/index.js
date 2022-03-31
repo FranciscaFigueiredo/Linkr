@@ -14,6 +14,8 @@ export default function Posts({ refresh, setRefresh }) {
 
   const [isLoading, setIsLoading] = useState(false);
 
+  const user = JSON.parse(sessionStorage.getItem('user'));
+
   useEffect(() => {
     setIsLoading(true);
     if (id) {
@@ -21,7 +23,7 @@ export default function Posts({ refresh, setRefresh }) {
         setIsLoading(false);
       });
     } else {
-      getPostsData(setPosts, hashtag).then(() => {
+      getPostsData(setPosts, user.token, hashtag).then(() => {
         setIsLoading(false);
       });
     }

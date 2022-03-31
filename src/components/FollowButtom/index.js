@@ -1,12 +1,11 @@
 import Button from "./style";
 import { toastError } from '../toasts.js';
-import { useContext, useState } from 'react';
-import UserContext from '../../contexts/UserContext';
+import { useState } from 'react';
 import { followUser, unfollowUser } from "../../services/linkr";
 
 export default function FollowButtom({ isFollowed, setIsFollowed, idUser }){
   const [disabled, setDisabled] = useState(false);
-  const { user } = useContext(UserContext);
+  const user = JSON.parse(sessionStorage.getItem('user'));
 
   function clickButtom(){
     setDisabled(true);
