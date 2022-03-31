@@ -32,7 +32,7 @@ export default function Posts({ refresh, setRefresh }) {
       });
     }
   }, [refresh, hashtag, id, setPosts]);
-  
+
   if (isLoading) return <Loader />;
 
   if (posts.length === 0)
@@ -43,12 +43,26 @@ export default function Posts({ refresh, setRefresh }) {
       <InfiniteScrollStyled
         dataLength={posts.length}
         pageStart={0}
-        loadMore={() => loadPostsOnScroll({ posts, setPosts, token, setHasMore, id })}
+        loadMore={() =>
+          loadPostsOnScroll({ posts, setPosts, token, setHasMore, id })
+        }
         useWindow={true}
-        hasMore={ hasMore }
-        loader={ <div className="loader" key={325251}> { hasMore ? <Loader /> : ''}</div>}
+        hasMore={hasMore}
+        loader={
+          <div className='loader' key={325251}>
+            {' '}
+            {hasMore ? <Loader /> : ''}
+          </div>
+        }
       >
-        {posts.map((post, index) => <Post key={ index } post={post} refresh={refresh} setRefresh={setRefresh} />)}
+        {posts.map((post, index) => (
+          <Post
+            key={index}
+            post={post}
+            refresh={refresh}
+            setRefresh={setRefresh}
+          />
+        ))}
       </InfiniteScrollStyled>
     </PostsContainer>
   );

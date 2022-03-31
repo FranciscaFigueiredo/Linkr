@@ -5,13 +5,11 @@ const WriteCommentContainer = styled.div`
   display: flex;
   justify-content: space-between;
   padding-top: 19px;
-  border-top: 1px solid #353535;
 
   img:first-of-type {
-    width: 40px;
+    width: 39px;
     aspect-ratio: 1;
     border-radius: 100%;
-    flex-grow: 1;
     margin-right: 14px;
   }
 `;

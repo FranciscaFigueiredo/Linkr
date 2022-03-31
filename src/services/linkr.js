@@ -17,13 +17,13 @@ function postSignUp(body) {
 function getPosts(hashtag) {
   if (hashtag) {
     return axios.get(`${api}/hashtag/${hashtag}`);
-  } 
+  }
   return axios.get(`${api}/posts`);
 }
 
-function loadPosts({ postsLength, token }){
+function loadPosts({ postsLength, token }) {
   const config = createConfig(token);
-  
+
   const promise = axios.get(`${api}/posts?olderThan=${postsLength}`, config);
   return promise;
 }
@@ -97,6 +97,10 @@ function publishComment(token, postId, textValue) {
   return axios.post(`${api}/posts/${postId}/comments`, body, config);
 }
 
+function getPostComments(postId) {
+  return axios.get(`${api}/posts/${postId}/comments`);
+}
+
 function getHashtag() {
   const promise = axios.get(`${api}/hashtag`);
   return promise;
@@ -125,43 +129,49 @@ function dislikeThePost({ id, token }) {
   const promise = axios.delete(`${api}/posts/${id}/like`, config);
   return promise;
 }
-function followUser(token, followedId){
+function followUser(token, followedId) {
   const config = createConfig(token);
-  return axios.post(`${api}/users/follow`,  
-  {
-    followedId 
-  }, config);
+  return axios.post(
+    `${api}/users/follow`,
+    {
+      followedId,
+    },
+    config
+  );
 }
-function unfollowUser(token, followedId){
+function unfollowUser(token, followedId) {
   const config = createConfig(token);
-  return axios.post(`${api}/users/unfollow`,  
-  {
-    followedId 
-  }, config);
+  return axios.post(
+    `${api}/users/unfollow`,
+    {
+      followedId,
+    },
+    config
+  );
 }
 
-function repost(token, postId){
+function repost(token, postId) {
   const config = {
     headers: {
       Authorization: `Bearer ${token}`,
     },
   };
 
-  const promise = axios.post(`${api}/reposts/${postId}`, {}, config)
+  const promise = axios.post(`${api}/reposts/${postId}`, {}, config);
 
-  return promise
+  return promise;
 }
 
-function deleteRepost(token, postId){
+function deleteRepost(token, postId) {
   const config = {
     headers: {
       Authorization: `Bearer ${token}`,
     },
   };
 
-  const promise = axios.delete(`${api}/reposts/${postId}`, config)
+  const promise = axios.delete(`${api}/reposts/${postId}`, config);
 
-  return promise
+  return promise;
 }
 
 function isReposted(token, postId) {
@@ -171,9 +181,9 @@ function isReposted(token, postId) {
     },
   };
 
-  const promise = axios.get(`${api}/reposts/${postId}`, config)
+  const promise = axios.get(`${api}/reposts/${postId}`, config);
 
-  return promise
+  return promise;
 }
 
 function getFollows(token) {
@@ -183,9 +193,9 @@ function getFollows(token) {
     },
   };
 
-  const promise = axios.get(`${api}/follows`, config)
+  const promise = axios.get(`${api}/follows`, config);
 
-  return promise
+  return promise;
 }
 
 export {
@@ -200,6 +210,7 @@ export {
   postPublish,
   updateComment,
   publishComment,
+  getPostComments,
   getHashtag,
   getLikes,
   likeThePost,
