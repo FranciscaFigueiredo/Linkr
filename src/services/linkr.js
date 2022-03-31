@@ -71,6 +71,11 @@ function getPostsById(id) {
   return promise;
 }
 
+function getPostsByIdOrder({ postsLength, id }) {
+  const promise = axios.get(`${api}/posts/${id}?olderThan=${postsLength}`);
+  return promise;
+}
+
 function getUserById(id) {
   const promise = axios.get(`${api}/users/${id}`);
   return promise;
@@ -124,6 +129,7 @@ export {
   deletePost,
   getUserByText,
   getPostsById,
+  getPostsByIdOrder,
   updateComment,
   getUserById,
 };

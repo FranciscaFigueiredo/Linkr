@@ -7,10 +7,8 @@ import getPostsDataById from '../../utils/getPostsDataById.js';
 import { InfiniteScrollStyled, PostsContainer } from './styles.js';
 import Post from '../Post/index.js';
 
-import InfiniteScroll from 'react-infinite-scroller';
-import { loadPosts } from '../../services/linkr.js';
 import UserContext from '../../contexts/UserContext.js';
-import { treatPostsData } from '../../utils/treatPostsData.js';
+import loadPostsOnScroll from '../../utils/loadPostsOnScroll.js';
 
 export default function Posts({ refresh, setRefresh }) {
   const { id, hashtag } = useParams();
@@ -20,24 +18,17 @@ export default function Posts({ refresh, setRefresh }) {
 
   const [isLoading, setIsLoading] = useState(true);
 
+  const [hasMore, setHasMore] = useState(true);
+
   useEffect(() => {
     setIsLoading(true);
     if (id) {
       getPostsDataById(setPosts, id);
     } else {
-      console.log('log');
       getPostsData(setPosts, hashtag);
     }
     setIsLoading(false);
   }, [refresh, hashtag, id, setPosts]);
-
-  function loadPostsOnScroll() {
-    loadPosts({ postsLength: posts.length - 1, token })
-      .then((res) => {
-        const treatedPosts = treatPostsData(res.data);
-        setPosts([...posts, ...treatedPosts]);
-      })
-  }
   
   if (isLoading) return <Loader />;
 
@@ -47,13 +38,12 @@ export default function Posts({ refresh, setRefresh }) {
   return (
     <PostsContainer>
       <InfiniteScrollStyled
+        dataLength={posts.length}
         pageStart={0}
-        loadMore={loadPostsOnScroll} 
-        useWindow={false}
-        hasMore={true || false}
-        loader={<div className="loader" key={0}> {console.log('entrou')}Loading ...</div>}
-        endMessage={<h1>Terminou </h1>}
-        useWindow={false}
+        loadMore={() => loadPostsOnScroll({ posts, setPosts, token, setHasMore, id })}
+        useWindow={true}
+        hasMore={ hasMore }
+        loader={ <div className="loader" key={325251}> { hasMore ? <Loader /> : ''}</div>}
       >
         {posts.map((post, index) => <Post key={ index } post={post} refresh={refresh} setRefresh={setRefresh} />)}
       </InfiniteScrollStyled>
