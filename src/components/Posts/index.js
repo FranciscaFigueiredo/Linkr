@@ -6,6 +6,7 @@ import PostsContext from '../../contexts/PostsContext.js';
 import getPostsDataById from '../../utils/getPostsDataById.js';
 import { PostsContainer } from './styles.js';
 import Post from '../Post/index.js';
+import { getFollows } from '../../services/linkr.js';
 
 export default function Posts({ refresh, setRefresh }) {
   const { id, hashtag } = useParams();
@@ -13,6 +14,8 @@ export default function Posts({ refresh, setRefresh }) {
   const { posts, setPosts } = useContext(PostsContext);
 
   const [isLoading, setIsLoading] = useState(false);
+
+  const user = JSON.parse(sessionStorage.getItem('user'))
 
   useEffect(() => {
     setIsLoading(true);
@@ -25,6 +28,9 @@ export default function Posts({ refresh, setRefresh }) {
         setIsLoading(false);
       });
     }
+    const promise = getFollows(user.token)
+    promise.then(res => localStorage.setItem("follows", JSON.stringify(res.data)))
+    promise.catch(res => console.log(res.response))
   }, [refresh, hashtag, id, setPosts]);
 
   if (isLoading) return <Loader />;
