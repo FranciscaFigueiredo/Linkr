@@ -18,6 +18,7 @@ export default function Posts({ refresh, setRefresh }) {
 
   const [isLoading, setIsLoading] = useState(false);
 
+  const user = JSON.parse(sessionStorage.getItem('user'));
   const [hasMore, setHasMore] = useState(true);
 
   useEffect(() => {
@@ -27,7 +28,9 @@ export default function Posts({ refresh, setRefresh }) {
         setIsLoading(false);
       });
     } else {
-      getPostsData(setPosts, hashtag).finally(() => {
+
+      getPostsData(setPosts, user.token, hashtag).finally(() => {
+
         setIsLoading(false);
       });
     }

@@ -7,8 +7,6 @@ import Trending from '../../components/Trending';
 import { getUserById } from '../../services/linkr';
 import { TimelineContainer, TimelineParent } from '../Timeline/styles';
 import FollowButtom from '../../components/FollowButtom/index.js';
-import { useContext } from 'react';
-import UserContext from '../../contexts/UserContext';
 
 export default function UserTimeline() {
   const { id } = useParams();
@@ -16,7 +14,7 @@ export default function UserTimeline() {
   const [name, setName] = useState('');
   const [image, setImage] = useState('');
   const [isFollowed, setIsFollowed] = useState(false);
-  const { user } = useContext(UserContext);
+  const user = JSON.parse(sessionStorage.getItem('user'));
 
   useEffect(() => {
     const promise = getUserById(id, user.token);

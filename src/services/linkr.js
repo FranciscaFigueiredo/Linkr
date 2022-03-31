@@ -14,11 +14,13 @@ function postSignUp(body) {
   return promise;
 }
 
-function getPosts(hashtag) {
+function getPosts(token, hashtag) {
+  const config = createConfig(token);
   if (hashtag) {
     return axios.get(`${api}/hashtag/${hashtag}`);
   }
-  return axios.get(`${api}/posts`);
+  return axios.get(`${api}/posts`, config);
+
 }
 
 function loadPosts({ postsLength, token }) {
