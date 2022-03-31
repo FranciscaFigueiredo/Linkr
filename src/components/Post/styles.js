@@ -2,12 +2,18 @@ import { FaHeart, FaRegHeart } from 'react-icons/fa';
 import { TiPencil } from 'react-icons/ti';
 import styled from 'styled-components';
 
+const Container = styled.div`
+  width: 100%;
+  position: relative;
+  margin-bottom: 38px;
+`;
 const PostContainer = styled.div`
   width: 100%;
   height: auto;
   background-color: #171717;
   border-radius: 16px;
   padding: 20px;
+  margin-top: 33px;
   display: flex;
   flex-direction: row;
   align-items: stretch;
@@ -15,17 +21,11 @@ const PostContainer = styled.div`
   position: relative;
 
   position: relative;
-  &:first-of-type {
-    margin-top: 29px;
-  }
 
   @media (max-width: 611px) {
     border-radius: 0;
     height: auto;
 
-    &:first-of-type {
-      margin-top: 16px;
-    }
   }
 `;
 
@@ -44,6 +44,12 @@ const PostSidebarContainer = styled.div`
     width: 80%;
     aspect-ratio: 1;
     border-radius: 100%;
+  }
+
+  .Tooltip {
+    font: 700 11px 'Lato';
+    padding: 6px 9px 5px 6px;
+    border-radius: 3px;
   }
 `;
 
@@ -138,6 +144,7 @@ const QuantLikes = styled.h4`
 `;
 
 export {
+  Container,
   PostContainer,
   PostSidebarContainer,
   PostContent,

@@ -16,18 +16,21 @@ export default function Posts({ refresh, setRefresh }) {
   const { posts, setPosts } = useContext(PostsContext);
   const { token } = useContext(UserContext);
 
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
 
   const [hasMore, setHasMore] = useState(true);
 
   useEffect(() => {
     setIsLoading(true);
     if (id) {
-      getPostsDataById(setPosts, id);
+      getPostsDataById(setPosts, id).then(() => {
+        setIsLoading(false);
+      });
     } else {
-      getPostsData(setPosts, hashtag);
+      getPostsData(setPosts, hashtag).then(() => {
+        setIsLoading(false);
+      });
     }
-    setIsLoading(false);
   }, [refresh, hashtag, id, setPosts]);
   
   if (isLoading) return <Loader />;
