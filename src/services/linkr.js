@@ -17,7 +17,7 @@ function postSignUp(body) {
 function getPosts(hashtag) {
   if (hashtag) {
     return axios.get(`${api}/hashtag/${hashtag}`);
-  }
+  } 
   return axios.get(`${api}/posts`);
 }
 
@@ -43,13 +43,14 @@ function logout({ token }) {
   return promise;
 }
 
-function getUserById(id) {
-  const promise = axios.get(`${api}/users/${id}`);
+function getUserById(id, token) {
+  const config = createConfig(token);
+  const promise = axios.get(`${api}/users/${id}`, config);
   return promise;
 }
 
-function getUserByText(text) {
-  const promise = axios.get(`${api}/users?text=${text}`);
+function getUserByText(text, userId) {
+  const promise = axios.get(`${api}/users?text=${text}&id=${userId}`);
   return promise;
 }
 
@@ -124,6 +125,20 @@ function dislikeThePost({ id, token }) {
   const promise = axios.delete(`${api}/posts/${id}/like`, config);
   return promise;
 }
+function followUser(token, followedId){
+  const config = createConfig(token);
+  return axios.post(`${api}/users/follow`,  
+  {
+    followedId 
+  }, config);
+}
+function unfollowUser(token, followedId){
+  const config = createConfig(token);
+  return axios.post(`${api}/users/unfollow`,  
+  {
+    followedId 
+  }, config);
+}
 
 function repost(token, postId){
   const config = {
@@ -161,6 +176,18 @@ function isReposted(token, postId) {
   return promise
 }
 
+function getFollows(token) {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+
+  const promise = axios.get(`${api}/follows`, config)
+
+  return promise
+}
+
 export {
   postSignUp,
   postLogin,
@@ -179,7 +206,10 @@ export {
   dislikeThePost,
   deletePost,
   getPostsByIdOrder,
+  followUser,
+  unfollowUser,
   repost,
   deleteRepost,
   isReposted,
+  getFollows,
 };

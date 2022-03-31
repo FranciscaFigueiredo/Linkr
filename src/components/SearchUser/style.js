@@ -15,9 +15,15 @@ const Container = styled.div`
   align-self: start;
 
   margin-top: 13px;
-
   @media (max-width: 940px) {
-    display: none;
+    width: 450px;
+  }
+  @media (max-width: 650px) {
+    width: 95%;
+    position: absolute;
+    top: 76px;
+    left:0px;
+    margin: 10px 10px 0px 10px;
   }
 `;
 const HeaderStyle = styled.div`
@@ -50,6 +56,16 @@ const HeaderStyle = styled.div`
     box-shadow: 0 0 0 0;
     border: 0 none;
     outline: 0;
+  }
+  @media (max-width: 940px) {
+    input{
+      width: 300px;
+    }
+  }
+  @media (max-width: 650px) {
+    input{
+      width: 80%;
+    }
   }
 `;
 const BodyStyle = styled.div`
@@ -84,6 +100,20 @@ const User = styled.div`
     font-size: 19px;
     color:#515151;
   }
+
+  .dot{
+    margin: 0 2px 0 3px;
+  }
+
+  span{
+    font-family: 'Lato', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 19px;
+    line-height: 23px;
+    color: #C5C5C5;
+  }
+
   &:hover{
     cursor:pointer;
   }
