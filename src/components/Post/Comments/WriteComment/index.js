@@ -5,8 +5,9 @@ import Loading from './Loading.js';
 import UserContext from '../../../../contexts/UserContext.js';
 import { publishComment } from '../../../../services/linkr.js';
 import { toastError } from '../../../toasts.js';
-export default function WriteComment({ post }) {
-  const { token } = useContext(UserContext);
+import getComments from './getComments.js';
+export default function WriteComment({ post, setComments }) {
+  const { token, user } = useContext(UserContext);
 
   const [value, setValue] = useState('');
   const [disabled, setDisabled] = useState(false);
@@ -18,10 +19,10 @@ export default function WriteComment({ post }) {
     setDisabled(true);
     publishComment(token, post.id, value)
       .then(() => {
-        //atualizar a variável comments
         setValue('');
         setDisabled(false);
         setLoading(false);
+        getComments(post, setComments);
       })
       .catch(() => {
         toastError('Comment failed to post. Please, try again');
@@ -32,7 +33,7 @@ export default function WriteComment({ post }) {
 
   return (
     <WriteCommentContainer>
-      <img src={post.userPic} alt='' />
+      <img src={user.pictureUrl} alt='' />
       <Form onSubmit={handleSubmit}>
         <input
           type='text'

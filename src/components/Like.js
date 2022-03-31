@@ -75,7 +75,12 @@ export default function Like({ post, likes, user }) {
           {localPost.likes.length} likes{' '}
         </QuantLikes>
       )}
-      <ReactTooltip className='Tooltip' place='bottom' type='light' />
+      <ReactTooltip
+        className='Tooltip'
+        place='bottom'
+        type='light'
+        effect='solid'
+      />
     </>
   );
 }

@@ -1,11 +1,11 @@
 import { useContext } from 'react';
 import UserContext from '../../contexts/UserContext.js';
 import Like from '../Like.js';
+import CommentsQuantity from './Comments/CommentsQuantity/index.js';
 import { PostSidebarContainer } from './styles.js';
 import RepostButton from './RepostButton/index.js';
 
-
-export default function PostSidebar({ post }) {
+export default function PostSidebar({ post, commentsProps }) {
   const { user } = useContext(UserContext);
 
   return (
@@ -13,6 +13,7 @@ export default function PostSidebar({ post }) {
       <img src={post.userPic} alt='user pic' />
       <Like post={{ ...post }} likes={[...post.likes]} user={user} />
       <RepostButton post={post} />
+      <CommentsQuantity post={post} commentsProps={commentsProps} />
     </PostSidebarContainer>
   );
 }
