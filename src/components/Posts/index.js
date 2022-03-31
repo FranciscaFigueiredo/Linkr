@@ -21,7 +21,6 @@ export default function Posts({ refresh, setRefresh }) {
         setIsLoading(false);
       });
     } else {
-      console.log('log');
       getPostsData(setPosts, hashtag).then(() => {
         setIsLoading(false);
       });

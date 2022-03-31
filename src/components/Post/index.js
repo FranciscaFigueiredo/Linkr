@@ -9,7 +9,13 @@ import { useState } from 'react';
 
 export default function Post({ post, refresh, setRefresh }) {
   const [showComments, setShowComments] = useState(false);
-  const commentsProps = { showComments, setShowComments };
+  const [comments, setComments] = useState(null);
+  const commentsProps = {
+    showComments,
+    setShowComments,
+    comments,
+    setComments,
+  };
 
   return (
     <Container>

@@ -1,13 +1,22 @@
-import { useContext } from 'react';
-import PostsContext from '../../../../contexts/PostsContext.js';
-import { Container } from './styles.js';
-import { AiOutlineComment } from 'react-icons/ai';
+import { CommentsIcon, Container } from './styles.js';
+import Loading from '../WriteComment/Loading.js';
+import { quantityString } from './quantityString.js';
 
-export default function CommentsQuantity({ commentsProps }) {
-  const { showComments, setShowComments } = useContext(PostsContext);
+export default function CommentsQuantity({ commentsProps, post }) {
+  const { showComments, setShowComments, comments } = commentsProps;
+
+  if (comments === null) return <Loading />;
+
+  const quantity = quantityString(comments);
+
   return (
-    <Container>
-      <AiOutlineComment />
+    <Container
+      onClick={() => {
+        setShowComments(!showComments);
+      }}
+    >
+      <CommentsIcon />
+      <span id='commentsQuantity'>{quantity}</span>
     </Container>
   );
 }

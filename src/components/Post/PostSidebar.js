@@ -11,7 +11,7 @@ export default function PostSidebar({ post, commentsProps }) {
     <PostSidebarContainer>
       <img src={post.userPic} alt='user pic' />
       <Like post={{ ...post }} likes={[...post.likes]} user={user} />
-      <CommentsQuantity commentsProps={commentsProps} />
+      <CommentsQuantity post={post} commentsProps={commentsProps} />
     </PostSidebarContainer>
   );
 }
