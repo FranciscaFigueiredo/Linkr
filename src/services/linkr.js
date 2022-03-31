@@ -79,6 +79,12 @@ function deletePost(token, postId) {
   return axios.delete(`${api}/posts/${postId}`, config);
 }
 
+function publishComment(token, postId, textValue) {
+  const config = createConfig(token);
+  const body = { textValue };
+  return axios.post(`${api}/posts/${postId}/comments`, body, config);
+}
+
 function getHashtag() {
   const promise = axios.get(`${api}/hashtag`);
   return promise;
@@ -122,6 +128,42 @@ function unfollowUser(token, followedId){
   }, config);
 }
 
+function repost(token, postId){
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+
+  const promise = axios.post(`${api}/reposts/${postId}`, {}, config)
+
+  return promise
+}
+
+function deleteRepost(token, postId){
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+
+  const promise = axios.delete(`${api}/reposts/${postId}`, config)
+
+  return promise
+}
+
+function isReposted(token, postId) {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+
+  const promise = axios.get(`${api}/reposts/${postId}`, config)
+
+  return promise
+}
+
 export {
   postSignUp,
   postLogin,
@@ -133,10 +175,14 @@ export {
   postPublish,
   updateComment,
   deletePost,
+  publishComment,
   getHashtag,
   getLikes,
   likeThePost,
   dislikeThePost,
   followUser,
   unfollowUser,
+  repost,
+  deleteRepost,
+  isReposted,
 };

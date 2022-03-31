@@ -12,17 +12,19 @@ export default function Posts({ refresh, setRefresh }) {
 
   const { posts, setPosts } = useContext(PostsContext);
 
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     setIsLoading(true);
     if (id) {
-      getPostsDataById(setPosts, id);
+      getPostsDataById(setPosts, id).then(() => {
+        setIsLoading(false);
+      });
     } else {
-      console.log('log');
-      getPostsData(setPosts, hashtag);
+      getPostsData(setPosts, hashtag).then(() => {
+        setIsLoading(false);
+      });
     }
-    setIsLoading(false);
   }, [refresh, hashtag, id, setPosts]);
 
   if (isLoading) return <Loader />;
@@ -33,7 +35,14 @@ export default function Posts({ refresh, setRefresh }) {
   return (
     <PostsContainer>
       {posts.map((post) => {
-        return <Post post={post} refresh={refresh} setRefresh={setRefresh} />;
+        return (
+          <Post
+            key={post.id}
+            post={post}
+            refresh={refresh}
+            setRefresh={setRefresh}
+          />
+        );
       })}
     </PostsContainer>
   );

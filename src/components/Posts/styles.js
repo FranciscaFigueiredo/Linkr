@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { FaRegHeart,FaHeart } from 'react-icons/fa'
+import { FaRegHeart, FaHeart } from 'react-icons/fa';
 import { TiPencil } from 'react-icons/ti';
 
 const PostsContainer = styled.div`
@@ -7,7 +7,6 @@ const PostsContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 16px;
 
   #noPosts {
     font: 700 17px 'Lato';
@@ -54,7 +53,7 @@ const PostSidebar = styled.div`
   flex-direction: column;
   align-items: center;
 
-  .likeContainer{
+  .likeContainer {
     margin: 15px auto 2px;
   }
 
@@ -90,22 +89,20 @@ const PostContent = styled.div`
 `;
 
 const Heart = styled(FaRegHeart)`
-    color: #ffffff;
-    font-size: 18px;
-    text-align: center;
+  color: #ffffff;
+  font-size: 18px;
+  text-align: center;
 
-    cursor: pointer;
-
-`
+  cursor: pointer;
+`;
 
 const HeartRed = styled(FaHeart)`
-    color: #ff0000;
-    font-size: 18px;
-    text-align: center;
+  color: #ff0000;
+  font-size: 18px;
+  text-align: center;
 
-    cursor: pointer;
-
-`
+  cursor: pointer;
+`;
 
 const Hashtag = styled.span`
   color: #ffffff;
@@ -125,26 +122,26 @@ const Options = styled.div`
 `;
 
 const Edit = styled(TiPencil)`
-  color: #FFFFFF;
+  color: #ffffff;
 
   cursor: pointer;
 
   font-size: 21px;
 `;
 const EditArea = styled.textarea`
-  border: 0px solid #FFFFFF;
+  border: 0px solid #ffffff;
   border-radius: 7px;
 
-  color: #4C4C4C;
+  color: #4c4c4c;
   font-weight: 400;
   font-size: 14px;
 
-  &::placeholder{
-    color: #4C4C4C;
+  &::placeholder {
+    color: #4c4c4c;
     font-weight: 400;
     font-size: 14px;
   }
-  &:focus{
+  &:focus {
     box-shadow: 0 0 0 0;
     border: 0 none;
     outline: 0;
@@ -153,8 +150,22 @@ const EditArea = styled.textarea`
 
 const QuantLikes = styled.h4`
   font-size: 11px;
-	font-weight: 400;
-	line-height: 15px;
+  font-weight: 400;
+  line-height: 15px;
+  cursor: default;
+
 `;
 
-export { PostsContainer, Post, PostSidebar, PostContent, Hashtag, Heart, HeartRed, Options, Edit, EditArea, QuantLikes };
+export {
+  PostsContainer,
+  Post,
+  PostSidebar,
+  PostContent,
+  Hashtag,
+  Heart,
+  HeartRed,
+  Options,
+  Edit,
+  EditArea,
+  QuantLikes,
+};

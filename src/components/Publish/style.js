@@ -3,6 +3,7 @@ import styled from 'styled-components';
 const Container = styled.div`
   width: 100%;
   height: 209px;
+  margin-bottom: 29px;
 
   background: #ffffff;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
@@ -85,6 +86,7 @@ const Container = styled.div`
   @media (max-width: 611px) {
     height: 164px;
     border-radius: 0;
+    margin-bottom: 16px;
     .image {
       display: none;
     }
