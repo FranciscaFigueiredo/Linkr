@@ -4,7 +4,6 @@ import Like from '../Like.js';
 import { PostSidebarContainer } from './styles.js';
 
 export default function PostSidebar({ post }) {
-  console.log({post});
   const { user } = useContext(UserContext);
 
   return (

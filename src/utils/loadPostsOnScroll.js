@@ -29,7 +29,6 @@ function getPostsData({ posts, setPosts, hashtag, token, setHasMore }) {
 }
   
 function getPostsDataById({ posts, setPosts, token, id, setHasMore }) {
-    console.log({postsGET: posts});
     getPostsByIdOrder({ postsLength: posts.length, id })
       .then((res) => {
         if (res.data.length) {
