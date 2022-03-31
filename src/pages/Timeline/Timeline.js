@@ -14,7 +14,9 @@ export default function Timeline() {
       <Header />
       <TimelineContainer>
         <TimelineParent>
-          <span id='title'>timeline</span>
+          <div id='titleContainer'>
+            <span id='title'>timeline</span>
+          </div>
           <Publish refresh={refresh} setRefresh={setRefresh} />
           <Posts refresh={refresh} setRefresh={setRefresh} />
         </TimelineParent>
