@@ -4,31 +4,38 @@ import { useParams } from 'react-router-dom';
 import getPostsData from '../../utils/getPostsData.js';
 import PostsContext from '../../contexts/PostsContext.js';
 import getPostsDataById from '../../utils/getPostsDataById.js';
-import { PostsContainer } from './styles.js';
+import { InfiniteScrollStyled, PostsContainer } from './styles.js';
 import Post from '../Post/index.js';
+
+import UserContext from '../../contexts/UserContext.js';
+import loadPostsOnScroll from '../../utils/loadPostsOnScroll.js';
 
 export default function Posts({ refresh, setRefresh }) {
   const { id, hashtag } = useParams();
 
   const { posts, setPosts } = useContext(PostsContext);
+  const { token } = useContext(UserContext);
 
   const [isLoading, setIsLoading] = useState(false);
 
   const user = JSON.parse(sessionStorage.getItem('user'));
+  const [hasMore, setHasMore] = useState(true);
 
   useEffect(() => {
     setIsLoading(true);
     if (id) {
-      getPostsDataById(setPosts, id).then(() => {
+      getPostsDataById(setPosts, id).finally(() => {
         setIsLoading(false);
       });
     } else {
-      getPostsData(setPosts, user.token, hashtag).then(() => {
+
+      getPostsData(setPosts, user.token, hashtag).finally(() => {
+
         setIsLoading(false);
       });
     }
   }, [refresh, hashtag, id, setPosts]);
-
+  
   if (isLoading) return <Loader />;
 
   if (posts.length === 0)
@@ -36,16 +43,16 @@ export default function Posts({ refresh, setRefresh }) {
 
   return (
     <PostsContainer>
-      {posts.map((post) => {
-        return (
-          <Post
-            key={post.id}
-            post={post}
-            refresh={refresh}
-            setRefresh={setRefresh}
-          />
-        );
-      })}
+      <InfiniteScrollStyled
+        dataLength={posts.length}
+        pageStart={0}
+        loadMore={() => loadPostsOnScroll({ posts, setPosts, token, setHasMore, id })}
+        useWindow={true}
+        hasMore={ hasMore }
+        loader={ <div className="loader" key={325251}> { hasMore ? <Loader /> : ''}</div>}
+      >
+        {posts.map((post, index) => <Post key={ index } post={post} refresh={refresh} setRefresh={setRefresh} />)}
+      </InfiniteScrollStyled>
     </PostsContainer>
   );
 }
