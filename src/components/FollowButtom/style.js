@@ -17,8 +17,14 @@ const Button = styled.div`
 
   margin-top: 26px;
 
-  background-color: ${props => (props.isFollowed) ? '#FFFFFF' : '#1877F2'};
+  background-color: ${props => (props.disabled) ? '#A9A9A9' : (props.isFollowed) ? '#FFFFFF' : '#1877F2'};
   color: ${props => (props.isFollowed) ? '#1877F2' : '#FFFFFF'};
+
+  pointer-events: ${props => (props.disabled)? 'none' : 'auto'};
+
+  &:hover{
+    cursor: ${props => (props.disabled)? 'none' : 'pointer'};
+  }
 
   @media (max-width: 611px) {
     display: none;

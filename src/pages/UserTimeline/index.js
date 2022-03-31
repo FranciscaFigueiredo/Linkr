@@ -7,19 +7,25 @@ import Trending from '../../components/Trending';
 import { getUserById } from '../../services/linkr';
 import { TimelineContainer, TimelineParent } from '../Timeline/styles';
 import FollowButtom from '../../components/FollowButtom/index.js';
+import { useContext } from 'react';
+import UserContext from '../../contexts/UserContext';
 
 export default function UserTimeline() {
   const { id } = useParams();
   const [refresh, setRefresh] = useState(true);
   const [name, setName] = useState('');
   const [image, setImage] = useState('');
-  
+  const [isFollowed, setIsFollowed] = useState(false);
+  const { user } = useContext(UserContext);
+
   useEffect(() => {
-    const promise = getUserById(id);
+    const promise = getUserById(id, user.token);
     promise
       .then((res) => {
+        console.log(res.data);
         setName(res.data.username);
         setImage(res.data.picture_url);
+        setIsFollowed(res.data.isFollowed);
       })
       .catch((err) => console.log(err.response.message));
   }, [id]);
@@ -35,7 +41,8 @@ export default function UserTimeline() {
           <Posts id={id} refresh={refresh} setRefresh={setRefresh} />
         </TimelineParent>
         <div id='subContainer'>
-          <FollowButtom isFollowed={false}/>
+          {(user.username === name) ? '' : 
+          <FollowButtom isFollowed={isFollowed} setIsFollowed={setIsFollowed} idUser={id}/>}
           <Trending refresh={refresh} />
         </div>
         <DeletePostModal />
