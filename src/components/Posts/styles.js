@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { FaRegHeart, FaHeart } from 'react-icons/fa';
 import { TiPencil } from 'react-icons/ti';
+import InfiniteScroll from 'react-infinite-scroller';
 
 const PostsContainer = styled.div`
   width: 100%;
@@ -156,16 +157,19 @@ const QuantLikes = styled.h4`
 
 `;
 
-export {
-  PostsContainer,
-  Post,
-  PostSidebar,
-  PostContent,
-  Hashtag,
-  Heart,
-  HeartRed,
-  Options,
-  Edit,
-  EditArea,
-  QuantLikes,
-};
+const InfiniteScrollStyled = styled(InfiniteScroll)`
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  
+  gap: 16px;
+
+  @media (max-width: 611px) {
+    margin-top: 0;
+    gap: 5px;
+  }
+`
+
+export { PostsContainer, Post, PostSidebar, PostContent, Hashtag, Heart, HeartRed, Options, Edit, EditArea, QuantLikes, InfiniteScrollStyled };
