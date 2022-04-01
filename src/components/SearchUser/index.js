@@ -6,22 +6,31 @@ import {
   Search,
 } from './style';
 import {DebounceInput} from 'react-debounce-input';
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { getUserByText } from "../../services/linkr";
 import { Link } from 'react-router-dom';
 
 export default function SearchUser(){
   const [search, setSearch] = useState('');
   const [users, setUsers] = useState([]);
+  const user = JSON.parse(sessionStorage.getItem('user'))
+  const spans = <><span className='dot'>•</span><span> following</span></>
+  const [follows, setFollows] = useState([]);
 
-  const list = users.map((data)=>
+  useEffect(() => {
+    setFollows(JSON.parse(localStorage.getItem('follows')))
+  },[])
+    
+  const list = users.map((data)=>{
+    const isFollower = follows.find(v => v.followed_id === data.id);
+    return (
     <Link to={`/users/${data.id}`} key={data.id} onClick={() => setSearch('')}>
       <User>
         <img src={data.picture_url} alt='username'/>
-        <p>{data.username}</p>
+        <p>{data.username} {isFollower && spans}</p>
       </User>
     </Link>
-  );
+  )});
   
   return (
     <Container>
@@ -32,7 +41,7 @@ export default function SearchUser(){
           value = {search}
           onChange={event => {
             setSearch(event.target.value);
-            getUserByText(event.target.value)
+            getUserByText(event.target.value, user.userId)
             .then((answer)=> setUsers(answer.data))
             .catch(()=> alert("erro"));
           }}

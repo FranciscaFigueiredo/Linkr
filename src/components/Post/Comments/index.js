@@ -1,10 +1,22 @@
+import { useEffect } from 'react';
 import { CommentsContainer } from './styles.js';
 import WriteComment from './WriteComment/index.js';
+import PostComments from './PostComments/index.js';
+import getComments from './WriteComment/getComments.js';
 
-export default function Comments({ post }) {
+export default function Comments({ post, commentsProps }) {
+  const { showComments, comments, setComments } = commentsProps;
+
+  useEffect(() => {
+    getComments(post, setComments);
+  }, [post, setComments]);
+
+  if (!showComments) return '';
+
   return (
     <CommentsContainer>
-      <WriteComment post={post} />
+      <PostComments post={post} comments={comments} />
+      <WriteComment post={post} setComments={setComments} />
     </CommentsContainer>
   );
 }
