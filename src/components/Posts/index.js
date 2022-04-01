@@ -34,7 +34,7 @@ export default function Posts({ refresh, setRefresh }) {
   }, [refresh, hashtag, id, setPosts]);
   
   if (isLoading) return <Loader />;
-
+console.log({hasMore});
   if (posts.length === 0)
     return <span id='noPosts'>There are no posts yet</span>;
 
@@ -43,7 +43,7 @@ export default function Posts({ refresh, setRefresh }) {
       <InfiniteScrollStyled
         dataLength={posts.length}
         pageStart={0}
-        loadMore={() => loadPostsOnScroll({ posts, setPosts, token, setHasMore, id })}
+        loadMore={() => loadPostsOnScroll({ posts, setPosts, token, setHasMore, id, hashtag })}
         useWindow={true}
         hasMore={ hasMore }
         loader={ <div className="loader" key={325251}> { hasMore ? <Loader /> : ''}</div>}

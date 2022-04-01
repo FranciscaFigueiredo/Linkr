@@ -21,8 +21,12 @@ function getPosts(hashtag) {
   return axios.get(`${api}/posts`);
 }
 
-function loadPosts({ postsLength, token }){
+function loadPosts({ postsLength, token, hashtag }){
   const config = createConfig(token);
+
+  if (hashtag) {
+    return axios.get(`${api}/hashtag/${hashtag}?olderThan=${postsLength}`);
+  }
   
   const promise = axios.get(`${api}/posts?olderThan=${postsLength}`, config);
   return promise;
@@ -64,7 +68,7 @@ function getPostsByIdOrder({ postsLength, id }) {
 }
 
 function checkPostsQuantity() {
-  const promise = axios.get(`${api}/posts/quantity`);
+  const promise = axios.get(`${api}/posts/quantity`,);
   return promise;
 }
 

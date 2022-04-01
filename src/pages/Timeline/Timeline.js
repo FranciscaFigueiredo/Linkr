@@ -2,32 +2,30 @@ import { useContext, useEffect, useState } from 'react';
 import Header from '../../components/Header/Header.js';
 import Posts from '../../components/Posts/';
 import Publish from '../../components/Publish/index.js';
-import { TimelineContainer, TimelineParent } from './styles.js';
+import { ButtonRefresh, TimelineContainer, TimelineParent } from './styles.js';
 import Trending from '../../components/Trending/index.js';
 import DeletePostModal from '../../components/Post/DeletePost/ConfirmationModal.js';
 import PostsContext from '../../contexts/PostsContext.js';
 import { checkPostsQuantity } from '../../services/linkr.js';
+import { BiRefresh } from 'react-icons/bi'
+import getPostsData from '../../utils/getPostsData.js';
+import useInterval from 'use-interval';
 
 export default function Timeline() {
   const [refresh, setRefresh] = useState(true);
 
   const { posts, setPosts } = useContext(PostsContext);
 
-  const { quant, setQuant } = useState(0);
+  const [quant, setQuant] = useState(null);
 
-
-  useEffect(() => {
-    setInterval(() => {
-      checkPostsQuantity()
-        .then((res) => {
-          if(res.data) {
-            setQuant(res.data)
-          }
-        })
-    }, 15000);
-  }, [])
-
-  console.log({ quant });
+  useInterval(() => {
+    checkPostsQuantity()
+      .then((res) => {
+        if(res.data) {
+          setQuant(Number(res.data.count))
+      }
+    })
+  }, 15000);
 
   return (
     <>
@@ -36,6 +34,22 @@ export default function Timeline() {
         <TimelineParent>
           <span id='title'>timeline</span>
           <Publish refresh={refresh} setRefresh={setRefresh} />
+          {
+            quant > posts.length ?
+              <ButtonRefresh onClick={() => getPostsData(setPosts)}>
+                {
+                  (quant - posts.length) === 1 ?
+                    `1 new post, load more!`
+                  : `${quant - posts.length} new posts, load more!`
+                }
+                <BiRefresh
+                  fontSize='20px'
+                  lineHeigth='20px'
+                  fontWeight='700'
+                />
+              </ButtonRefresh>
+            : ''
+          }
           <Posts refresh={refresh} setRefresh={setRefresh} />
         </TimelineParent>
         <div>

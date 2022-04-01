@@ -5,9 +5,10 @@ const PostsContext = createContext();
 export function PostsProvider({ children }) {
   const [posts, setPosts] = useState([]);
   const [postId, setPostId] = useState(null);
+  const [data, setData] = useState(null);
 
   return (
-    <PostsContext.Provider value={{ posts, setPosts, postId, setPostId }}>
+    <PostsContext.Provider value={{ posts, setPosts, postId, setPostId, data, setData }}>
       {children}
     </PostsContext.Provider>
   );
