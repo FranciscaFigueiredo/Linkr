@@ -6,6 +6,8 @@ export function PostsProvider({ children }) {
   const [posts, setPosts] = useState([]);
   const [postId, setPostId] = useState(null);
   const [showComments, setShowComments] = useState(false);
+  const [allPosts, setAllPosts] = useState([]);
+  const [func, setFunc] = useState('')
 
   return (
     <PostsContext.Provider
@@ -16,6 +18,7 @@ export function PostsProvider({ children }) {
         setPostId,
         showComments,
         setShowComments,
+        allPosts, setAllPosts, func, setFunc, 
       }}
     >
       {children}

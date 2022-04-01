@@ -2,15 +2,17 @@ import { toastError } from "../components/toasts";
 import { getPostsByIdOrder, loadPosts } from "../services/linkr";
 import { treatPostsData } from "./treatPostsData";
 
-export default function loadPostsOnScroll({ posts, setAllPosts, token, setHasMore, id, hashtag, limit, pagination, allPosts, setLimit }) {
+export default function loadPostsOnScroll({ posts, refresh, setRefresh, setAllPosts, token, setHasMore, id, hashtag, limit, pagination, allPosts, setLimit }) {
     // if (id) {
     //   getPostsDataById({ posts, setAllPosts, token, id, setHasMore, pagination });
     // } else {
     //   getPostsData({ posts, setAllPosts, hashtag, token, setHasMore, pagination });
     // }
     if (allPosts.length > limit) {
-      setLimit(limit+10)
       pagination([...allPosts], limit);
+      setLimit(limit+3)
+      console.log('if');
+      setRefresh(!refresh);
     }
 }
 

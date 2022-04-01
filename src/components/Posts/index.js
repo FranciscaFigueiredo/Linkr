@@ -14,24 +14,32 @@ import loadPostsOnScroll from '../../utils/loadPostsOnScroll.js';
 export default function Posts({ refresh, setRefresh }) {
   const { id, hashtag } = useParams();
 
-  const { posts, setPosts } = useContext(PostsContext);
+  const { posts, setPosts, allPosts, setAllPosts, setFunc } = useContext(PostsContext);
   const { token } = useContext(UserContext);
 
 
   const [limit, setLimit] = useState(10);
-  const [allPosts, setAllPosts] = useState([]);
+  
 
-  function pagination(allPosts, limit) {
-    console.log({allPosts});
-    const teste = []
-    for (let i = 0; i < limit && i < allPosts.length; i++) {
-      teste.push(allPosts[i])
+  function pagination(allPosts) {
+    if(allPosts){
+      console.log({ allPosts });
+      const teste = []
+      for (let i = 0; i < limit && i < allPosts?.length; i++) {
+        teste.push(allPosts[i])
+      }
+      console.log('pagination');
+      console.log(teste);
+      setPosts([...teste])
+      //window.scrollTo(0, 1000);
+      setLimit(limit + 10)
+
+      if (limit > allPosts.length) {
+        setHasMore(false)
+      }
     }
-    console.log('pagination');
-    console.log(teste);
-    setPosts([...teste])
-    // setLimit(limit + 10)
   }
+  
   console.log({posts});
   console.log({limit});
  
@@ -44,12 +52,12 @@ export default function Posts({ refresh, setRefresh }) {
   useEffect(() => {
     setIsLoading(true);
     if (id) {
-      getPostsDataById(setAllPosts,pagination, id).finally(() => {
+      getPostsDataById({setAllPosts,pagination, id}).finally(() => {
         setIsLoading(false);
       });
     } else {
 
-      getPostsData(limit, setAllPosts, pagination, user.token, hashtag).finally(() => {
+      getPostsData({setAllPosts, pagination, token: user.token, hashtag}).finally(() => {
 
         setIsLoading(false);
       });
@@ -60,6 +68,8 @@ export default function Posts({ refresh, setRefresh }) {
       setFollows(res.data);
     })
     promise.catch(res => console.log(res.response))
+
+    setFunc(pagination)
     
 
   }, [refresh, hashtag, id, setPosts]);
@@ -81,7 +91,7 @@ export default function Posts({ refresh, setRefresh }) {
       <InfiniteScrollStyled
         dataLength={posts.length}
         pageStart={0}
-        loadMore={() => loadPostsOnScroll({ posts, setAllPosts, token, setHasMore, id, hashtag, limit, pagination, allPosts, setLimit})}
+        loadMore={() => pagination([...allPosts])}
         useWindow={true}
         hasMore={hasMore}
         loader={

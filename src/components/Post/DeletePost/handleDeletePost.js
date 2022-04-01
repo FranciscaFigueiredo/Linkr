@@ -9,14 +9,18 @@ export default async function handleDeletePost(
   setPosts,
   postId,
   hashtagParams,
-  idParams
+  idParams,
+  setAllPosts
 ) {
+  
+  console.log(postId, idParams);
   return deletePost(token, postId)
     .then(() => {
-      if (idParams) getPostsDataById(setPosts, idParams);
-      else getPostsData(setPosts, hashtagParams);
-      setIsModalOpen(false);
-      toastSuccess('Post deleted');
+      window.location.reload();
+      // if (idParams) getPostsDataById({setAllPosts, id: idParams});
+      // else getPostsData(setPosts, hashtagParams);
+      // setIsModalOpen(false);
+      // toastSuccess('Post deleted');
     })
     .catch(() => {
       setIsModalOpen(false);

@@ -16,7 +16,7 @@ export default function Timeline() {
 
   const { token } = JSON.parse(sessionStorage.getItem('user'));
 
-  const { posts, setPosts } = useContext(PostsContext);
+  const { posts, setPosts, allPosts, setAllPosts, func } = useContext(PostsContext);
 
   const [quant, setQuant] = useState(null);
 
@@ -38,13 +38,13 @@ export default function Timeline() {
             <span id='title'>timeline</span>
           </div>
           <Publish refresh={refresh} setRefresh={setRefresh} />
-          {/* {
-            quant > posts.length ?
-              <ButtonRefresh onClick={() => getPostsData(setPosts, token)}>
+          {
+            quant > allPosts.length ?
+              <ButtonRefresh onClick={() => setRefresh(!refresh)}>
                 {
-                  (quant - posts.length) === 1 ?
+                  (quant - allPosts.length) === 1 ?
                     `1 new post, load more!`
-                  : `${quant - posts.length} new posts, load more!`
+                  : `${quant - allPosts.length} new posts, load more!`
                 }
                 <BiRefresh
                   fontSize='20px'
@@ -53,7 +53,7 @@ export default function Timeline() {
                 />
               </ButtonRefresh>
             : ''
-          } */}
+          }
           <Posts refresh={refresh} setRefresh={setRefresh} />
         </TimelineParent>
         <div>
