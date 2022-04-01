@@ -84,6 +84,8 @@ const ButtonRefresh = styled.div`
 
   background-color: #1877f2;
   border-radius: 16px;
+
+  margin-bottom: 29px;
 `;
 
 export { TimelineContainer, TimelineParent, PublishPlaceholder, ButtonRefresh };
