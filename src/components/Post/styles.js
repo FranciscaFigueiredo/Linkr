@@ -5,6 +5,7 @@ import styled from 'styled-components';
 const Container = styled.div`
   width: 100%;
   position: relative;
+  margin-bottom: 38px;
 `;
 const PostContainer = styled.div`
   width: 100%;
