@@ -2,15 +2,19 @@ import { toastError } from "../components/toasts";
 import { getPostsByIdOrder, loadPosts } from "../services/linkr";
 import { treatPostsData } from "./treatPostsData";
 
-export default function loadPostsOnScroll({ posts, setPosts, token, setHasMore, id, hashtag }) {
-    if (id) {
-        getPostsDataById({ posts, setPosts, token, id, setHasMore });
-    } else {
-        getPostsData({ posts, setPosts, hashtag, token, setHasMore });
+export default function loadPostsOnScroll({ posts, setAllPosts, token, setHasMore, id, hashtag, limit, pagination, allPosts, setLimit }) {
+    // if (id) {
+    //   getPostsDataById({ posts, setAllPosts, token, id, setHasMore, pagination });
+    // } else {
+    //   getPostsData({ posts, setAllPosts, hashtag, token, setHasMore, pagination });
+    // }
+    if (allPosts.length > limit) {
+      setLimit(limit+10)
+      pagination([...allPosts], limit);
     }
 }
 
-function getPostsData({ posts, setPosts, hashtag, token, setHasMore }) {
+function getPostsData({ posts, setAllPosts, hashtag, token, setHasMore }) {
     loadPosts({ postsLength: posts.length, token, hashtag })
       .then((res) => {
         if (res.data.length < posts.length) {
@@ -20,7 +24,7 @@ function getPostsData({ posts, setPosts, hashtag, token, setHasMore }) {
         }
         if (res.data.length) {
           const treatedPosts = treatPostsData([...posts, ...res.data]);
-          setPosts([...treatedPosts]);
+          setAllPosts([...treatedPosts]);
         }
           
       })
@@ -32,14 +36,14 @@ function getPostsData({ posts, setPosts, hashtag, token, setHasMore }) {
       });
 }
   
-function getPostsDataById({ posts, setPosts, id, setHasMore }) {
+function getPostsDataById({ posts, setAllPosts, id, setHasMore }) {
     getPostsByIdOrder({ postsLength: posts.length, id })
       .then((res) => {
         if (res.data.length) {
           setHasMore(true)
           const treatedPosts = treatPostsData(res.data);
           
-          setPosts([...treatedPosts]);
+          setAllPosts([...treatedPosts]);
           return;
         }
         setHasMore(false)

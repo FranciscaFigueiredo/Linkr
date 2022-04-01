@@ -38,7 +38,7 @@ export default function Timeline() {
             <span id='title'>timeline</span>
           </div>
           <Publish refresh={refresh} setRefresh={setRefresh} />
-          {
+          {/* {
             quant > posts.length ?
               <ButtonRefresh onClick={() => getPostsData(setPosts, token)}>
                 {
@@ -53,7 +53,7 @@ export default function Timeline() {
                 />
               </ButtonRefresh>
             : ''
-          }
+          } */}
           <Posts refresh={refresh} setRefresh={setRefresh} />
         </TimelineParent>
         <div>

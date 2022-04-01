@@ -17,6 +17,24 @@ export default function Posts({ refresh, setRefresh }) {
   const { posts, setPosts } = useContext(PostsContext);
   const { token } = useContext(UserContext);
 
+
+  const [limit, setLimit] = useState(10);
+  const [allPosts, setAllPosts] = useState([]);
+
+  function pagination(allPosts, limit) {
+    console.log({allPosts});
+    const teste = []
+    for (let i = 0; i < limit && i < allPosts.length; i++) {
+      teste.push(allPosts[i])
+    }
+    console.log('pagination');
+    console.log(teste);
+    setPosts([...teste])
+    // setLimit(limit + 10)
+  }
+  console.log({posts});
+  console.log({limit});
+ 
   const [isLoading, setIsLoading] = useState(false);
 
   const user = JSON.parse(sessionStorage.getItem('user'));
@@ -26,12 +44,12 @@ export default function Posts({ refresh, setRefresh }) {
   useEffect(() => {
     setIsLoading(true);
     if (id) {
-      getPostsDataById(setPosts, id).finally(() => {
+      getPostsDataById(setAllPosts,pagination, id).finally(() => {
         setIsLoading(false);
       });
     } else {
 
-      getPostsData(setPosts, user.token, hashtag).finally(() => {
+      getPostsData(limit, setAllPosts, pagination, user.token, hashtag).finally(() => {
 
         setIsLoading(false);
       });
@@ -42,6 +60,7 @@ export default function Posts({ refresh, setRefresh }) {
       setFollows(res.data);
     })
     promise.catch(res => console.log(res.response))
+    
 
   }, [refresh, hashtag, id, setPosts]);
 
@@ -62,7 +81,7 @@ export default function Posts({ refresh, setRefresh }) {
       <InfiniteScrollStyled
         dataLength={posts.length}
         pageStart={0}
-        loadMore={() => loadPostsOnScroll({ posts, setPosts, token, setHasMore, id, hashtag })}
+        loadMore={() => loadPostsOnScroll({ posts, setAllPosts, token, setHasMore, id, hashtag, limit, pagination, allPosts, setLimit})}
         useWindow={true}
         hasMore={hasMore}
         loader={
