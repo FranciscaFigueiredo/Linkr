@@ -29,8 +29,7 @@ export function treatPostsData(rawPosts) {
       });
     } else {
       const post = posts[indexOfFoundRawPost];
-
-      post.likes.push({
+      if (userId && post.likes.find((like) => like.id === id) === undefined) post.likes.push({
         id,
         userId,
         username,

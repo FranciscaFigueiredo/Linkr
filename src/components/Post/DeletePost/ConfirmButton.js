@@ -10,7 +10,7 @@ export default function ConfirmButton({ hashtagParams, idParams }) {
 
   const { token } = useContext(UserContext);
   const { setIsModalOpen } = useContext(ModalContext);
-  const { setPosts, postId } = useContext(PostsContext);
+  const { setPosts, postId, setAllPosts } = useContext(PostsContext);
 
   if (isLoading) return <ThreeDots color='white' width={40} height={40} />;
   else
@@ -24,7 +24,8 @@ export default function ConfirmButton({ hashtagParams, idParams }) {
             setPosts,
             postId,
             hashtagParams,
-            idParams
+            idParams,
+            setAllPosts
           );
         }}
       >

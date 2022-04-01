@@ -2,11 +2,12 @@ import { toastError } from '../components/toasts.js';
 import { getPostsById } from '../services/linkr.js';
 import { treatPostsData } from './treatPostsData.js';
 
-export default function getPostsDataById(setPosts, id) {
+export default function getPostsDataById({setAllPosts, id, pagination}) {
   return getPostsById(id)
     .then((res) => {
       const posts = treatPostsData(res.data);
-      setPosts([...posts]);
+      setAllPosts([...posts]);
+      pagination([...posts])
     })
     .catch((error) => {
       console.error();

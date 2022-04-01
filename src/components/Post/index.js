@@ -25,7 +25,7 @@ export default function Post({ post, refresh, setRefresh }) {
             />
             <LinkSnippet post={post} />
           </PostContent>
-          <DeletePostButton post={post} />
+          <DeletePostButton post={post}/>
         </PostContainerWrapper>
         <Comments post={post} />
       </Container>
