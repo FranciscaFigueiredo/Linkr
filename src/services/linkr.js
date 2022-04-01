@@ -70,8 +70,9 @@ function getPostsByIdOrder({ postsLength, id }) {
   return promise;
 }
 
-function checkPostsQuantity() {
-  const promise = axios.get(`${api}/posts/quantity`,);
+function checkPostsQuantity({ token }) {
+  const config = createConfig(token);
+  const promise = axios.get(`${api}/posts/quantity`, config);
   return promise;
 }
 

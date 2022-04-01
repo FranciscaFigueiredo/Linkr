@@ -14,18 +14,22 @@ import useInterval from 'use-interval';
 export default function Timeline() {
   const [refresh, setRefresh] = useState(true);
 
+  const { token } = JSON.parse(sessionStorage.getItem('user'));
+
   const { posts, setPosts } = useContext(PostsContext);
 
   const [quant, setQuant] = useState(null);
 
   useInterval(() => {
-    checkPostsQuantity()
+    checkPostsQuantity({ token })
       .then((res) => {
+        console.log(res.data.count);
         if(res.data) {
-          setQuant(Number(res.data.count))
-      }
-    })
+          setQuant(res.data.count)
+        }
+      })
   }, 15000);
+  console.log({ quant});
 
   return (
     <>
@@ -38,7 +42,7 @@ export default function Timeline() {
           <Publish refresh={refresh} setRefresh={setRefresh} />
           {
             quant > posts.length ?
-              <ButtonRefresh onClick={() => getPostsData(setPosts)}>
+              <ButtonRefresh onClick={() => getPostsData(setPosts, token)}>
                 {
                   (quant - posts.length) === 1 ?
                     `1 new post, load more!`

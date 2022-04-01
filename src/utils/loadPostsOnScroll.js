@@ -13,16 +13,16 @@ export default function loadPostsOnScroll({ posts, setPosts, token, setHasMore, 
 function getPostsData({ posts, setPosts, hashtag, token, setHasMore }) {
     loadPosts({ postsLength: posts.length, token, hashtag })
       .then((res) => {
-        if (res.data.length) {
+        if (res.data.length < posts.length) {
           setHasMore(true)
-          const treatedPosts = treatPostsData(res.data);
+        } else {
+          setHasMore(false);
+        }
+        if (res.data.length) {
+          const treatedPosts = treatPostsData([...posts, ...res.data]);
+          setPosts([...treatedPosts]);
+        }
           
-          setPosts([...posts, ...treatedPosts]);
-          return;
-        }
-        else {
-          setHasMore(false)
-        }
       })
       .catch(() => {
         console.error();
@@ -39,7 +39,7 @@ function getPostsDataById({ posts, setPosts, id, setHasMore }) {
           setHasMore(true)
           const treatedPosts = treatPostsData(res.data);
           
-          setPosts([...posts, ...treatedPosts]);
+          setPosts([...treatedPosts]);
           return;
         }
         setHasMore(false)
