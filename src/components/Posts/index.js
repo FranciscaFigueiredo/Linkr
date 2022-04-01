@@ -6,10 +6,10 @@ import PostsContext from '../../contexts/PostsContext.js';
 import getPostsDataById from '../../utils/getPostsDataById.js';
 import { InfiniteScrollStyled, PostsContainer } from './styles.js';
 import Post from '../Post/index.js';
+import { getFollows } from '../../services/linkr.js';
 
 import UserContext from '../../contexts/UserContext.js';
 import loadPostsOnScroll from '../../utils/loadPostsOnScroll.js';
-import { getFollows } from '../../services/linkr.js';
 
 export default function Posts({ refresh, setRefresh }) {
   const { id, hashtag } = useParams();
@@ -36,10 +36,13 @@ export default function Posts({ refresh, setRefresh }) {
         setIsLoading(false);
       });
     }
-    getFollows(user.token)
-    .then((ans)=>{
-      setFollows(ans.data);
+    const promise = getFollows(user.token)
+    promise.then(res => {
+      localStorage.setItem("follows", JSON.stringify(res.data))
+      setFollows(res.data);
     })
+    promise.catch(res => console.log(res.response))
+
   }, [refresh, hashtag, id, setPosts]);
 
   if (isLoading) return <Loader />;
