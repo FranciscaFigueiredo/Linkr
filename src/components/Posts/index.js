@@ -47,7 +47,9 @@ export default function Posts({ refresh, setRefresh }) {
 
   if (isLoading) return <Loader />;
 
-  if (posts.length === 0){
+  if (id && posts.length === 0){
+    return <span id='noPosts'>There are no posts yet</span>;
+  } else if (posts.length === 0){
     if(follows.length > 0){
       return <span id='noPosts'>No posts found from your friends</span>; 
     } else {

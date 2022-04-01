@@ -7,6 +7,9 @@ const Container = styled.div`
   
   border-radius: 8px;
 
+  position: relative;
+  z-index: 10;
+
   background-color: #FFFFFF;
 
   display: flex;
