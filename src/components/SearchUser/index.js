@@ -45,6 +45,10 @@ export default function SearchUser(){
             .then((answer)=> setUsers(answer.data))
             .catch(()=> alert("erro"));
           }}
+          onBlur={()=>{
+            setTimeout(()=>setSearch(''), 200);
+            
+          }}
           placeholder='Search for people'
           />
         <Search/>
