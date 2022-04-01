@@ -20,7 +20,6 @@ export default function UserTimeline() {
     const promise = getUserById(id, user.token);
     promise
       .then((res) => {
-        console.log(res.data);
         setName(res.data.username);
         setImage(res.data.picture_url);
         setIsFollowed(res.data.isFollowed);

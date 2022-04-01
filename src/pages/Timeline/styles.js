@@ -69,4 +69,23 @@ const PublishPlaceholder = styled.div`
   align-items: center;
 `;
 
-export { TimelineContainer, TimelineParent, PublishPlaceholder };
+const ButtonRefresh = styled.div`
+  width: 611px;
+  height: 61px;
+
+  color: #ffffff;
+  font-size: 16px;
+  font-family: 'Lato', sans-serif;
+  line-height: 20px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background-color: #1877f2;
+  border-radius: 16px;
+
+  margin-bottom: 29px;
+`;
+
+export { TimelineContainer, TimelineParent, PublishPlaceholder, ButtonRefresh };

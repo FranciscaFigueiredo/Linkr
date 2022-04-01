@@ -62,9 +62,7 @@ export default function Posts({ refresh, setRefresh }) {
       <InfiniteScrollStyled
         dataLength={posts.length}
         pageStart={0}
-        loadMore={() =>
-          loadPostsOnScroll({ posts, setPosts, token, setHasMore, id })
-        }
+        loadMore={() => loadPostsOnScroll({ posts, setPosts, token, setHasMore, id, hashtag })}
         useWindow={true}
         hasMore={hasMore}
         loader={

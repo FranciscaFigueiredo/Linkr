@@ -2,23 +2,27 @@ import { toastError } from "../components/toasts";
 import { getPostsByIdOrder, loadPosts } from "../services/linkr";
 import { treatPostsData } from "./treatPostsData";
 
-export default function loadPostsOnScroll({ posts, setPosts, token, setHasMore, id }) {
+export default function loadPostsOnScroll({ posts, setPosts, token, setHasMore, id, hashtag }) {
     if (id) {
         getPostsDataById({ posts, setPosts, token, id, setHasMore });
-      } else {
-        getPostsData({ posts, setPosts, hashtag: null, token, setHasMore });
+    } else {
+        getPostsData({ posts, setPosts, hashtag, token, setHasMore });
     }
 }
 
 function getPostsData({ posts, setPosts, hashtag, token, setHasMore }) {
-    loadPosts({ postsLength: posts.length, token })
+    loadPosts({ postsLength: posts.length, token, hashtag })
       .then((res) => {
-        if (res.data.length) {
+        if (res.data.length < posts.length) {
           setHasMore(true)
-          const treatedPosts = treatPostsData(res.data);
-          setHasMore(false)
-          setPosts([...posts, ...treatedPosts]);
+        } else {
+          setHasMore(false);
         }
+        if (res.data.length) {
+          const treatedPosts = treatPostsData([...posts, ...res.data]);
+          setPosts([...treatedPosts]);
+        }
+          
       })
       .catch(() => {
         console.error();
@@ -28,15 +32,17 @@ function getPostsData({ posts, setPosts, hashtag, token, setHasMore }) {
       });
 }
   
-function getPostsDataById({ posts, setPosts, token, id, setHasMore }) {
+function getPostsDataById({ posts, setPosts, id, setHasMore }) {
     getPostsByIdOrder({ postsLength: posts.length, id })
       .then((res) => {
         if (res.data.length) {
           setHasMore(true)
           const treatedPosts = treatPostsData(res.data);
-          setHasMore(false)
-          setPosts([...posts, ...treatedPosts]);
+          
+          setPosts([...treatedPosts]);
+          return;
         }
+        setHasMore(false)
       })
       .catch(() => {
         console.error();

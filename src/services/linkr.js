@@ -23,9 +23,13 @@ function getPosts(token, hashtag) {
 
 }
 
-function loadPosts({ postsLength, token }) {
+function loadPosts({ postsLength, token, hashtag }){
   const config = createConfig(token);
 
+  if (hashtag) {
+    return axios.get(`${api}/hashtag/${hashtag}?olderThan=${postsLength}`);
+  }
+  
   const promise = axios.get(`${api}/posts?olderThan=${postsLength}`, config);
   return promise;
 }
@@ -63,6 +67,12 @@ function getPostsById(id) {
 
 function getPostsByIdOrder({ postsLength, id }) {
   const promise = axios.get(`${api}/posts/${id}?olderThan=${postsLength}`);
+  return promise;
+}
+
+function checkPostsQuantity({ token }) {
+  const config = createConfig(token);
+  const promise = axios.get(`${api}/posts/quantity`, config);
   return promise;
 }
 
@@ -209,6 +219,8 @@ export {
   getPosts,
   loadPosts,
   getPostsById,
+  getPostsByIdOrder,
+  checkPostsQuantity,
   postPublish,
   updateComment,
   publishComment,
@@ -218,7 +230,6 @@ export {
   likeThePost,
   dislikeThePost,
   deletePost,
-  getPostsByIdOrder,
   followUser,
   unfollowUser,
   repost,
