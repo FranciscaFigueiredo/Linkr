@@ -1,11 +1,12 @@
-import { useEffect } from 'react';
+import { useContext, useEffect } from 'react';
 import { CommentsContainer } from './styles.js';
 import WriteComment from './WriteComment/index.js';
 import PostComments from './PostComments/index.js';
 import getComments from './WriteComment/getComments.js';
+import PostContext from '../../../contexts/RepostsContext.js';
 
-export default function Comments({ post, commentsProps }) {
-  const { showComments, comments, setComments } = commentsProps;
+export default function Comments({ post }) {
+  const { showComments, comments, setComments } = useContext(PostContext);
 
   useEffect(() => {
     getComments(post, setComments);

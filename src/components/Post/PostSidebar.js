@@ -5,7 +5,7 @@ import CommentsQuantity from './Comments/CommentsQuantity/index.js';
 import { PostSidebarContainer } from './styles.js';
 import RepostButton from './RepostButton/index.js';
 
-export default function PostSidebar({ post, commentsProps }) {
+export default function PostSidebar({ post }) {
   const { user } = useContext(UserContext);
 
   return (
@@ -13,7 +13,7 @@ export default function PostSidebar({ post, commentsProps }) {
       <img src={post.userPic} alt='user pic' />
       <Like post={{ ...post }} likes={[...post.likes]} user={user} />
       <RepostButton post={post} />
-      <CommentsQuantity post={post} commentsProps={commentsProps} />
+      <CommentsQuantity post={post} />
     </PostSidebarContainer>
   );
 }

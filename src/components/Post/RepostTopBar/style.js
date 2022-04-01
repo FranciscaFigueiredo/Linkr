@@ -1,10 +1,10 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 const Container = styled.div`
-  display: ${({isNone}) => !isNone && 'none'};
+  display: ${({ isNone }) => !isNone && 'none'};
   height: 70px;
   width: 611px;
-  background: #1E1E1E;
+  background: #1e1e1e;
   padding-left: 13px;
   border-radius: 16px;
 
@@ -13,26 +13,26 @@ const Container = styled.div`
   left: 0;
   z-index: -1;
 
-  div{
-      height: 33px;
-      padding: 10px;
+  div {
+    height: 33px;
+    padding: 10px;
 
-      display: flex;
-      align-items: center;
+    display: flex;
+    align-items: center;
   }
 
-  p{
-        margin-left: 6px;
+  p {
+    margin-left: 6px;
 
-        font-family: 'Lato', sans-serif;
-        font-style: normal;
-        font-weight: normal;
-        font-size: 11px;
-        line-height: 13px;
-        color: #FFFFFF;
+    font-family: 'Lato', sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 11px;
+    line-height: 13px;
+    color: #ffffff;
   }
-  span{
-      font-weight: bold;
+  span {
+    font-weight: bold;
   }
 
   @media (max-width: 611px) {
@@ -41,4 +41,4 @@ const Container = styled.div`
   }
 `;
 
-export default Container
+export default Container;
