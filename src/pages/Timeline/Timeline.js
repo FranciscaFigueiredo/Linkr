@@ -23,13 +23,11 @@ export default function Timeline() {
   useInterval(() => {
     checkPostsQuantity({ token })
       .then((res) => {
-        console.log(res.data.count);
         if(res.data) {
           setQuant(res.data.count)
         }
       })
   }, 15000);
-  console.log({ quant});
 
   return (
     <>
