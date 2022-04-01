@@ -21,6 +21,7 @@ const CommentContainer = styled.div`
     font: 700 14px 'Lato';
     margin-right: 4px;
     color: #f3f3f3;
+    cursor: pointer;
   }
 
   #userInfo {

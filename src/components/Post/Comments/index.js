@@ -16,7 +16,7 @@ export default function Comments({ post }) {
 
   return (
     <CommentsContainer>
-      <PostComments comments={comments} />
+      <PostComments post={post} comments={comments} />
       <WriteComment post={post} setComments={setComments} />
     </CommentsContainer>
   );
