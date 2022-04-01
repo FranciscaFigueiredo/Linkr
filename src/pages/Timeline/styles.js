@@ -7,7 +7,13 @@ const TimelineContainer = styled.div`
   justify-content: center;
   gap: 25px;
 
-  #subContainer{
+  #noPosts {
+    width: fit-content;
+    font: 700 17px 'Lato';
+    margin: 29px auto;
+  }
+
+  #subContainer {
     position: relative;
     display: flex;
     flex-direction: column;
@@ -24,20 +30,20 @@ const TimelineParent = styled.div`
   display: flex;
   flex-direction: column;
 
-  #titleContainer{
+  #titleContainer {
     display: flex;
     justify-content: flex-start;
     align-items: center;
     gap: 18px;
     margin: 10px 0 43px 0;
 
-    img{
+    img {
       width: 50px;
       height: 50px;
 
       border-radius: 50%;
     }
-  } 
+  }
   #title {
     font: 700 43px 'Oswald';
   }

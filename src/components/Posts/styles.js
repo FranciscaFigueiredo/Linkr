@@ -9,11 +9,6 @@ const PostsContainer = styled.div`
   flex-direction: column;
   align-items: center;
 
-  #noPosts {
-    font: 700 17px 'Lato';
-    margin-top: 29px;
-  }
-
   @media (max-width: 611px) {
     margin-top: 0;
     gap: 5px;
@@ -154,7 +149,6 @@ const QuantLikes = styled.h4`
   font-weight: 400;
   line-height: 15px;
   cursor: default;
-
 `;
 
 const InfiniteScrollStyled = styled(InfiniteScroll)`
@@ -163,13 +157,26 @@ const InfiniteScrollStyled = styled(InfiniteScroll)`
   display: flex;
   flex-direction: column;
   align-items: center;
-  
+
   gap: 16px;
 
   @media (max-width: 611px) {
     margin-top: 0;
     gap: 5px;
   }
-`
+`;
 
-export { PostsContainer, Post, PostSidebar, PostContent, Hashtag, Heart, HeartRed, Options, Edit, EditArea, QuantLikes, InfiniteScrollStyled };
+export {
+  PostsContainer,
+  Post,
+  PostSidebar,
+  PostContent,
+  Hashtag,
+  Heart,
+  HeartRed,
+  Options,
+  Edit,
+  EditArea,
+  QuantLikes,
+  InfiniteScrollStyled,
+};
