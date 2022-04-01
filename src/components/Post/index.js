@@ -1,30 +1,21 @@
 import { LinkSnippet } from '../LinkSnippet/index.js';
-import { Container, PostContainer, PostContent } from './styles.js';
+import { Container, PostContent } from './styles.js';
 import { DeletePostButton } from './DeletePost/index.js';
 import PostSidebar from './PostSidebar.js';
 import PostUsername from './PostUsername.js';
 import PostComment from './PostComment.js';
 import RepostTopBar from './RepostTopBar/index.js';
-import { RepostProvider } from '../../contexts/RepostsContext';
+import { PostProvider } from '../../contexts/RepostsContext';
 import Comments from './Comments/index.js';
-import { useState } from 'react';
+import PostContainerWrapper from './PostContainerWrapper.js';
 
 export default function Post({ post, refresh, setRefresh }) {
-  const [showComments, setShowComments] = useState(false);
-  const [comments, setComments] = useState(null);
-  const commentsProps = {
-    showComments,
-    setShowComments,
-    comments,
-    setComments,
-  };
-
   return (
-    <RepostProvider>
+    <PostProvider>
       <Container>
         <RepostTopBar post={post} />
-        <PostContainer>
-          <PostSidebar post={post} commentsProps={commentsProps} />
+        <PostContainerWrapper>
+          <PostSidebar post={post} />
           <PostContent>
             <PostUsername post={post} />
             <PostComment
@@ -35,9 +26,9 @@ export default function Post({ post, refresh, setRefresh }) {
             <LinkSnippet post={post} />
           </PostContent>
           <DeletePostButton post={post} />
-        </PostContainer>
-        <Comments post={post} commentsProps={commentsProps} />
+        </PostContainerWrapper>
+        <Comments post={post} />
       </Container>
-    </RepostProvider>
+    </PostProvider>
   );
 }

@@ -5,15 +5,15 @@ import styled from 'styled-components';
 const Container = styled.div`
   width: 100%;
   position: relative;
-  margin-bottom: 38px;
 `;
+
 const PostContainer = styled.div`
   width: 100%;
   height: auto;
   background-color: #171717;
   border-radius: 16px;
   padding: 20px;
-  margin-top: 33px;
+  margin-top: ${({ isRepost }) => isRepost && '33px'};
   display: flex;
   flex-direction: row;
   align-items: stretch;
@@ -25,7 +25,6 @@ const PostContainer = styled.div`
   @media (max-width: 611px) {
     border-radius: 0;
     height: auto;
-
   }
 `;
 
