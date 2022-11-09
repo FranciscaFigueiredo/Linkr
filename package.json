@@ -52,6 +52,6 @@
     ]
   },
   "devDependencies": {
-    "preact-cli": "^3.0.0-rc.18"
+    "preact-cli": "^3.4.1"
   }
 }
